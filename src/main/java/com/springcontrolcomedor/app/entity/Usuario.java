@@ -1,6 +1,7 @@
 package com.springcontrolcomedor.app.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,7 +23,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuarios")
 public class Usuario implements Serializable {
 
 	@Id
@@ -70,6 +72,15 @@ public class Usuario implements Serializable {
 
 	@Column(name = "eliminado")
 	private int eliminado;
+
+	public Usuario() {
+		roles = new ArrayList<Rol>();
+	}
+
+	@PrePersist
+	public void prePersist() {
+		fechaRegistro = new Date();
+	}
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -165,6 +176,10 @@ public class Usuario implements Serializable {
 
 	public void setEliminado(int eliminado) {
 		this.eliminado = eliminado;
+	}
+
+	public void addRol(Rol rol) {
+		roles.add(rol);
 	}
 
 	private static final long serialVersionUID = 1L;
