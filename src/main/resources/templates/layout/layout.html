@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="head">
+	<meta charset="utf-8">
+	<title th:text="${titulo}"></title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	  <link rel="stylesheet" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}">	
+	  <link rel="stylesheet" th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}">	
+	  <link rel="stylesheet" th:href="@{/bower_components/Ionicons/css/ionicons.min.css}">	  
+	  <link rel="stylesheet" th:href="@{/dist/css/AdminLTE.min.css}">	 
+	  <link rel="stylesheet" th:href="@{/dist/css/skins/_all-skins.min.css}">	  
+	  <link rel="stylesheet" th:href="@{/bower_components/morris.js/morris.css}">	 
+	  <link rel="stylesheet" th:href="@{/bower_components/jvectormap/jquery-jvectormap.css}">	 
+	  <link rel="stylesheet" th:href="@{/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css}">	  
+	  <link rel="stylesheet" th:href="@{/bower_components/bootstrap-daterangepicker/daterangepicker.css}">	 
+	  <link rel="stylesheet" th:href="@{/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css}">
+	  
+	  <link rel="stylesheet" th:href="@{/bower_components/fullcalendar/dist/fullcalendar.min.css}">
+	  <link rel="stylesheet" th:href="@{/bower_components/fullcalendar/dist/fullcalendar.print.min.css}" media="print">
+	  
+	  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+	</head>
+	<body th:fragment="body" class="hold-transition skin-blue fixed sidebar-mini sidebar-collapse">
+		<header th:fragment="header" class="main-header">
+	    	<a th:href="@{/index}" class="logo">	     
+	      		<span class="logo-mini"><b>C</b>M</span>	      
+	      		<span class="logo-lg"><b>Consultorio</b> Médico</span>
+	    	</a>	   
+		    <nav class="navbar navbar-static-top">	    
+		      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+		        <span class="sr-only">Toggle navigation</span>
+		      </a>		
+		    <div class="navbar-custom-menu">
+		        <ul class="nav navbar-nav">	         
+		          <li class="dropdown messages-menu">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		              <i class="fa fa-envelope-o"></i>
+		              <span class="label label-success">4</span>
+		            </a>
+		            <ul class="dropdown-menu">
+		              <li class="header">You have 4 messages</li>
+		              <li>
+		                <!-- inner menu: contains the actual data -->
+		                <ul class="menu">
+		                  <li><!-- start message -->
+		                    <a href="#">
+		                      <div class="pull-left">
+		                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+		                      </div>
+		                      <h4>
+		                        Support Team
+		                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+		                      </h4>
+		                      <p>Why not buy a new awesome theme?</p>
+		                    </a>
+		                  </li>
+		                  <!-- end message -->
+		                  <li>
+		                    <a href="#">
+		                      <div class="pull-left">
+		                        <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+		                      </div>
+		                      <h4>
+		                        AdminLTE Design Team
+		                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
+		                      </h4>
+		                      <p>Why not buy a new awesome theme?</p>
+		                    </a>
+		                  </li>
+		                  <li>
+		                    <a href="#">
+		                      <div class="pull-left">
+		                        <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+		                      </div>
+		                      <h4>
+		                        Developers
+		                        <small><i class="fa fa-clock-o"></i> Today</small>
+		                      </h4>
+		                      <p>Why not buy a new awesome theme?</p>
+		                    </a>
+		                  </li>
+		                  <li>
+		                    <a href="#">
+		                      <div class="pull-left">
+		                        <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+		                      </div>
+		                      <h4>
+		                        Sales Department
+		                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
+		                      </h4>
+		                      <p>Why not buy a new awesome theme?</p>
+		                    </a>
+		                  </li>
+		                  <li>
+		                    <a href="#">
+		                      <div class="pull-left">
+		                        <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+		                      </div>
+		                      <h4>
+		                        Reviewers
+		                        <small><i class="fa fa-clock-o"></i> 2 days</small>
+		                      </h4>
+		                      <p>Why not buy a new awesome theme?</p>
+		                    </a>
+		                  </li>
+		                </ul>
+		              </li>
+		              <li class="footer"><a href="#">See All Messages</a></li>
+		            </ul>
+		          </li>
+		          <!-- Notifications: style can be found in dropdown.less -->
+		          <li class="dropdown notifications-menu">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		              <i class="fa fa-bell-o"></i>
+		              <span class="label label-warning">10</span>
+		            </a>
+		            <ul class="dropdown-menu">
+		              <li class="header">You have 10 notifications</li>
+		              <li>
+		                <!-- inner menu: contains the actual data -->
+		                <ul class="menu">
+		                  <li>
+		                    <a href="#">
+		                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+		                    </a>
+		                  </li>
+		                  <li>
+		                    <a href="#">
+		                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+		                      page and may cause design problems
+		                    </a>
+		                  </li>
+		                  <li>
+		                    <a href="#">
+		                      <i class="fa fa-users text-red"></i> 5 new members joined
+		                    </a>
+		                  </li>
+		                  <li>
+		                    <a href="#">
+		                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+		                    </a>
+		                  </li>
+		                  <li>
+		                    <a href="#">
+		                      <i class="fa fa-user text-red"></i> You changed your username
+		                    </a>
+		                  </li>
+		                </ul>
+		              </li>
+		              <li class="footer"><a href="#">View all</a></li>
+		            </ul>
+		          </li>
+		          <!-- Tasks: style can be found in dropdown.less -->
+		          <li class="dropdown tasks-menu">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		              <i class="fa fa-flag-o"></i>
+		              <span class="label label-danger">9</span>
+		            </a>
+		            <ul class="dropdown-menu">
+		              <li class="header">You have 9 tasks</li>
+		              <li>
+		                <!-- inner menu: contains the actual data -->
+		                <ul class="menu">
+		                  <li><!-- Task item -->
+		                    <a href="#">
+		                      <h3>
+		                        Design some buttons
+		                        <small class="pull-right">20%</small>
+		                      </h3>
+		                      <div class="progress xs">
+		                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+		                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+		                          <span class="sr-only">20% Complete</span>
+		                        </div>
+		                      </div>
+		                    </a>
+		                  </li>
+		                  <!-- end task item -->
+		                  <li><!-- Task item -->
+		                    <a href="#">
+		                      <h3>
+		                        Create a nice theme
+		                        <small class="pull-right">40%</small>
+		                      </h3>
+		                      <div class="progress xs">
+		                        <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
+		                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+		                          <span class="sr-only">40% Complete</span>
+		                        </div>
+		                      </div>
+		                    </a>
+		                  </li>
+		                  <!-- end task item -->
+		                  <li><!-- Task item -->
+		                    <a href="#">
+		                      <h3>
+		                        Some task I need to do
+		                        <small class="pull-right">60%</small>
+		                      </h3>
+		                      <div class="progress xs">
+		                        <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
+		                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+		                          <span class="sr-only">60% Complete</span>
+		                        </div>
+		                      </div>
+		                    </a>
+		                  </li>
+		                  <!-- end task item -->
+		                  <li><!-- Task item -->
+		                    <a href="#">
+		                      <h3>
+		                        Make beautiful transitions
+		                        <small class="pull-right">80%</small>
+		                      </h3>
+		                      <div class="progress xs">
+		                        <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
+		                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+		                          <span class="sr-only">80% Complete</span>
+		                        </div>
+		                      </div>
+		                    </a>
+		                  </li>
+		                  <!-- end task item -->
+		                </ul>
+		              </li>
+		              <li class="footer">
+		                <a href="#">View all tasks</a>
+		              </li>
+		            </ul>
+		          </li>
+		          <!-- User Account: style can be found in dropdown.less -->
+		          <li class="dropdown user user-menu">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+		              <span class="hidden-xs">Dr. Luis More Saldaña</span>
+		            </a>
+		            <ul class="dropdown-menu">
+		              <!-- User image -->
+		              <li class="user-header">
+		                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">		
+		                <p>
+		                  <strong>Dr. Luis More Saldaña</strong>
+		                  <br>
+		                  <small>Médico Endocrinólogo</small>
+		                  	                 
+		                </p>		                		               		                
+		              </li>		             	              
+		              <!-- Menu Footer-->
+		              <li class="user-footer">		                
+		                <div class="pull-right">
+		                  <a th:href="@{/login}" class="btn btn-default btn-flat">Cerrar Sesión</a>
+		                </div>
+		              </li>
+		            </ul>
+		          </li>
+		          <!-- Control Sidebar Toggle Button -->		         
+		        </ul>
+		      </div>
+		    </nav>
+	  </header>
+	  <aside th:fragment="lateral-panel-left" class="main-sidebar">    
+	    <section class="sidebar">
+	      <!-- Sidebar user panel -->
+	      <div class="user-panel">
+	        <div class="pull-left image">
+	          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+	        </div>
+	        <div class="pull-left info">
+	          <p>Dr. Luis More Saldaña</p>
+	          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+	        </div>
+	      </div>
+	      <!-- sidebar menu: : style can be found in sidebar.less -->
+	      <ul class="sidebar-menu" data-widget="tree">
+	        <li class="header">MENÚ PRINCIPAL</li>
+	        <li id="menu_inicio">
+	          <a th:href="@{/}">
+	            <i class="fa fa-dashboard"></i> <span>Inicio</span>	            
+	          </a>	         
+	        </li>
+	        <li class="treeview" id="menu_registros">
+	          <a href="#">
+	            <i class="fa fa-user"></i>
+	            <span>Registros</span>
+	            <span class="pull-right-container">
+	              <i class="fa fa-angle-left pull-right"></i>
+	            </span>
+	          </a>
+	          <ul class="treeview-menu">
+	          	<li id="menu_paciente"><a th:href="@{/paciente}"><i class="fa fa-circle-o"></i>Paciente</a></li>
+	            <li id="menu_personal"><a th:href="@{/personal}"><i class="fa fa-circle-o"></i>Personal</a></li>	            
+	          </ul>
+	        </li>
+	        <li id="menu_programacion_medica">
+	          <a th:href="@{/programacion_medica}">
+	            <i class="fa fa-clock-o"></i> <span>Prog. Médica</span>	            
+	          </a>	         
+	        </li>
+	        <li id="menu_cita_medica">
+	          <a th:href="@{/cita_medica}">
+	            <i class="fa fa-calendar-plus-o"></i> <span>Cita Médica</span>	            
+	          </a>	         
+	        </li>
+	        <li id="menu_atender_cita_medica">
+	          <a th:href="@{/atender_cita_medica}">
+	            <i class="fa fa-calendar-check-o"></i> <span>Atender Cita Medica</span>	            
+	          </a>	         
+	        </li>		        
+	        <li class="treeview" id="menu_mantenedores">
+	          <a href="#">
+	            <i class="fa fa-server"></i>
+	            <span>Mantenedores</span>
+	            <span class="pull-right-container">
+	              <i class="fa fa-angle-left pull-right"></i>
+	            </span>
+	          </a>
+	          <ul class="treeview-menu">
+	            <li id="menu_imagenologia"><a th:href="@{/imagenologia}"><i class="fa fa-circle-o"></i>Imagenología</a></li>
+	            <li id="menu_consultorio"><a th:href="@{/consultorio}"><i class="fa fa-circle-o"></i>Consultorios</a></li>
+	            <li id="menu_medicamento"><a th:href="@{/medicamento}"><i class="fa fa-circle-o"></i>Medicamentos</a></li>
+	            <li id="menu_diagnostico"><a th:href="@{/diagnostico}"><i class="fa fa-circle-o"></i>Diagnósticos</a></li>
+	            <li id="menu_especialidad"><a th:href="@{/especialidad}"><i class="fa fa-circle-o"></i>Especialidades</a></li>
+	            <li id="menu_examen_laboratorio"><a th:href="@{/examen_laboratorio}"><i class="fa fa-circle-o"></i>Ex. de Laboratorio</a></li>
+	            <li id="menu_procedimiento"><a th:href="@{/procedimiento}"><i class="fa fa-circle-o"></i>Procedimientos</a></li>
+	            <li id="menu_establecimiento"><a th:href="@{/establecimiento}"><i class="fa fa-circle-o"></i>Establecimientos</a></li>
+	          </ul>
+	        </li>
+	        <li class="treeview" id="menu_seguridad">
+	          <a href="#">
+	            <i class="fa fa-lock"></i>
+	            <span>Seguridad</span>
+	            <span class="pull-right-container">
+	              <i class="fa fa-angle-left pull-right"></i>
+	            </span>
+	          </a>
+	          <ul class="treeview-menu">
+	            <li id="menu_usuario"><a th:href="@{/usuario}"><i class="fa fa-circle-o"></i> Usuarios</a></li>	            
+	          </ul>
+	        </li>	        
+	        <li class="header">Otras opciones</li>
+	        <li><a th:href="@{/login}"><i class="fa fa-sign-out text-red"></i><span>Cerrar Sesión</span></a></li>	       
+	      </ul>
+	    </section>   
+   </aside>
+   <footer  th:fragment="footer" class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 1.0.0
+    </div>
+    <strong>Copyright &copy; 2018. <a href="#">Consultorio Médico 1.0</a>.</strong> Todos los derechos Reservados.
+<script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/bower_components/jquery-ui/jquery-ui.min.js}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.7 -->
+<script th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- Morris.js charts -->
+<script th:src="@{/bower_components/raphael/raphael.min.js}"></script>
+<script th:src="@{/bower_components/morris.js/morris.min.js}"></script>
+<!-- Sparkline -->
+<script th:src="@{/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js}"></script>
+<!-- jvectormap -->
+<script th:src="@{/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js}"></script>
+<script th:src="@{/plugins/jvectormap/jquery-jvectormap-world-mill-en.js}"></script>
+<!-- jQuery Knob Chart -->
+<script th:src="@{/bower_components/jquery-knob/dist/jquery.knob.min.js}"></script>
+<!-- daterangepicker -->
+<script th:src="@{/bower_components/moment/min/moment.min.js}"></script>
+<script th:src="@{/bower_components/bootstrap-daterangepicker/daterangepicker.js}"></script>
+<!-- datepicker -->
+<script th:src="@{/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script th:src="@{/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js}"></script>
+<!-- Slimscroll -->
+<script th:src="@{/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/bower_components/fastclick/lib/fastclick.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/dist/js/adminlte.min.js}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script th:src="@{/dist/js/pages/dashboard.js}"></script>
+<!-- full Calendar -->
+<script th:src="@{/bower_components/moment/moment.js}"></script>
+<script th:src="@{/bower_components/fullcalendar/dist/fullcalendar.min.js}"></script>
+
+
+ <script th:src="@{/dist/js/calendario.js}"></script> 
+ 
+</footer> 
+</body>
+</html>

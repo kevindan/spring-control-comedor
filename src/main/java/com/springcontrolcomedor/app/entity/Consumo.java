@@ -203,6 +203,20 @@ public class Consumo implements Serializable {
 		this.eliminado = eliminado;
 	}
 
+	public void calculaMontos() {
+
+		Double total = 0.0;
+
+		for (DetalleConsumo itemConsumo : detalleConsumo) {
+			total += itemConsumo.getSubTotal();
+		}
+
+		this.montoTotal = total;
+		this.montoIgv = total * 0.18;
+		this.montoSinIgv = total - (total * 0.18);
+
+	}
+
 	private static final long serialVersionUID = 1L;
 
 }

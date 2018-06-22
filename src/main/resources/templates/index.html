@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">  
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini sidebar-collapse">
+<div class="wrapper">
+  <header th:replace="layout/layout :: header" ></header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside th:replace="layout/layout :: lateral-panel-left"></aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Panel de Inicio
+        <small>Vista General</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a th:href="@{/index}"> Home</a></li>
+        <li class="active">Panel de Inicio</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+      	<div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>06</h3>
+              <p>Pacientes Registrados</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a th:href="@{/paciente}" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-purple">
+            <div class="inner">
+              <h3>04</h3>
+              <p>Citas programadas</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-clock-o"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>45</h3>
+              <p>Citas atendidas</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>7</h3>
+              <p>Citas Anuladas</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-calendar-times-o"></i>
+            </div>
+            <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <div class="row">
+      	<section class="col-lg-6 col-xs-12 connectorSortable">
+      		<div class="box box-success">
+	            <div class="box-header">
+	             <i class="fa fa-clock-o"></i>	
+	             <h3 class="box-title">Citas programadas para hoy</h3>		              
+	            </div>
+	            <div class="box-body" id="panel_citas_hoy">
+	             	<div class="row">
+					<div class="col-xs-12">
+						<div class="table-responsive">
+							<table class="table table-bordered">								
+								<thead>
+									<tr style="background-color: #ccc;">
+										<th class="text-center">Acciones</th>										
+										<th class="text-center">Nombres</th>
+										<th class="text-center">Ap.Paterno</th>
+										<th class="text-center">Ap.Materno</th>
+										<th class="text-center">Hora</th>
+										
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="text-center">
+											<div class="btn-group">
+                                               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                               		<i class="fa fa-th margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
+                                               </button>
+                                               <ul class="dropdown-menu">
+                                               		<li class="bg-success"><a onclick=""><i class="fa fa-check margin-r-5"></i>Atender</a></li>
+                                                    <li class="bg-warning"><a onclick=""><i class="fa fa-clock-o margin-r-5"></i>Reprogramar</a></li>
+                                               </ul>
+                                            </div>											
+										</td>										
+										<td class="text-center">Arturo Eugenio</td>
+										<td class="text-center">Sandoval</td>
+										<td class="text-center">Gutierrez</td>
+										<td class="text-center">09:00 am</td>
+										
+									</tr>	
+									<tr>
+										<td class="text-center">
+											<div class="btn-group">
+                                               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                               		<i class="fa fa-th margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
+                                               </button>
+                                               <ul class="dropdown-menu">
+                                               		<li class="bg-success"><a onclick=""><i class="fa fa-check margin-r-5"></i>Atender</a></li>
+                                                    <li class="bg-warning"><a onclick=""><i class="fa fa-clock-o margin-r-5"></i>Reprogramar</a></li>
+                                               </ul>
+                                            </div>											
+										</td>										
+										<td class="text-center">Arturo Eugenio</td>
+										<td class="text-center">Sandoval</td>
+										<td class="text-center">Gutierrez</td>
+										<td class="text-center">09:00 am</td>										
+									</tr>
+									<tr>
+										<td class="text-center">
+											<div class="btn-group">
+                                               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                               		<i class="fa fa-th margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
+                                               </button>
+                                               <ul class="dropdown-menu">
+                                               		<li class="bg-success"><a onclick=""><i class="fa fa-check margin-r-5"></i>Atender</a></li>
+                                                    <li class="bg-warning"><a onclick=""><i class="fa fa-clock-o margin-r-5"></i>Reprogramar</a></li>
+                                               </ul>
+                                            </div>											
+										</td>										
+										<td class="text-center">Arturo Eugenio</td>
+										<td class="text-center">Sandoval</td>
+										<td class="text-center">Gutierrez</td>
+										<td class="text-center">09:00 am</td>										
+									</tr>
+									<tr>
+										<td class="text-center">
+											<div class="btn-group">
+                                               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                               		<i class="fa fa-th margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
+                                               </button>
+                                               <ul class="dropdown-menu">
+                                               		<li class="bg-success"><a onclick=""><i class="fa fa-check margin-r-5"></i>Atender</a></li>
+                                                    <li class="bg-warning"><a onclick=""><i class="fa fa-clock-o margin-r-5"></i>Reprogramar</a></li>
+                                               </ul>
+                                            </div>											
+										</td>										
+										<td class="text-center">Arturo Eugenio</td>
+										<td class="text-center">Sandoval</td>
+										<td class="text-center">Gutierrez</td>
+										<td class="text-center">09:00 am</td>										
+									</tr>								
+								</tbody>
+								<tfoot>
+									<tr style="background-color: gray; color: white;">
+										<th class="text-center">Acciones</th>										
+										<th class="text-center">Nombres</th>
+										<th class="text-center">Ap.Paterno</th>
+										<th class="text-center">Ap.Materno</th>
+										<th class="text-center">Hora</th>										
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<div class="box-footer clearfix">
+			                <div class="row">
+			                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			                		<ul class="pagination pagination-sm no-margin pull-right">
+			                			<li><a href=""rel="back">Anterior</a></li>
+			                			<li class="active" data-ci-pagination-page="1"><a href="#">1</a></li>
+			                			<li><a href="" data-ci-pagination-page="2">2</a></li>
+			                			<li><a href="" data-ci-pagination-page="3">3</a></li>
+			                			<li><a href="" data-ci-pagination-page="2" rel="next">Siguiente</a></li>
+			                		</ul>
+			                	</div>
+			                </div>
+			            </div>						
+					</div>
+				</div>            
+	            </div>            
+          </div>
+      	</section>
+      	<section class="col-lg-6 col-xs-12 connectorSortable">
+      		<div class="box box-success">
+	            <div class="box-header">
+	              <i class="fa fa-users"></i>	
+	              <h3 class="box-title">Ultimos pacientes registrados</h3>		              
+	            </div>
+	            <div class="box-body" id="panel_pacientes_registrados">
+	            	<div class="row">
+					<div class="col-xs-12">
+						<div class="table-responsive">
+							<table class="table table-bordered">								
+								<thead>
+									<tr style="background-color: #ccc;">										
+										<th class="text-center">Nombres</th>
+										<th class="text-center">Ap.Paterno</th>
+										<th class="text-center">Ap.Materno</th>
+										<th class="text-center">Fecha registro</th>
+									</tr>
+								</thead>
+								<tbody>									
+									<tr>										
+										<td class="text-center">Arturo Eugenio</td>
+										<td class="text-center">Sandoval</td>
+										<td class="text-center">Gutierrez</td>
+										<td class="text-center">23/05/2018</td>
+									</tr>
+									<tr>										
+										<td class="text-center">Arturo Eugenio</td>
+										<td class="text-center">Sandoval</td>
+										<td class="text-center">Gutierrez</td>
+										<td class="text-center">23/05/2018</td>
+									</tr>
+									<tr>										
+										<td class="text-center">Arturo Eugenio</td>
+										<td class="text-center">Sandoval</td>
+										<td class="text-center">Gutierrez</td>
+										<td class="text-center">23/05/2018</td>
+									</tr>
+									<tr>										
+										<td class="text-center">Arturo Eugenio</td>
+										<td class="text-center">Sandoval</td>
+										<td class="text-center">Gutierrez</td>
+										<td class="text-center">23/05/2018</td>
+									</tr>
+									<tr>										
+										<td class="text-center">Arturo Eugenio</td>
+										<td class="text-center">Sandoval</td>
+										<td class="text-center">Gutierrez</td>
+										<td class="text-center">23/05/2018</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr style="background-color: gray; color: white;">										
+										<th class="text-center">Nombres</th>
+										<th class="text-center">Ap.Paterno</th>
+										<th class="text-center">Ap.Materno</th>
+										<th class="text-center">Fecha registro</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<div class="box-footer">
+				        	<div class="row">
+				        		<div class="col-xs-12">
+					        		<div class="form-group">
+					                	<a th:href="@{/paciente}" class="small-box-footer pull-right">Ver todos los pacientes</a>
+					            	</div>
+					           	</div>
+				            </div>
+			            </div>						
+					</div>
+				</div> 	            
+	            </div>            
+          </div>
+      	</section>      
+      </div>
+      <div class="row">	
+	      <section class="col-lg-12 connectorSortable">
+	      	<div class="box box-primary">
+	          	<div class="box-body no-padding">
+	              <!-- THE CALENDAR -->
+	           		<div id="calendar"></div>
+	           	</div>           
+	       	</div>
+	      </section>
+	  </div>      
+    </section>    
+  </div> 
+  <footer th:replace="layout/layout :: footer"></footer>  
+  <div class="control-sidebar-bg">
+  </div>
+</div>
+
+<script>
+
+$(document).ready(function(){
+	
+    $('li').removeClass("active");
+    $('#menu_inicio').addClass("active");
+    
+});
+</script>
+</body>
+</html>

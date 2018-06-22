@@ -74,8 +74,8 @@ public class DetalleConsumo implements Serializable {
 		this.subTotal = subTotal;
 	}
 
-	public Double calculaSubTotal() {
-		return producto.getPrecioVenta() * cantidad.doubleValue();
+	public void calculaSubTotal() {
+		this.setSubTotal(producto.getPrecioVenta() * cantidad.doubleValue());
 	}
 
 	private static final long serialVersionUID = 1L;

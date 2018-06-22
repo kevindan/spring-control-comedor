@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,6 +33,11 @@ public class Rol implements Serializable {
 	@NotNull
 	@Column(name = "fecha_registro")
 	private Date fechaRegistro;
+
+	@PrePersist
+	public void prePersist() {
+		fechaRegistro = new Date();
+	}
 
 	public Long getIdRol() {
 		return idRol;
