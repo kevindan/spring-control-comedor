@@ -38,12 +38,12 @@ public class Producto implements Serializable {
 	private String presentacion;
 
 	@Column(name = "precio_compra")
-	private double precioCompra;
+	private Double precioCompra;
 
 	@Column(name = "precio_venta")
 	@NotNull
 	@NotEmpty
-	private double precioVenta;
+	private Double precioVenta;
 
 	@Column(name = "stock_minimo")
 	private int stockMinimo;
@@ -96,7 +96,7 @@ public class Producto implements Serializable {
 		this.presentacion = presentacion;
 	}
 
-	public double getPrecioCompra() {
+	public Double getPrecioCompra() {
 		return precioCompra;
 	}
 
@@ -104,7 +104,7 @@ public class Producto implements Serializable {
 		this.precioCompra = precioCompra;
 	}
 
-	public double getPrecioVenta() {
+	public Double getPrecioVenta() {
 		return precioVenta;
 	}
 

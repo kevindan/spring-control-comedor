@@ -49,19 +49,19 @@ public class Consumo implements Serializable {
 	private Date fechaConsumo;
 
 	@Column(name = "monto_sin_igv")
-	private double montoSinIgv;
+	private Double montoSinIgv;
 
 	@Column(name = "monto_igv")
-	private double montoIgv;
+	private Double montoIgv;
 
 	@Column(name = "monto_total")
-	private double montoTotal;
+	private Double montoTotal;
 
 	@Column(name = "monto_cancelado")
-	private double montoCancelado;
+	private Double montoCancelado;
 
 	@Column(name = "saldo")
-	private double saldo;
+	private Double saldo;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_consumo")
@@ -127,7 +127,7 @@ public class Consumo implements Serializable {
 		this.fechaConsumo = fechaConsumo;
 	}
 
-	public double getMontoSinIgv() {
+	public Double getMontoSinIgv() {
 		return montoSinIgv;
 	}
 
@@ -135,7 +135,7 @@ public class Consumo implements Serializable {
 		this.montoSinIgv = montoSinIgv;
 	}
 
-	public double getMontoIgv() {
+	public Double getMontoIgv() {
 		return montoIgv;
 	}
 
@@ -143,7 +143,7 @@ public class Consumo implements Serializable {
 		this.montoIgv = montoIgv;
 	}
 
-	public double getMontoTotal() {
+	public Double getMontoTotal() {
 		return montoTotal;
 	}
 
@@ -151,7 +151,7 @@ public class Consumo implements Serializable {
 		this.montoTotal = montoTotal;
 	}
 
-	public double getMontoCancelado() {
+	public Double getMontoCancelado() {
 		return montoCancelado;
 	}
 
@@ -159,7 +159,7 @@ public class Consumo implements Serializable {
 		this.montoCancelado = montoCancelado;
 	}
 
-	public double getSaldo() {
+	public Double getSaldo() {
 		return saldo;
 	}
 
