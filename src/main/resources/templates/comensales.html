@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+	<meta charset="utf-8">  
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini sidebar-collapse">
+<div class="wrapper">
+  <header th:replace="layout/layout :: header" ></header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside th:replace="layout/layout :: lateral-panel-left"></aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Registro de Comensales        
+      </h1>
+      <ol class="breadcrumb">
+        <li><a th:href="@{/index}"> Home</a></li>
+        <li class="active">Comensales</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+      	<section class="col-lg-6 col-xs-12 connectorSortable">
+      		<div class="box box-success">
+	            <div class="box-header with-border">	              
+	              <h3 class="box-title">Datos del Comensal</h3>		              
+	            </div>
+	            <form action="" accept-charset="utf-8">
+		            <div class="box-body" id="panel_citas_hoy">
+		            	<div class="row">
+		            		<div class="col-md-6">
+		            			<div class="row">
+		            				<div class="col-xs-6">		            	
+					            		<div class="form-group">
+					            			<label for="dni">D.N.I</label>
+					            			<div class="input-group">
+					            				<span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
+		                  						<input type="text" class="form-control" id="dni" placeholder="Ingrese DNI" autocomplete="off">
+					            			</div>
+					            		</div>
+					            	</div>
+		            			</div>
+		            			<div class="row">
+		            				<div class="col-xs-12">
+										<div class="form-group">
+			                  				<label for="nombres">Nombres</label>
+			                  				<div class="input-group">
+			                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
+			                  					<input type="text" class="form-control" id="nombres" placeholder="Ingrese un nombre" autocomplete="off">
+			                				</div>
+			                			</div>
+			                		</div>
+			                		<div class="col-xs-12">
+			                			<div class="form-group">			                			
+			                  				<label for="apellido_paterno">Apellido Paterno</label>
+			                  				<div class="input-group">
+			                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
+			                  					<input type="text" class="form-control" id="apellido_paterno" placeholder="Ingrese apellido paterno" autocomplete="off">
+			                				</div>
+			                			</div>
+			                		</div>
+			                		<div class="col-xs-12">
+			                			<div class="form-group">
+			                  				<label for="apellido_materno">Apellido Materno</label>
+			                  				<div class="input-group">
+			                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
+			                  					<input type="text" class="form-control" id="apellido_materno" placeholder="Ingrese apellido materno" autocomplete="off">
+			                				</div>
+			                			</div>
+			                		</div>			                			
+								</div>	
+		            		</div>
+		            		<div class="col-md-6">
+								<div class="row">
+									<div class="col-xs-6">
+	                					<div class="form-group">                				                			
+		                					<label for="sexo">Sexo</label>
+		                					<div class="input-group">
+		                						<span class="input-group-addon"><i class="fa fa-intersex"></i></span>
+			                					<select class="form-control" id="sexo" name="sexo">
+			                               			<option value="M">Masculino</option>
+			                                		<option value="F">Femenino</option>
+			                            		</select>
+		                        			</div>
+		                        		</div>	                                            				
+	                				</div>	                				
+	                				<div class="col-xs-12">
+	                					<div class="form-group">
+               								<label for="direccion">Dirección</label>
+               								<div class="input-group">
+               									<span class="input-group-addon"><i class="fa fa-address-card-o"></i></span>
+               									<input type="text" class="form-control" id="direccion" placeholder="Ingrese una dirección" autocomplete="off">
+               								</div>
+               							</div>		
+	                				</div>	                				
+	                				<div class="col-xs-12">
+	                					<div class="form-group">
+	                						<label for="email">E-mail</label>
+	                				 		<div class="input-group">
+	                							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+	                							<input type="email" id="email" class="form-control" placeholder="Ingrese e-mail" autocomplete="off">
+	              					 		</div>
+	              						</div>	
+	                				</div>
+	                				<div class="col-xs-6">
+	                					<div class="form-group">
+	                						<label for="telefono">Teléfono</label>
+	                				 		<div class="input-group">
+	                							<span class="input-group-addon"><i class="fa fa-phone"></i></span>
+	                							<input type="text" id="telefono" class="form-control"  autocomplete="off">
+	              					 		</div>
+	              						</div>
+	                				</div>	
+								</div>			            		
+		            		</div>				            		
+		            	</div>       		                		
+		            </div>
+		            <div class="box-footer">		            	
+		            	<button type="submit" class="btn btn-default" id="btn_nuevo_paciente">Nuevo</button>
+	                	<button type="submit" class="btn btn-primary pull-right" id="btn_grabar_paciente">Grabar</button>
+	              	</div>
+	             </form>             
+          </div>
+      	</section>
+      	<section class="col-lg-6 col-xs-12 connectorSortable">
+      		<div class="box box-success">      		 
+	          <div class="box-header with-border">	             
+	          	<h3 class="box-title">Listado de Comensales</h3>		              
+	          </div>
+	          <div class="box-body" id="panel_pacientes_registrados">
+	          	<form action="#" accept-charset="utf-8">
+					<div class="form-group">
+						<label for="filtro">Filtro</label>
+                        <div class="input-group">
+							<input type="text" name="filtro" id="filtro_comensales" class="form-control" placeholder="Ingrese un apellido" value="" autocomplete="off">
+							<div class="input-group-btn">
+								<button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<caption><span>Cantidad de comensales encontrados : <b>4</b></span></caption>
+								<thead>
+									<tr style="background-color: #ccc;">
+										<th class="text-center">Acciones</th>
+										<th class="text-center">Nombres</th>
+										<th class="text-center">Ap.Paterno</th>
+										<th class="text-center">Ap.Materno</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="text-center">
+											<div class="btn-group">
+                                               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                                               		<i class="fa fa-cogs margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
+                                               </button>
+                                               <ul class="dropdown-menu">
+                                               		<li><a onclick=""><i class="fa fa-pencil margin-r-5"></i>Editar</a></li>
+                                                    <li><a onclick=""><i class="fa fa-trash margin-r-5"></i>Eliminar</a></li>
+                                               </ul>
+                                            </div>											
+										</td>
+										<td class="text-center">Arturo Eugenio</td>
+										<td class="text-center">Sandoval</td>
+										<td class="text-center">Gutierrez</td>
+									</tr>									
+								</tbody>
+								<tfoot>
+									<tr style="background-color: gray; color: white;">
+										<th class="text-center">Acciones</th>
+										<th class="text-center">Nombres</th>
+										<th class="text-center">Ap.Paterno</th>
+										<th class="text-center">Ap.Materno</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<div class="box-footer clearfix">
+			                <div class="row">
+			                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			                		<ul class="pagination pagination-sm no-margin pull-right">
+			                			<li><a href=""rel="back">Anterior</a></li>
+			                			<li class="active" data-ci-pagination-page="1"><a href="#">1</a></li>
+			                			<li><a href="" data-ci-pagination-page="2">2</a></li>
+			                			<li><a href="" data-ci-pagination-page="3">3</a></li>
+			                			<li><a href="" data-ci-pagination-page="2" rel="next">Siguiente</a></li>
+			                		</ul>
+			                	</div>
+			                </div>
+			            </div>						
+					</div>
+				</div>	             	            
+	          </div>	                       
+          </div>
+      	</section>      
+      </div>
+    </section>    
+  </div>
+  <footer th:replace="layout/layout :: footer"></footer>  
+  <div class="control-sidebar-bg"></div>
+</div>
+<script>
+//Funcion de inicio de formulario
+$(document).ready(function(){
+	
+	    $('li').removeClass("active");
+	    $('#menu_registros').addClass("active");
+	    $('#menu_comensales').addClass("active");
+	    
+	    $('#fecha_nacimiento').datepicker({
+	        autoclose: true	    
+	   })	
+});
+</script>
+</body>
+</html>
+

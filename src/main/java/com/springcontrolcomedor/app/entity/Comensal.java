@@ -17,6 +17,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -51,7 +52,11 @@ public class Comensal implements Serializable {
 
 	@Column(name = "telefono")
 	private String telefono;
-
+	
+	@Column(name="email")
+	@Email	
+	private String email;
+	
 	@OneToMany(mappedBy = "comensal", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Consumo> consumos;
 

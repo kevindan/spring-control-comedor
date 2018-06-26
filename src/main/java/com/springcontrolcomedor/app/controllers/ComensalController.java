@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ComensalController {
 
-	@GetMapping("/comensal")
+	@GetMapping("/comensales")
 	private String comensal() {
-		return "comensal";
+		return "comensales";
 	}
 
 }
