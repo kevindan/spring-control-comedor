@@ -31,13 +31,17 @@ public class Comensal implements Serializable {
 	private Long idComensal;
 
 	@Column(name = "dni")
+	@NotEmpty
+	@NotNull
 	private String dni;
 
 	@Column(name = "nombres")
 	@NotEmpty
+	@NotNull
 	private String nombres;
 
 	@Column(name = "apellido_paterno")
+	@NotNull
 	@NotEmpty
 	private String apellidoPaterno;
 
@@ -52,11 +56,11 @@ public class Comensal implements Serializable {
 
 	@Column(name = "telefono")
 	private String telefono;
-	
-	@Column(name="email")
-	@Email	
+
+	@Column(name = "email")
+	@Email
 	private String email;
-	
+
 	@OneToMany(mappedBy = "comensal", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Consumo> consumos;
 
@@ -167,6 +171,14 @@ public class Comensal implements Serializable {
 
 	public void setEliminado(int eliminado) {
 		this.eliminado = eliminado;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 	private static final long serialVersionUID = 1L;
