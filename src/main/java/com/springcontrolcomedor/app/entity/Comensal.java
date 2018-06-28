@@ -31,8 +31,8 @@ public class Comensal implements Serializable {
 	private Long idComensal;
 
 	@Column(name = "dni")
-	@NotEmpty
-	@NotNull
+	@NotEmpty( message = "No puede ser vacío" )
+	@NotNull( message = "No puede ser nulo" )
 	private String dni;
 
 	@Column(name = "nombres")
