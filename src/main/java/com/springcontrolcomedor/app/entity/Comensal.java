@@ -19,7 +19,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "comensales")
@@ -31,17 +30,14 @@ public class Comensal implements Serializable {
 	private Long idComensal;
 
 	@Column(name = "dni")
-	@NotEmpty( message = "No puede ser vacío" )
-	@NotNull( message = "No puede ser nulo" )
+	@NotEmpty
 	private String dni;
 
 	@Column(name = "nombres")
 	@NotEmpty
-	@NotNull
 	private String nombres;
 
 	@Column(name = "apellido_paterno")
-	@NotNull
 	@NotEmpty
 	private String apellidoPaterno;
 
@@ -65,8 +61,7 @@ public class Comensal implements Serializable {
 	private List<Consumo> consumos;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_registro")
-	@NotNull
+	@Column(name = "fecha_registro")	
 	private Date fechaRegistro;
 
 	@Column(name = "eliminado")
@@ -79,6 +74,7 @@ public class Comensal implements Serializable {
 	@PrePersist
 	public void prePersist() {
 		fechaRegistro = new Date();
+		eliminado = 0;
 	}
 
 	public Long getIdComensal() {

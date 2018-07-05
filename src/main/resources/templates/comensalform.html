@@ -104,9 +104,11 @@
 	                						<label for="email">E-mail</label>
 	                				 		<div class="input-group">
 	                							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-	                							<input type="email" id="email" th:field="*{email}" name="email" class="form-control" placeholder="Ingrese e-mail" autocomplete="off"/>
+	                							<input type="text" id="email" th:field="*{email}" name="email" class="form-control" placeholder="Ingrese e-mail" autocomplete="off"/>
 	              					 		</div>
-	              						</div>	
+	              						</div>
+	              						<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+	              							
 	                				</div>
 	                				<div class="col-xs-6">
 	                					<div class="form-group">

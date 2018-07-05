@@ -19,6 +19,7 @@ public class ComensalDaoImpl implements IComensalDao {
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	@Override
+
 	public List<Comensal> findAll() {
 		// TODO Auto-generated method stub
 		return em.createQuery("from Comensal").getResultList();

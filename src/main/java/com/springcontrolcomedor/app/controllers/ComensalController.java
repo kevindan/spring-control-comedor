@@ -1,7 +1,5 @@
 package com.springcontrolcomedor.app.controllers;
 
-import java.util.Map;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,30 +21,25 @@ public class ComensalController {
 	@RequestMapping(value = "/comensales", method = RequestMethod.GET)
 	private String listar(Model model) {
 
+		Comensal comensal = new Comensal();
+		
+		model.addAttribute("comensal",comensal);
 		model.addAttribute("titulo", "Listado de Comensales");
 		model.addAttribute("comensales", comensalDao.findAll());
 
 		return "comensales";
 	}
+	
+	@RequestMapping(value = "/comensales", method = RequestMethod.POST)
+	public String grabar(@Valid Comensal comensal, BindingResult result, Model model) {
 
-	@RequestMapping(value = "/comensalform")
-	public String crear(Map<String, Object> model) {
-
-		Comensal comensal = new Comensal();
-
-		model.put("comensal", comensal);
-
-		return "comensalForm";
-
-	}
-
-	@RequestMapping(value = "/addcomensal", method = RequestMethod.POST)
-	public String grabar(@Valid Comensal comensal, BindingResult result) {
-
-		if (result.hasErrors()) {
-
-			return "comensalform";
+		if(result.hasErrors()) {
+			
+			model.addAttribute("titulo", "Listado de Comensales");
+			model.addAttribute("comensales", comensalDao.findAll());		
+			return "comensales";
 		}
+	
 		comensalDao.save(comensal);
 		return "redirect:comensales";
 	}
