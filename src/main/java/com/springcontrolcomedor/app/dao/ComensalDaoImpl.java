@@ -31,4 +31,10 @@ public class ComensalDaoImpl implements IComensalDao {
 		em.persist(comensal);
 	}
 
+	@Override
+	public Comensal finOne(Long id) {
+
+		return em.find(Comensal.class, id);
+	}
+
 }

@@ -9,5 +9,7 @@ public interface IComensalDao {
 	public List<Comensal> findAll();
 
 	public void save(Comensal comensal);
+	
+	public Comensal finOne(Long id);
 
 }

@@ -29,7 +29,7 @@ public class ComensalController {
 
 		return "comensales";
 	}
-	
+			
 	@RequestMapping(value = "/comensales", method = RequestMethod.POST)
 	public String grabar(@Valid Comensal comensal, BindingResult result, Model model) {
 
