@@ -13,12 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "comensales")
@@ -61,7 +62,8 @@ public class Comensal implements Serializable {
 	private List<Consumo> consumos;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_registro")	
+	@Column(name = "fecha_registro")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaRegistro;
 
 	@Column(name = "eliminado")
@@ -69,10 +71,6 @@ public class Comensal implements Serializable {
 
 	public Comensal() {
 		consumos = new ArrayList<Consumo>();
-	}
-
-	@PrePersist
-	public void prePersist() {
 		fechaRegistro = new Date();
 		eliminado = 0;
 	}

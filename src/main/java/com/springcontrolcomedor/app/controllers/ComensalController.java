@@ -15,10 +15,9 @@ import com.springcontrolcomedor.app.entity.Comensal;
 
 @Controller
 public class ComensalController {
-	
+
 	@Autowired
 	private IComensalDao comensalDao;
-	
 
 	@RequestMapping(value = "/comensales", method = RequestMethod.GET)
 	private String listar(Model model) {
@@ -32,7 +31,7 @@ public class ComensalController {
 		return "comensales";
 	}
 
-	@RequestMapping(value = "/comensales/{idComensal}")
+	@RequestMapping(value = "/editar/{idComensal}")
 	public String editar(@PathVariable(value = "idComensal") Long idComensal, Model model) {
 
 		Comensal comensal = null;
@@ -67,6 +66,28 @@ public class ComensalController {
 
 		comensalDao.save(comensal);
 		return "redirect:/comensales";
+	}
+
+	@RequestMapping(value = "/comensales/{idComensal}", method = RequestMethod.POST)
+	public String eliminar(@PathVariable(value = "idComensal") Long idComensal, Model model) {
+
+		Comensal comensal = null;
+
+		if (idComensal > 0) {
+
+			comensal = comensalDao.finOne(idComensal);
+
+		} else {
+
+			return "redirect:/comensales";
+
+		}
+
+		model.addAttribute("comensal", comensal);
+		model.addAttribute("titulo", "Listado de Comensales");
+		model.addAttribute("comensales", comensalDao.findAll());
+
+		return "comensales";
 	}
 
 }

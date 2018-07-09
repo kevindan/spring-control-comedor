@@ -1,6 +1,5 @@
 package com.springcontrolcomedor.app.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,8 +13,6 @@ import com.springcontrolcomedor.app.entity.Comensal;
 @Repository
 public class ComensalDaoImpl implements IComensalDao {
 
-	Date fechaRegistro = new Date(); 
-	
 	@PersistenceContext
 	private EntityManager em;
 
@@ -24,7 +21,7 @@ public class ComensalDaoImpl implements IComensalDao {
 	@Override
 
 	public List<Comensal> findAll() {
-		// TODO Auto-generated method stub
+
 		return em.createQuery("from Comensal").getResultList();
 	}
 
@@ -33,20 +30,24 @@ public class ComensalDaoImpl implements IComensalDao {
 	public void save(Comensal comensal) {
 
 		if (comensal.getIdComensal() != null && comensal.getIdComensal() > 0) {
-			comensal.setFechaRegistro(fechaRegistro);
+
 			em.merge(comensal);
 
 		} else {
 
 			em.persist(comensal);
 		}
-
 	}
 
 	@Override
 	public Comensal finOne(Long id) {
 
 		return em.find(Comensal.class, id);
+	}
+
+	@Override
+	public void delete(Long id) {
+		em.remove(finOne(id));
 	}
 
 }

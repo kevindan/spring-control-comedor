@@ -11,5 +11,7 @@ public interface IComensalDao {
 	public void save(Comensal comensal);
 	
 	public Comensal finOne(Long id);
+	
+	public void delete(Long id);
 
 }

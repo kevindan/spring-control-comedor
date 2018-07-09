@@ -132,6 +132,8 @@
 	              		</div>
 	              	</div>
 	              	<input type="hidden" th:field="*{idComensal}" />
+	              	<input type="hidden" th:field="*{fechaRegistro}" />
+	              	<input type="hidden" th:field="*{eliminado}" />
 	             </form>             
           </div>
       	</section>      	
@@ -177,7 +179,7 @@
                                                		<i class="fa fa-cogs margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
                                                </button>
                                                <ul class="dropdown-menu">
-                                               		<li><a th:href="@{/comensales/} + ${comensal.idComensal}"><i class="fa fa-pencil margin-r-5"></i>Editar</a></li>
+                                               		<li><a th:href="@{/editar/} + ${comensal.idComensal}"><i class="fa fa-pencil margin-r-5"></i>Editar</a></li>
                                                     <li><a ><i class="fa fa-trash margin-r-5"></i>Eliminar</a></li>
                                                </ul>
                                             </div>											
