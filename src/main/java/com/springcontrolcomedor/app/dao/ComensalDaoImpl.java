@@ -46,6 +46,7 @@ public class ComensalDaoImpl implements IComensalDao {
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		em.remove(finOne(id));
 	}

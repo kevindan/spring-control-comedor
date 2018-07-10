@@ -28,7 +28,7 @@
 	            <div class="box-header with-border">	              
 	              <h3 class="box-title">Datos del Comensal</h3>		              
 	            </div>
-	            <form th:action="@{/comensales}" th:object="${comensal}" method="post" accept-charset="utf-8">
+	            <form th:action="@{/comensales/grabar}" th:object="${comensal}" method="post" accept-charset="utf-8">
 		            <div class="box-body" id="panel_citas_hoy">
 		            	<div class="row">
 		            		<div class="col-md-6">
@@ -158,61 +158,61 @@
 						</div>
 					</div>
 				</form>
-				<div class="row">
-					<div class="col-xs-12">					
-						<div class="table-responsive">
-							<table class="table table-bordered" id="lista_comensales" name="lista_comensales">
-								<caption><span>Cantidad de comensales encontrados : <b>4</b></span></caption>																
-								<thead>
-									<tr class="bg-blue">
-										<th class="text-center">Acciones</th>
-										<th class="text-center">Nombres</th>
-										<th class="text-center">Ap.Paterno</th>
-										<th class="text-center">Ap.Materno</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="comensal : ${comensales}">
-										<td class="text-center">
-											<div class="btn-group">
-                                               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                               		<i class="fa fa-cogs margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
-                                               </button>
-                                               <ul class="dropdown-menu">
-                                               		<li><a th:href="@{/editar/} + ${comensal.idComensal}"><i class="fa fa-pencil margin-r-5"></i>Editar</a></li>
-                                                    <li><a ><i class="fa fa-trash margin-r-5"></i>Eliminar</a></li>
-                                               </ul>
-                                            </div>											
-										</td>
-										<td class="text-center" th:text="${comensal.nombres}"></td>
-										<td class="text-center" th:text="${comensal.apellidoPaterno}"></td>
-										<td class="text-center" th:text="${comensal.apellidoMaterno}"></td>
-									</tr>									
-								</tbody>
-								<tfoot>
-									<tr style="background-color: gray; color: white;">
-										<th class="text-center">Acciones</th>
-										<th class="text-center">Nombres</th>
-										<th class="text-center">Ap.Paterno</th>
-										<th class="text-center">Ap.Materno</th>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-						<div class="box-footer clearfix">
-			                <div class="row">
-			                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			                		<ul class="pagination pagination-sm no-margin pull-right">
-			                			<li><a href=""rel="back">Anterior</a></li>
-			                			<li class="active" data-ci-pagination-page="1"><a href="#">1</a></li>
-			                			<li><a href="" data-ci-pagination-page="2">2</a></li>
-			                			<li><a href="" data-ci-pagination-page="3">3</a></li>
-			                			<li><a href="" data-ci-pagination-page="2" rel="next">Siguiente</a></li>
-			                		</ul>
-			                	</div>
-			                </div>
-			            </div>						
-					</div>
+				<div class="row">					
+						<div class="col-xs-12">					
+							<div class="table-responsive">
+								<table class="table table-bordered" id="lista_comensales" name="lista_comensales">
+									<caption><span>Cantidad de comensales encontrados : <b>4</b></span></caption>																
+									<thead>
+										<tr class="bg-blue">
+											<th class="text-center">Acciones</th>
+											<th class="text-center">Nombres</th>
+											<th class="text-center">Ap.Paterno</th>
+											<th class="text-center">Ap.Materno</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="comensal : ${comensales}">
+											<td class="text-center">
+												<div class="btn-group">
+	                                               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+	                                               		<i class="fa fa-cogs margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
+	                                               </button>
+	                                               <ul class="dropdown-menu">
+	                                               		<li><a th:href="@{/comensales/editar/} + ${comensal.idComensal}"><i class="fa fa-pencil margin-r-5"></i>Editar</a></li>
+	                                                    <li><a th:href="@{/comensales/eliminar/} + ${comensal.idComensal}" ><i class="fa fa-trash margin-r-5"></i>Eliminar</a></li>
+	                                               </ul>
+	                                            </div>											
+											</td>
+											<td class="text-center" th:text="${comensal.nombres}"></td>
+											<td class="text-center" th:text="${comensal.apellidoPaterno}"></td>
+											<td class="text-center" th:text="${comensal.apellidoMaterno}"></td>
+										</tr>									
+									</tbody>
+									<tfoot>
+										<tr style="background-color: gray; color: white;">
+											<th class="text-center">Acciones</th>
+											<th class="text-center">Nombres</th>
+											<th class="text-center">Ap.Paterno</th>
+											<th class="text-center">Ap.Materno</th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+							<div class="box-footer clearfix">
+				                <div class="row">
+				                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				                		<ul class="pagination pagination-sm no-margin pull-right">
+				                			<li><a href=""rel="back">Anterior</a></li>
+				                			<li class="active" data-ci-pagination-page="1"><a href="#">1</a></li>
+				                			<li><a href="" data-ci-pagination-page="2">2</a></li>
+				                			<li><a href="" data-ci-pagination-page="3">3</a></li>
+				                			<li><a href="" data-ci-pagination-page="2" rel="next">Siguiente</a></li>
+				                		</ul>
+				                	</div>
+				                </div>
+				            </div>						
+						</div>					
 				</div>	             	            
 	          </div>	                       
           </div>

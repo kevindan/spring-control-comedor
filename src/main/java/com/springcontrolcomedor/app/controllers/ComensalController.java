@@ -14,12 +14,13 @@ import com.springcontrolcomedor.app.dao.IComensalDao;
 import com.springcontrolcomedor.app.entity.Comensal;
 
 @Controller
+@RequestMapping(value = "/comensales")
 public class ComensalController {
 
 	@Autowired
 	private IComensalDao comensalDao;
 
-	@RequestMapping(value = "/comensales", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	private String listar(Model model) {
 
 		Comensal comensal = new Comensal();
@@ -39,11 +40,10 @@ public class ComensalController {
 		if (idComensal > 0) {
 
 			comensal = comensalDao.finOne(idComensal);
-
+			
 		} else {
 
 			return "redirect:/comensales";
-
 		}
 
 		model.addAttribute("comensal", comensal);
@@ -53,7 +53,7 @@ public class ComensalController {
 		return "comensales";
 	}
 
-	@RequestMapping(value = "/comensales", method = RequestMethod.POST)
+	@RequestMapping(value = "/grabar", method = RequestMethod.POST)
 	public String grabar(@Valid Comensal comensal, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
@@ -68,26 +68,15 @@ public class ComensalController {
 		return "redirect:/comensales";
 	}
 
-	@RequestMapping(value = "/comensales/{idComensal}", method = RequestMethod.POST)
-	public String eliminar(@PathVariable(value = "idComensal") Long idComensal, Model model) {
-
-		Comensal comensal = null;
+	@RequestMapping(value = "/eliminar/{idComensal}")
+	public String eliminar(@PathVariable(value = "idComensal") Long idComensal) {
 
 		if (idComensal > 0) {
 
-			comensal = comensalDao.finOne(idComensal);
-
-		} else {
-
-			return "redirect:/comensales";
-
+			comensalDao.delete(idComensal);
 		}
 
-		model.addAttribute("comensal", comensal);
-		model.addAttribute("titulo", "Listado de Comensales");
-		model.addAttribute("comensales", comensalDao.findAll());
-
-		return "comensales";
+		return "redirect:/comensales";
 	}
 
 }
