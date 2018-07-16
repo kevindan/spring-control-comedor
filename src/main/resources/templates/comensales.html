@@ -106,9 +106,8 @@
 	                							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 	                							<input type="text" id="email" th:field="*{email}" name="email" class="form-control" placeholder="Ingrese e-mail" autocomplete="off"/>
 	              					 		</div>
+	              					 		<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
 	              						</div>
-	              						<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
-	              							
 	                				</div>
 	                				<div class="col-xs-12">
 	                					<div class="form-group">
@@ -127,7 +126,7 @@
 		            	<div class="row">
 		            		<div class="col-lg-4">
 		            			<button type="submit" class="btn btn-primary" id="btn_grabar_comensal" name="btn_grabar_comensal">Grabar</button>		            	
-				            	<button type="button" class="btn btn-default" id="btn_nuevo_comensal" name="btn_nuevo_comensal">Nuevo</button>			                	
+				            	<a th:href="@{/comensales}" class="btn btn-default" id="btn_nuevo_comensal" >Nuevo</a>			                	
 	              			</div>
 	              		</div>
 	              	</div>
@@ -213,7 +212,7 @@
 				                </div>
 				            </div>						
 						</div>					
-				</div>	             	            
+			 		</div>	             	            
 	          </div>	                       
           </div>
       	</section>      

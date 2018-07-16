@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.springcontrolcomedor.app.entity.Comensal;
 
@@ -17,16 +16,14 @@ public class ComensalDaoImpl implements IComensalDao {
 	private EntityManager em;
 
 	@SuppressWarnings("unchecked")
-	@Transactional(readOnly = true)
-	@Override
 
+	@Override
 	public List<Comensal> findAll() {
 
 		return em.createQuery("from Comensal").getResultList();
 	}
 
 	@Override
-	@Transactional
 	public void save(Comensal comensal) {
 
 		if (comensal.getIdComensal() != null && comensal.getIdComensal() > 0) {
@@ -46,7 +43,6 @@ public class ComensalDaoImpl implements IComensalDao {
 	}
 
 	@Override
-	@Transactional
 	public void delete(Long id) {
 		em.remove(finOne(id));
 	}

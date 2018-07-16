@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springcontrolcomedor.app.dao.IComensalDao;
 import com.springcontrolcomedor.app.entity.Comensal;
+import com.springcontrolcomedor.app.service.IComensalService;
 
 @Controller
 @RequestMapping(value = "/comensales")
 public class ComensalController {
 
 	@Autowired
-	private IComensalDao comensalDao;
+	private IComensalService comensalService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	private String listar(Model model) {
@@ -27,7 +28,7 @@ public class ComensalController {
 
 		model.addAttribute("comensal", comensal);
 		model.addAttribute("titulo", "Listado de Comensales");
-		model.addAttribute("comensales", comensalDao.findAll());
+		model.addAttribute("comensales", comensalService.findAll());
 
 		return "comensales";
 	}
@@ -39,7 +40,7 @@ public class ComensalController {
 
 		if (idComensal > 0) {
 
-			comensal = comensalDao.finOne(idComensal);
+			comensal = comensalService.finOne(idComensal);
 			
 		} else {
 
@@ -48,7 +49,7 @@ public class ComensalController {
 
 		model.addAttribute("comensal", comensal);
 		model.addAttribute("titulo", "Listado de Comensales");
-		model.addAttribute("comensales", comensalDao.findAll());
+		model.addAttribute("comensales", comensalService.findAll());
 
 		return "comensales";
 	}
@@ -59,12 +60,12 @@ public class ComensalController {
 		if (result.hasErrors()) {
 
 			model.addAttribute("titulo", "Listado de Comensales");
-			model.addAttribute("comensales", comensalDao.findAll());
+			model.addAttribute("comensales", comensalService.findAll());
 
 			return "comensales";
 		}
 
-		comensalDao.save(comensal);
+		comensalService.save(comensal);
 		return "redirect:/comensales";
 	}
 
@@ -73,7 +74,7 @@ public class ComensalController {
 
 		if (idComensal > 0) {
 
-			comensalDao.delete(idComensal);
+			comensalService.delete(idComensal);
 		}
 
 		return "redirect:/comensales";
