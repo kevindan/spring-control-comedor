@@ -3,6 +3,8 @@ package com.springcontrolcomedor.app.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +21,7 @@ public class IComensalServiceImpl implements IComensalService {
 	@Transactional(readOnly = true)
 	public List<Comensal> findAll() {
 
-		return comensalDao.findAll();
+		return (List<Comensal>) comensalDao.findAll();
 	}
 
 	@Override
@@ -32,14 +34,20 @@ public class IComensalServiceImpl implements IComensalService {
 	@Override
 	public Comensal finOne(Long id) {
 
-		return comensalDao.finOne(id);
+		return comensalDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		comensalDao.delete(id);
+		comensalDao.deleteById(id);
 
+	}
+
+	@Override
+	public Page<Comensal> findAll(Pageable pageable) {
+
+		return comensalDao.findAll(pageable);
 	}
 
 }
