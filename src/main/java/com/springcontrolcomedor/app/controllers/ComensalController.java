@@ -82,12 +82,11 @@ public class ComensalController {
 	}
 
 	@RequestMapping(value = "/grabar", method = RequestMethod.POST)
-	public String grabar(@Valid Comensal comensal, @RequestParam(name = "page", defaultValue = "0") int page,
-			BindingResult result, Model model, RedirectAttributes flash) {
+	public String grabar(@Valid Comensal comensal, BindingResult result, Model model, RedirectAttributes flash) {
 
 		if (result.hasErrors()) {
 
-			Pageable pageRequest = PageRequest.of(page, 5);
+			Pageable pageRequest = PageRequest.of(0, 5);
 
 			Page<Comensal> comensales = comensalService.findAll(pageRequest);
 
