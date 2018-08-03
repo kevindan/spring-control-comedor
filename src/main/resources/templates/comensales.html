@@ -42,7 +42,7 @@
 					            			<label for="dni">D.N.I</label>
 					            			<div class="input-group">
 					            				<span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-		                  						<input type="text" class="form-control" th:field="*{dni}" id="dni" name="dni" placeholder="Ingrese DNI" autocomplete="off"/>					            				
+		                  						<input maxlength="8"  onkeypress="return valida_numeros(event)" type="text" class="form-control" th:field="*{dni}" id="dni" name="dni" placeholder="Ingrese DNI" autocomplete="off"/>					            				
 					            			</div>
 					            			<small class="form-text text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
 					            		</div>
@@ -228,10 +228,15 @@ $(document).ready(function(){
 	    $('#menu_registros').addClass("active");
 	    $('#menu_comensales').addClass("active");
 	    
-	    $('#fecha_nacimiento').datepicker({
-	        autoclose: true	    
-	   })	
-});
+	   });
+</script>
+<script>
+	function valida_numeros(e){
+		
+		key = window.Event ? e.keyCode : e.which;
+				
+		return (key >= 48 && key <= 57);
+	}
 </script>
 </body>
 </html>
