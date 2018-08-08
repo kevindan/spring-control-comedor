@@ -17,6 +17,7 @@
 	  
 	  <link rel="stylesheet" th:href="@{/bootstrap/bower_components/fullcalendar/dist/fullcalendar.min.css}">
 	  <link rel="stylesheet" th:href="@{/bootstrap/bower_components/fullcalendar/dist/fullcalendar.print.min.css}" media="print">
+	  <link rel="stylesheet" th:href="@{/css/button-circle.css}">
 	  
 	  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 	</head>
@@ -34,13 +35,13 @@
 		        <ul class="nav navbar-nav">
 		          <li class="dropdown user user-menu">
 		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-		              <img src="bootstrap/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+		              <img th:src="@{/bootstrap/dist/img/user2-160x160.jpg}" class="user-image" alt="User Image">
 		              <span class="hidden-xs">Administrator</span>
 		            </a>
 		            <ul class="dropdown-menu">
 		              <!-- User image -->
 		              <li class="user-header">
-		                <img src="bootstrap/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">		
+		                <img th:src="@{/bootstrap/dist/img/user2-160x160.jpg}" class="img-circle" alt="User Image">		
 		                <p>
 		                  <strong>Administrator</strong>
 		                  <br>

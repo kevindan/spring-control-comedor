@@ -13,7 +13,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Registro de Comensales        
+        Comensales        
       </h1>
       <ol class="breadcrumb">
         <li><a th:href="@{/index}"> Home</a></li>
@@ -26,129 +26,16 @@
 		<div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
 		<div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
 		<div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
-      <div class="row">
-      	<section class="col-lg-6 col-xs-12 connectorSortable">
-      		<div class="box box-success">
-	            <div class="box-header with-border">	              
-	              <h3 class="box-title">Datos del Comensal</h3>		              
-	            </div>
-	            <form th:action="@{/comensales/grabar}" th:object="${comensal}" method="post" accept-charset="utf-8">
-		            <div class="box-body" id="panel_citas_hoy">
-		            	<div class="row">
-		            		<div class="col-md-6">
-		            			<div class="row">
-		            				<div class="col-xs-6">		            	
-					            		<div class="form-group">
-					            			<label for="dni">D.N.I</label>
-					            			<div class="input-group">
-					            				<span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-		                  						<input maxlength="8"  onkeypress="return valida_numeros(event)" type="text" class="form-control" th:field="*{dni}" id="dni" name="dni" placeholder="Ingrese DNI" autocomplete="off"/>					            				
-					            			</div>
-					            			<small class="form-text text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
-					            		</div>
-					            	</div>
-		            			</div>
-		            			<div class="row">
-		            				<div class="col-xs-12">
-										<div class="form-group">
-			                  				<label for="nombres">Nombres</label>
-			                  				<div class="input-group">
-			                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
-			                  					<input type="text" th:field="*{nombres}" class="form-control" id="nombres" name="nombres" placeholder="Ingrese un nombre" autocomplete="off"/>
-			                				</div>
-			                				<small class="form-text text-danger" th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}"></small>
-			                			</div>
-			                		</div>
-			                		<div class="col-xs-12">
-			                			<div class="form-group">			                			
-			                  				<label for="apellido_paterno">Apellido Paterno</label>
-			                  				<div class="input-group">
-			                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
-			                  					<input type="text" class="form-control" th:field="*{apellidoPaterno}" id="apellido_paterno" name="apellido_paterno" placeholder="Ingrese apellido paterno" autocomplete="off"/>			                					
-			                				</div>
-			                				<small class="form-text text-danger" th:if="${#fields.hasErrors('apellidoPaterno')}" th:errors="*{apellidoPaterno}"></small>
-			                			</div>
-			                		</div>
-			                		<div class="col-xs-12">
-			                			<div class="form-group">
-			                  				<label for="apellido_materno">Apellido Materno</label>
-			                  				<div class="input-group">
-			                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
-			                  					<input type="text" th:field="*{apellidoMaterno}" class="form-control" id="apellido_materno" name="apellido_materno" placeholder="Ingrese apellido materno" autocomplete="off"/>
-			                				</div>
-			                			</div>
-			                		</div>			                			
-								</div>	
-		            		</div>
-		            		<div class="col-md-6">
-								<div class="row">
-									<div class="col-xs-12">
-	                					<div class="form-group">                				                			
-		                					<label for="sexo">Sexo</label>
-		                					<div class="input-group">
-		                						<span class="input-group-addon"><i class="fa fa-intersex"></i></span>
-			                					<select class="form-control" id="sexo" name="sexo" th:field="*{sexo}">
-			                               			<option value="Hombre">Masculino</option>
-			                                		<option value="Mujer">Femenino</option>
-			                            		</select>
-		                        			</div>
-		                        		</div>	                                            				
-	                				</div>	                				
-	                				<div class="col-xs-12">
-	                					<div class="form-group">
-               								<label for="direccion">Dirección</label>
-               								<div class="input-group">
-               									<span class="input-group-addon"><i class="fa fa-address-card-o"></i></span>
-               									<input type="text" th:field="*{direccion}" class="form-control" id="direccion" name="direccion" placeholder="Ingrese una dirección" autocomplete="off"/>
-               								</div>
-               							</div>		
-	                				</div>	                				
-	                				<div class="col-xs-12">
-	                					<div class="form-group">
-	                						<label for="email">E-mail</label>
-	                				 		<div class="input-group">
-	                							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-	                							<input type="text" id="email" th:field="*{email}" name="email" class="form-control" placeholder="Ingrese e-mail" autocomplete="off"/>
-	              					 		</div>
-	              					 		<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
-	              						</div>
-	                				</div>
-	                				<div class="col-xs-12">
-	                					<div class="form-group">
-	                						<label for="telefono">Teléfono</label>
-	                				 		<div class="input-group">
-	                							<span class="input-group-addon"><i class="fa fa-phone"></i></span>
-	                							<input type="text" id="telefono" th:field="*{telefono}" name="telefono" class="form-control"  autocomplete="off"/>
-	              					 		</div>
-	              						</div>
-	                				</div>	
-								</div>			            		
-		            		</div>				            		
-		            	</div>       		                		
-		            </div>
-		            <div class="box-footer">
-		            	<div class="row">
-		            		<div class="col-lg-4">
-		            			<button type="submit" class="btn btn-primary" id="btn_grabar_comensal" name="btn_grabar_comensal">Grabar</button>		            	
-				            	<a th:href="@{/comensales}" class="btn btn-default" id="btn_nuevo_comensal" >Nuevo</a>			                	
-	              			</div>
-	              		</div>
-	              	</div>
-	              	<input type="hidden" th:field="*{idComensal}" />
-	              	<input type="hidden" th:field="*{fechaRegistro}" />
-	              	<input type="hidden" th:field="*{eliminado}" />
-	             </form>             
-          </div>
-      	</section>      	
-      	<section class="col-lg-6 col-xs-12 connectorSortable">
+      <div class="row">      	      	
+      	<section class="col-xs-12 connectorSortable">
       		<div class="box box-success">      		 
 	          <div class="box-header with-border">	             
-	          	<h3 class="box-title" th:text="${titulo}"></h3>		              
+	          	<h3 class="box-title">Lista de comensales registrados</h3>		              
 	          </div>
 	          <div class="box-body" id="panel_comensales_registrados">
 	          	<form action="#" accept-charset="utf-8">
 	          		<div class="row">					
-						<div class="col-xs-12">
+						<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
 							<div class="form-group">
 								<label for="filtro">Filtro</label>
 		                        <div class="input-group">
@@ -161,15 +48,21 @@
 						</div>
 					</div>
 				</form>
+				<div class="row">
+					<div class="col-xs-12">						
+						<button type="button" class="btn btn-success btn-lg btn-circle pull-right" id="boton_nuevo_comensal"><i class="glyphicon glyphicon-plus"></i></button>						
+					</div>
+				</div>
+				<p>
 				<div class="row">					
 						<div class="col-xs-12">					
 							<div class="table-responsive">
-								<table class="table table-bordered" id="lista_comensales" name="lista_comensales">
-									<caption><span>Cantidad de comensales encontrados : <b>4</b></span></caption>																
+								<table class="table table-bordered" id="lista_comensales" name="lista_comensales">																								
 									<thead>
 										<tr class="bg-blue">
 											<th class="text-center">Acciones</th>
-											<th class="text-center">Nombres</th>
+											<th class="text-center">D.N.I</th>
+											<th class="text-center">Nombres</th>											
 											<th class="text-center">Ap.Paterno</th>
 											<th class="text-center">Ap.Materno</th>
 										</tr>
@@ -182,11 +75,12 @@
 	                                               		<i class="fa fa-cogs margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
 	                                               </button>
 	                                               <ul class="dropdown-menu">
-	                                               		<li><a th:href="@{/comensales/editar/} + ${comensal.idComensal}"><i class="fa fa-pencil margin-r-5"></i>Editar</a></li>
-	                                                    <li><a th:href="@{/comensales/eliminar/} + ${comensal.idComensal}" ><i class="fa fa-trash margin-r-5"></i>Eliminar</a></li>
+	                                               		<li><a th:href="@{/comensales/editar/} + ${comensal.idComensal}" id="editar_comensal"><i class="fa fa-pencil margin-r-5"></i>Editar</a></li>
+	                                                    <li><a th:href="@{/comensales/eliminar/} + ${comensal.idComensal}" id="eliminar_comensal"><i class="fa fa-trash margin-r-5"></i>Eliminar</a></li>
 	                                               </ul>
 	                                            </div>											
 											</td>
+											<td class="text-center" th:text="${comensal.dni}"></td>
 											<td class="text-center" th:text="${comensal.nombres}"></td>
 											<td class="text-center" th:text="${comensal.apellidoPaterno}"></td>
 											<td class="text-center" th:text="${comensal.apellidoMaterno}"></td>
@@ -195,6 +89,7 @@
 									<tfoot>
 										<tr style="background-color: gray; color: white;">
 											<th class="text-center">Acciones</th>
+											<th class="text-center">D.N.I</th>
 											<th class="text-center">Nombres</th>
 											<th class="text-center">Ap.Paterno</th>
 											<th class="text-center">Ap.Materno</th>
@@ -215,29 +110,135 @@
           </div>
       	</section>      
       </div>
-    </section>    
+    </section>       
   </div>
-  <footer th:replace="layout/layout :: footer"></footer>  
-  <div class="control-sidebar-bg"></div>
+  <footer th:replace="layout/layout :: footer"></footer>    
 </div>
-<script>
-//Funcion de inicio de formulario
-$(document).ready(function(){
-	
-	    $('li').removeClass("active");
-	    $('#menu_registros').addClass("active");
-	    $('#menu_comensales').addClass("active");
-	    
-	   });
-</script>
-<script>
-	function valida_numeros(e){
-		
-		key = window.Event ? e.keyCode : e.which;
-				
-		return (key >= 48 && key <= 57);
-	}
-</script>
+
+<!-- MODAL REGISTRO DE COMENSALES -->
+<div class="modal fade" id="modal_registro_comensal" data-backdrop="static">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form th:action="@{/comensales/grabar}" id="form_comensal" th:object="${comensal}" method="post" accept-charset="utf-8">
+				<div class="modal-header">
+					<h4 class="modal-title">Datos del Comensal</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12">										            
+					            	<div class="row">
+					            		<div class="col-md-6">
+					            			<div class="row">
+					            				<div class="col-xs-6">		            	
+								            		<div class="form-group">
+								            			<label for="dni">D.N.I</label>
+								            			<div class="input-group">
+								            				<span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
+					                  						<input maxlength="8"  onkeypress="return valida_numeros(event)" type="text" class="form-control" th:field="*{dni}" id="dni" name="dni" placeholder="Ingrese DNI" autocomplete="off"/>					            				
+								            			</div>
+								            			<small class="form-text text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
+								            		</div>
+								            	</div>
+					            			</div>
+					            			<div class="row">
+					            				<div class="col-xs-12">
+													<div class="form-group">
+						                  				<label for="nombres">Nombres</label>
+						                  				<div class="input-group">
+						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
+						                  					<input type="text" th:field="*{nombres}" class="form-control" id="nombres" name="nombres" placeholder="Ingrese un nombre" autocomplete="off"/>
+						                				</div>
+						                				<small class="form-text text-danger" th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}"></small>
+						                			</div>
+						                		</div>
+						                		<div class="col-xs-12">
+						                			<div class="form-group">			                			
+						                  				<label for="apellido_paterno">Apellido Paterno</label>
+						                  				<div class="input-group">
+						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
+						                  					<input type="text" class="form-control" th:field="*{apellidoPaterno}" id="apellido_paterno" name="apellido_paterno" placeholder="Ingrese apellido paterno" autocomplete="off"/>			                					
+						                				</div>
+						                				<small class="form-text text-danger" th:if="${#fields.hasErrors('apellidoPaterno')}" th:errors="*{apellidoPaterno}"></small>
+						                			</div>
+						                		</div>
+						                		<div class="col-xs-12">
+						                			<div class="form-group">
+						                  				<label for="apellido_materno">Apellido Materno</label>
+						                  				<div class="input-group">
+						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
+						                  					<input type="text" th:field="*{apellidoMaterno}" class="form-control" id="apellido_materno" name="apellido_materno" placeholder="Ingrese apellido materno" autocomplete="off"/>
+						                				</div>
+						                			</div>
+						                		</div>			                			
+											</div>	
+					            		</div>
+					            		<div class="col-md-6">
+											<div class="row">
+												<div class="col-xs-6">
+				                					<div class="form-group">                				                			
+					                					<label for="sexo">Sexo</label>
+					                					<div class="input-group">
+					                						<span class="input-group-addon"><i class="fa fa-intersex"></i></span>
+						                					<select class="form-control" id="sexo" name="sexo" th:field="*{sexo}">
+						                               			<option value="Hombre">Masculino</option>
+						                                		<option value="Mujer">Femenino</option>
+						                            		</select>
+					                        			</div>
+					                        		</div>	                                            				
+				                				</div>	                				
+				                				<div class="col-xs-12">
+				                					<div class="form-group">
+			               								<label for="direccion">Dirección</label>
+			               								<div class="input-group">
+			               									<span class="input-group-addon"><i class="fa fa-address-card-o"></i></span>
+			               									<input type="text" th:field="*{direccion}" class="form-control" id="direccion" name="direccion" placeholder="Ingrese una dirección" autocomplete="off"/>
+			               								</div>
+			               							</div>		
+				                				</div>	                				
+				                				<div class="col-xs-12">
+				                					<div class="form-group">
+				                						<label for="email">E-mail</label>
+				                				 		<div class="input-group">
+				                							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+				                							<input type="text" id="email" th:field="*{email}" name="email" class="form-control" placeholder="Ingrese e-mail" autocomplete="off"/>
+				              					 		</div>
+				              					 		<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+				              						</div>
+				                				</div>
+				                				<div class="col-xs-6">
+				                					<div class="form-group">
+				                						<label for="telefono">Teléfono</label>
+				                				 		<div class="input-group">
+				                							<span class="input-group-addon"><i class="fa fa-phone"></i></span>
+				                							<input type="text" id="telefono" th:field="*{telefono}" name="telefono" class="form-control" placeholder="Ingrese un teléfono" autocomplete="off"/>
+				              					 		</div>
+				              						</div>
+				                				</div>	
+											</div>			            		
+					            		</div>				            		
+					            	</div>	            
+						         <input type="hidden" id="comensal_id" th:field="*{idComensal}" />
+						         <input type="hidden" id="fecha_registro" th:field="*{fechaRegistro}" />
+						         <input type="hidden" id="eliminado" th:field="*{eliminado}" />			             
+						</div>
+					</div>    			
+				</div>
+				<div class="modal-footer">
+					<div class="row">
+					 	<div class="col-xs-12">
+					    	<button type="submit" class="btn btn-primary" id="btn_grabar_comensal" name="btn_grabar_comensal">Grabar</button>		            	
+							<button type="button" class="btn btn-default" id="btn_cancelar_comensal" name="btn_cancelar_comensal">Cancelar</button>
+				    	</div>
+				    </div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!--  FIN MODAL REGISTRO DE COMENSALES -->
+
+<script th:src="@{/js/comensal.js}" ></script>
+
 </body>
 </html>
 
