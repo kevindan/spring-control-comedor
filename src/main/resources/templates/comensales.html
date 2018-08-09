@@ -131,7 +131,7 @@
 					            			<div class="row">
 					            				<div class="col-xs-6">		            	
 								            		<div class="form-group">
-								            			<label for="dni">D.N.I</label>
+								            			<label class="control-label" for="dni">D.N.I</label>
 								            			<div class="input-group">
 								            				<span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
 					                  						<input maxlength="8"  onkeypress="return valida_numeros(event)" type="text" class="form-control" th:field="*{dni}" id="dni" name="dni" placeholder="Ingrese DNI" autocomplete="off"/>					            				
@@ -152,8 +152,8 @@
 						                			</div>
 						                		</div>
 						                		<div class="col-xs-12">
-						                			<div class="form-group">			                			
-						                  				<label for="apellido_paterno">Apellido Paterno</label>
+						                			<div class="form-group has-feedback">			                			
+						                  				<label class="control-label" for="apellido_paterno">Apellido Paterno</label>
 						                  				<div class="input-group">
 						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
 						                  					<input type="text" class="form-control" th:field="*{apellidoPaterno}" id="apellido_paterno" name="apellido_paterno" placeholder="Ingrese apellido paterno" autocomplete="off"/>			                					
@@ -200,7 +200,7 @@
 				                						<label for="email">E-mail</label>
 				                				 		<div class="input-group">
 				                							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-				                							<input type="text" id="email" th:field="*{email}" name="email" class="form-control" placeholder="Ingrese e-mail" autocomplete="off"/>
+				                							<input type="email" id="email" th:field="*{email}" name="email" class="form-control" placeholder="Ingrese e-mail" autocomplete="off"/>
 				              					 		</div>
 				              					 		<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
 				              						</div>
@@ -217,9 +217,9 @@
 											</div>			            		
 					            		</div>				            		
 					            	</div>	            
-						         <input type="hidden" id="comensal_id" th:field="*{idComensal}" />
-						         <input type="hidden" id="fecha_registro" th:field="*{fechaRegistro}" />
-						         <input type="hidden" id="eliminado" th:field="*{eliminado}" />			             
+						         <input type="hidden" id="comensal_id" th:field="*{idComensal}"/>
+						         <input type="hidden" id="fecha_registro" th:field="*{fechaRegistro}"/>
+						         <input type="hidden" id="eliminado" th:field="*{eliminado}"/>			             
 						</div>
 					</div>    			
 				</div>
