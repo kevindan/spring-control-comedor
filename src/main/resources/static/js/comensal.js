@@ -34,13 +34,13 @@ function valida_formulario(){
 		fields:{
 			dni:{
 				validators:{
-					notEmpty:{
-						message: 'DNI requerido'
-					},
 					stringLength:{
 						min: 8,
 						max: 8,
-						message: 'Ingrese los 8 dígitos '
+						message: 'Debe ingresar los 8 dígitos'
+					},
+					notEmpty:{
+						message: 'El DNI es requerido'
 					}
 				}
 			},
@@ -48,38 +48,30 @@ function valida_formulario(){
 				validators:{
 					notEmpty:{
 						message: 'El nombre es requerido'
-					}					
+					}
 				}
 			},
-			apellido_paterno:{
+			apellidoPaterno:{
 				validators:{
 					notEmpty:{
-						message: 'El apellido paterno es requerido'
-					}					
+						message: 'El apellido paterno es requerido'						
+					}
 				}
 			},
 			email:{
 				validators:{
 					emailAddress:{
-						message: 'formato no válido'
+						message: 'Escriba un email válido'
 					},
-					notEmpty:{						
+					notEmpty:{
 						message: 'El email es requerido'
 					}
 				}
-			},
-			apellido_materno:{
-				validators:{
-					notEmpty:{
-						message: 'El apellido materno es requerido'
-					}					
-				}
 			}
-		}		
+		}	
 	});
 	
 }
-
 //Función que permite ingresar solo números en un input
 function valida_numeros(e){
 		
@@ -90,6 +82,7 @@ function valida_numeros(e){
 
 function limpiar_form_comensal(){
 	
+	$('#form_comensal').data('bootstrapValidator').resetForm();
 	$('#form_comensal').trigger('reset');
 		
 }
