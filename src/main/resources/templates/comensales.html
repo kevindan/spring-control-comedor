@@ -75,7 +75,8 @@
 	                                               		<i class="fa fa-cogs margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
 	                                               </button>
 	                                               <ul class="dropdown-menu">
-	                                               		<li><a th:href="@{/comensales/editar/} + ${comensal.idComensal}" id="editar_comensal"><i class="fa fa-pencil margin-r-5"></i>Editar</a></li>
+	                                               		<li><a id="ver_comensal" th:onclick="'ver_comensal('+${comensal.idComensal}+')'"><i class="fa fa-eye margin-r-5"></i>ver</a></li>
+	                                               		<li><a id="editar_comensal" th:onclick="'editar_comensal('+${comensal.idComensal}+')'"><i class="fa fa-pencil margin-r-5"></i>Editar</a></li>
 	                                                    <li><a th:href="@{/comensales/eliminar/} + ${comensal.idComensal}" id="eliminar_comensal"><i class="fa fa-trash margin-r-5"></i>Eliminar</a></li>
 	                                               </ul>
 	                                            </div>											
@@ -217,8 +218,8 @@
 											</div>			            		
 					            		</div>				            		
 					            	</div>	            
-						         <input type="hidden" id="comensal_id" th:field="*{idComensal}"/>
-						         <input type="hidden" id="fecha_registro" th:field="*{fechaRegistro}"/>
+						         <input type="hidden" id="idComensal" th:field="*{idComensal}"/>
+						         <input type="hidden" id="fechaRegistro" th:field="*{fechaRegistro}"/>
 						         <input type="hidden" id="eliminado" th:field="*{eliminado}"/>			             
 						</div>
 					</div>    			

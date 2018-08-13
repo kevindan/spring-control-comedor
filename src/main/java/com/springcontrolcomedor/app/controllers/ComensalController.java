@@ -9,10 +9,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springcontrolcomedor.app.entity.Comensal;
@@ -44,7 +46,7 @@ public class ComensalController {
 
 		return "comensales";
 	}
-
+/*
 	@RequestMapping(value = "/editar/{idComensal}")
 	public String editar(@PathVariable(value = "idComensal") Long idComensal,
 			@RequestParam(name = "page", defaultValue = "0") int page, Model model, RedirectAttributes flash) {
@@ -80,7 +82,14 @@ public class ComensalController {
 
 		return "comensales";
 	}
-
+	*/
+	
+	@GetMapping(value="/buscar/{idComensal}", produces= {"application/json"})
+	public @ResponseBody Comensal buscarComensal(@PathVariable Long idComensal) {
+		return comensalService.finOne(idComensal);
+	}
+	
+	
 	@RequestMapping(value = "/grabar", method = RequestMethod.POST)
 	public String grabar(@Valid Comensal comensal, BindingResult result, Model model, RedirectAttributes flash) {
 
