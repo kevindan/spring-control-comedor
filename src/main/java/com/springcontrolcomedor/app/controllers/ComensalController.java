@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springcontrolcomedor.app.entity.Comensal;
@@ -23,6 +25,7 @@ import com.springcontrolcomedor.app.util.paginator.PageRender;
 
 @Controller
 @RequestMapping(value = "/comensales")
+@SessionAttributes("comensal")
 public class ComensalController {
 
 	@Autowired
@@ -46,53 +49,53 @@ public class ComensalController {
 
 		return "comensales";
 	}
-/*
-	@RequestMapping(value = "/editar/{idComensal}")
-	public String editar(@PathVariable(value = "idComensal") Long idComensal,
-			@RequestParam(name = "page", defaultValue = "0") int page, Model model, RedirectAttributes flash) {
+	/*
+	 * @RequestMapping(value = "/editar/{idComensal}") public String
+	 * editar(@PathVariable(value = "idComensal") Long idComensal,
+	 * 
+	 * @RequestParam(name = "page", defaultValue = "0") int page, Model model,
+	 * RedirectAttributes flash) {
+	 * 
+	 * Comensal comensal = null;
+	 * 
+	 * if (idComensal > 0) {
+	 * 
+	 * comensal = comensalService.finOne(idComensal);
+	 * 
+	 * if (comensal == null) {
+	 * 
+	 * flash.addFlashAttribute("error",
+	 * "¡El id del comensal no existe en la base de datos!"); return
+	 * "redirect:/comensales"; }
+	 * 
+	 * } else {
+	 * 
+	 * flash.addFlashAttribute("error",
+	 * "¡El id del comensal no puede ser 0 o nulo!"); return "redirect:/comensales";
+	 * }
+	 * 
+	 * Pageable pageRequest = PageRequest.of(page, 5);
+	 * 
+	 * Page<Comensal> comensales = comensalService.findAll(pageRequest);
+	 * 
+	 * PageRender<Comensal> pageRender = new PageRender<>("", comensales);
+	 * 
+	 * model.addAttribute("comensal", comensal); model.addAttribute("titulo",
+	 * "Listado de Comensales"); model.addAttribute("comensales", comensales);
+	 * model.addAttribute("page", pageRender);
+	 * 
+	 * return "comensales"; }
+	 */
 
-		Comensal comensal = null;
-
-		if (idComensal > 0) {
-
-			comensal = comensalService.finOne(idComensal);
-
-			if (comensal == null) {
-
-				flash.addFlashAttribute("error", "¡El id del comensal no existe en la base de datos!");
-				return "redirect:/comensales";
-			}
-
-		} else {
-
-			flash.addFlashAttribute("error", "¡El id del comensal no puede ser 0 o nulo!");
-			return "redirect:/comensales";
-		}
-
-		Pageable pageRequest = PageRequest.of(page, 5);
-
-		Page<Comensal> comensales = comensalService.findAll(pageRequest);
-
-		PageRender<Comensal> pageRender = new PageRender<>("", comensales);
-
-		model.addAttribute("comensal", comensal);
-		model.addAttribute("titulo", "Listado de Comensales");
-		model.addAttribute("comensales", comensales);
-		model.addAttribute("page", pageRender);
-
-		return "comensales";
-	}
-	*/
-	
-	@GetMapping(value="/buscar/{idComensal}", produces= {"application/json"})
+	@GetMapping(value = "/buscar/{idComensal}", produces = { "application/json" })
 	public @ResponseBody Comensal buscarComensal(@PathVariable Long idComensal) {
 		return comensalService.finOne(idComensal);
 	}
-	
-	
-	@RequestMapping(value = "/grabar", method = RequestMethod.POST)
-	public String grabar(@Valid Comensal comensal, BindingResult result, Model model, RedirectAttributes flash) {
 
+	@RequestMapping(value = "/grabar", method = RequestMethod.POST)
+	public String grabar(@Valid Comensal comensal, BindingResult result, Model model, RedirectAttributes flash,
+			SessionStatus status) {
+		
 		if (result.hasErrors()) {
 
 			Pageable pageRequest = PageRequest.of(0, 5);
@@ -110,9 +113,10 @@ public class ComensalController {
 
 		String mensajaeFlash = (comensal.getIdComensal() != null) ? "¡Comensal editado con éxito!"
 				: "¡Comensal grabado con éxito!";
-
+		
 		comensalService.save(comensal);
 		flash.addFlashAttribute("success", mensajaeFlash);
+		status.setComplete();
 		return "redirect:/comensales";
 	}
 

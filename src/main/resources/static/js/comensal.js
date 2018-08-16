@@ -9,18 +9,19 @@ $(document).ready(function() {
 
 	$("#boton_nuevo_comensal").click(function() {
 
+		$('#panel_mensaje_success').hide();
 		form_comensal_habilitado(true);
 		mostrar_modal_comensal();
-		
-	});
 
+	});
+/*
 	$('#btn_cancelar_comensal').click(function() {
 
 		limpiar_form_comensal();
 		ocultar_modal_comensal();
 
 	});
-
+*/
 });
 
 // Funcion que inicializa la validacion de los campos del formulario
@@ -155,15 +156,16 @@ function valida_numeros(e) {
 }
 
 function limpiar_form_comensal() {
-	
+
+	$('#form_comensal').data('bootstrapValidator').resetForm();
 	$('#idComensal').val('');
 	$('#fechaRegistro').val('');
 	$('#eliminado').val('');
-
-	$('#form_comensal').data('bootstrapValidator').resetForm();
 	$('#form_comensal').trigger('reset');
-	
+
 	form_comensal_habilitado(true);
+
+	console.log($('#idComensal').val() + '');
 
 }
 
