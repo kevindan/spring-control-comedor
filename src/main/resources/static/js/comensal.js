@@ -14,14 +14,13 @@ $(document).ready(function() {
 		mostrar_modal_comensal();
 
 	});
-/*
-	$('#btn_cancelar_comensal').click(function() {
-
-		limpiar_form_comensal();
-		ocultar_modal_comensal();
-
-	});
-*/
+	/*
+	 * $('#btn_cancelar_comensal').click(function() {
+	 * 
+	 * limpiar_form_comensal(); ocultar_modal_comensal();
+	 * 
+	 * });
+	 */
 });
 
 // Funcion que inicializa la validacion de los campos del formulario
@@ -118,6 +117,37 @@ function ver_comensal(comensalId) {
 	buscar_comensal(comensalId);
 	form_comensal_habilitado(false);
 	mostrar_modal_comensal();
+}
+
+function eliminar_comensal(idComensal) {
+
+	$('#texto_eliminar_comensal').html('¿Seguro de eliminar al comensal?');
+	$('#modal_confirma_eliminar_comensal').modal({
+		keyboard : false
+	});
+
+	var modalConfirm = function(callback) {
+
+		$('#btn_confirma_eliminar_comensal').on("click", function() {
+			callback(true);
+			$('#modal_confirma_eliminar_comensal').modal('hide');
+		});
+
+		$('#btn_cancela_eliminar_comensal').on("click", function() {
+			callback(false);
+			$('#modal_confirma_eliminar_comensal').modal('hide');
+		});
+	}
+	
+	modalConfirm(function(confirm){
+		
+		if(confirm){
+			location.href='/comensales/eliminar/'+idComensal;;
+		}
+	});
+
+	// location.href='/comensales/eliminar/'+idComensal;
+
 }
 
 function form_comensal_habilitado(condicion) {

@@ -75,9 +75,9 @@
 	                                               		<i class="fa fa-cogs margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
 	                                               </button>
 	                                               <ul class="dropdown-menu">
-	                                               		<li><a id="ver_comensal" th:onclick="'ver_comensal('+${comensal.idComensal}+')'"><i class="fa fa-eye margin-r-5"></i>ver</a></li>
+	                                               		<li><a id="ver_comensal" th:onclick="'ver_comensal('+${comensal.idComensal}+')'"><i class="fa fa-eye margin-r-5"></i>Ver</a></li>
 	                                               		<li><a id="editar_comensal" th:onclick="'editar_comensal('+${comensal.idComensal}+')'"><i class="fa fa-pencil margin-r-5"></i>Editar</a></li>
-	                                                    <li><a th:href="@{/comensales/eliminar/} + ${comensal.idComensal}" id="eliminar_comensal"><i class="fa fa-trash margin-r-5"></i>Eliminar</a></li>
+	                                                  	<li><a id="eliminar_comensal" th:onclick="'eliminar_comensal('+${comensal.idComensal}+')'"><i class="fa fa-trash margin-r-5"></i>Eliminar</a></li>
 	                                               </ul>
 	                                            </div>											
 											</td>
@@ -237,6 +237,25 @@
 	</div>
 </div>
 <!--  FIN MODAL REGISTRO DE COMENSALES -->
+
+<!-- MODAL CONFIRMA ELIMINAR COMENSAL -->
+<div class="modal fade" id="modal_confirma_eliminar_comensal" data-backdrop="static">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Confirmación</h4>
+			</div>
+			<div class="modal-body">
+				<div class="text-center" id="texto_eliminar_comensal"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="btn_confirma_eliminar_comensal" class="btn btn-primary">Si</button>
+				<button type="button" id="btn_cancela_eliminar_comensal" class="btn btn-default">No</button>
+			</div>
+		</div>		
+	</div>
+</div>
+<!-- FIN DE MODAL CONFIRMA ELIMINAR COMENSAL -->
 
 <script th:src="@{/js/validator/bootstrapValidator.min.js}"></script>
 <script th:src="@{/js/validator/bootstrapValidator.js}"></script>
