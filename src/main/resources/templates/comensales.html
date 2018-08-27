@@ -33,21 +33,19 @@
 	          	<h3 class="box-title">Lista de comensales registrados</h3>		              
 	          </div>
 	          <div class="box-body" id="panel_comensales_registrados">
-	          	<form action="#" accept-charset="utf-8">
 	          		<div class="row">					
 						<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
 							<div class="form-group">
 								<label for="filtro">Filtro</label>
 		                        <div class="input-group">
-									<input type="text" name="filtro_comensales" id="filtro_comensales" class="form-control" placeholder="Ingrese un apellido" value="" autocomplete="off">
+									<input type="text" name="filtro_comensal_apellido" id="filtro_comensal_apellido" class="form-control" placeholder="Ingrese un apellido" value="" autocomplete="off">
 									<div class="input-group-btn">
-										<button type="submit" class="btn btn-success" id="buscar_comensales" name="buscar_comensales"><i class="fa fa-search"></i></button>
+										<a class="btn btn-success" id="btn_filtrar_comensales" th:onclick="'filtrar_comensales()'"><i class="fa fa-search"></i></a>
 									</div>
 								</div>							
 							</div>
 						</div>
-					</div>
-				</form>
+					</div>				
 				<div class="row">
 					<div class="col-xs-12">						
 						<button type="button" class="btn btn-success btn-lg btn-circle pull-right" id="boton_nuevo_comensal"><i class="glyphicon glyphicon-plus"></i></button>						
@@ -242,14 +240,14 @@
 <div class="modal fade" id="modal_confirma_eliminar_comensal" data-backdrop="static">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
-			<div class="modal-header">
+			<div class="modal-header bg-primary">
 				<h4 class="modal-title">Confirmación</h4>
 			</div>
 			<div class="modal-body">
 				<div class="text-center" id="texto_eliminar_comensal"></div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="btn_confirma_eliminar_comensal" class="btn btn-primary">Si</button>
+				<button type="button" id="btn_confirma_eliminar_comensal" class="btn btn-danger">Si</button>
 				<button type="button" id="btn_cancela_eliminar_comensal" class="btn btn-default">No</button>
 			</div>
 		</div>		

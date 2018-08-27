@@ -49,6 +49,33 @@ public class ComensalController {
 
 		return "comensales";
 	}
+
+
+	@RequestMapping(value = {"/filtrar/{apellidoPaterno}","/filtrar/"}, method = RequestMethod.GET)
+	private String filtrarPorApellidoPaterno(@RequestParam(name = "page", defaultValue = "0") int page,
+			@PathVariable(value = "apellidoPaterno" , required = false) String apellidoPaterno, Model model) {
+
+		Comensal comensal = new Comensal();
+
+		Pageable pageRequest = PageRequest.of(page, 5);
+		
+		Page<Comensal> comensales = null;
+		
+		if (apellidoPaterno != null) {
+			comensales = comensalService.findbySurname(apellidoPaterno, pageRequest);
+		}else {
+			return "redirect:/comensales";
+		}	
+		PageRender<Comensal> pageRender = new PageRender<>("", comensales);
+
+		model.addAttribute("comensal", comensal);
+		model.addAttribute("titulo", "Listado de Comensales");
+		model.addAttribute("comensales", comensales);
+		model.addAttribute("page", pageRender);
+
+		return "comensales";
+
+	}
 	/*
 	 * @RequestMapping(value = "/editar/{idComensal}") public String
 	 * editar(@PathVariable(value = "idComensal") Long idComensal,
@@ -95,7 +122,7 @@ public class ComensalController {
 	@RequestMapping(value = "/grabar", method = RequestMethod.POST)
 	public String grabar(@Valid Comensal comensal, BindingResult result, Model model, RedirectAttributes flash,
 			SessionStatus status) {
-		
+
 		if (result.hasErrors()) {
 
 			Pageable pageRequest = PageRequest.of(0, 5);
@@ -113,7 +140,7 @@ public class ComensalController {
 
 		String mensajaeFlash = (comensal.getIdComensal() != null) ? "¡Comensal editado con éxito!"
 				: "¡Comensal grabado con éxito!";
-		
+
 		comensalService.save(comensal);
 		flash.addFlashAttribute("success", mensajaeFlash);
 		status.setComplete();

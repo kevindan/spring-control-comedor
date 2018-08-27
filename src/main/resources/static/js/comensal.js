@@ -105,6 +105,17 @@ function buscar_comensal(comensalId) {
 	});
 }
 
+function filtrar_comensales() {
+
+	var apellidoPaterno = $('#filtro_comensal_apellido').val();
+
+	if (apellidoPaterno != null || apellidoPaterno != '') {
+
+		location.href = "/comensales/filtrar/" + apellidoPaterno;
+	}
+
+}
+
 function editar_comensal(comensalId) {
 
 	buscar_comensal(comensalId);
@@ -138,15 +149,14 @@ function eliminar_comensal(idComensal) {
 			$('#modal_confirma_eliminar_comensal').modal('hide');
 		});
 	}
-	
-	modalConfirm(function(confirm){
-		
-		if(confirm){
-			location.href='/comensales/eliminar/'+idComensal;;
+
+	modalConfirm(function(confirm) {
+
+		if (confirm) {
+			location.href = '/comensales/eliminar/' + idComensal;
+			;
 		}
 	});
-
-	// location.href='/comensales/eliminar/'+idComensal;
 
 }
 

@@ -50,4 +50,10 @@ public class IComensalServiceImpl implements IComensalService {
 		return comensalDao.findAll(pageable);
 	}
 
+	@Override
+	public Page<Comensal> findbySurname(String apellidoPaterno, Pageable pageable) {
+		
+		return comensalDao.findByApellidoPaternoLikeIgnoreCase(apellidoPaterno, pageable);
+	}
+
 }
