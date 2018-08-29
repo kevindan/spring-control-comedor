@@ -53,7 +53,7 @@ public class IComensalServiceImpl implements IComensalService {
 	@Override
 	public Page<Comensal> findbySurname(String apellidoPaterno, Pageable pageable) {
 		
-		return comensalDao.findByApellidoPaternoLikeIgnoreCase(apellidoPaterno, pageable);
+		return comensalDao.findByApellidoPaternoLikeIgnoreCase("%"+apellidoPaterno+"%", pageable);
 	}
 
 }

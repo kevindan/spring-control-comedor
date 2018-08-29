@@ -76,43 +76,6 @@ public class ComensalController {
 		return "comensales";
 
 	}
-	/*
-	 * @RequestMapping(value = "/editar/{idComensal}") public String
-	 * editar(@PathVariable(value = "idComensal") Long idComensal,
-	 * 
-	 * @RequestParam(name = "page", defaultValue = "0") int page, Model model,
-	 * RedirectAttributes flash) {
-	 * 
-	 * Comensal comensal = null;
-	 * 
-	 * if (idComensal > 0) {
-	 * 
-	 * comensal = comensalService.finOne(idComensal);
-	 * 
-	 * if (comensal == null) {
-	 * 
-	 * flash.addFlashAttribute("error",
-	 * "¡El id del comensal no existe en la base de datos!"); return
-	 * "redirect:/comensales"; }
-	 * 
-	 * } else {
-	 * 
-	 * flash.addFlashAttribute("error",
-	 * "¡El id del comensal no puede ser 0 o nulo!"); return "redirect:/comensales";
-	 * }
-	 * 
-	 * Pageable pageRequest = PageRequest.of(page, 5);
-	 * 
-	 * Page<Comensal> comensales = comensalService.findAll(pageRequest);
-	 * 
-	 * PageRender<Comensal> pageRender = new PageRender<>("", comensales);
-	 * 
-	 * model.addAttribute("comensal", comensal); model.addAttribute("titulo",
-	 * "Listado de Comensales"); model.addAttribute("comensales", comensales);
-	 * model.addAttribute("page", pageRender);
-	 * 
-	 * return "comensales"; }
-	 */
 
 	@GetMapping(value = "/buscar/{idComensal}", produces = { "application/json" })
 	public @ResponseBody Comensal buscarComensal(@PathVariable Long idComensal) {
@@ -158,5 +121,43 @@ public class ComensalController {
 
 		return "redirect:/comensales";
 	}
+	
+	/*
+	 * @RequestMapping(value = "/editar/{idComensal}") public String
+	 * editar(@PathVariable(value = "idComensal") Long idComensal,
+	 * 
+	 * @RequestParam(name = "page", defaultValue = "0") int page, Model model,
+	 * RedirectAttributes flash) {
+	 * 
+	 * Comensal comensal = null;
+	 * 
+	 * if (idComensal > 0) {
+	 * 
+	 * comensal = comensalService.finOne(idComensal);
+	 * 
+	 * if (comensal == null) {
+	 * 
+	 * flash.addFlashAttribute("error",
+	 * "¡El id del comensal no existe en la base de datos!"); return
+	 * "redirect:/comensales"; }
+	 * 
+	 * } else {
+	 * 
+	 * flash.addFlashAttribute("error",
+	 * "¡El id del comensal no puede ser 0 o nulo!"); return "redirect:/comensales";
+	 * }
+	 * 
+	 * Pageable pageRequest = PageRequest.of(page, 5);
+	 * 
+	 * Page<Comensal> comensales = comensalService.findAll(pageRequest);
+	 * 
+	 * PageRender<Comensal> pageRender = new PageRender<>("", comensales);
+	 * 
+	 * model.addAttribute("comensal", comensal); model.addAttribute("titulo",
+	 * "Listado de Comensales"); model.addAttribute("comensales", comensales);
+	 * model.addAttribute("page", pageRender);
+	 * 
+	 * return "comensales"; }
+	 */
 
 }
