@@ -62,8 +62,10 @@ public class ComensalController {
 		Page<Comensal> comensales = null;
 		
 		if (apellidoPaterno != null) {
+			
 			comensales = comensalService.findbySurname(apellidoPaterno, pageRequest);
 		}else {
+			
 			return "redirect:/comensales";
 		}	
 		PageRender<Comensal> pageRender = new PageRender<>("", comensales);

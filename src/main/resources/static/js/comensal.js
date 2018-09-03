@@ -14,6 +14,14 @@ $(document).ready(function() {
 		mostrar_modal_comensal();
 
 	});
+
+	// Ejecuta el filtrado al pulsar la tecla ENTER
+	$('#filtro_comensal_apellido').keypress(function(e) {
+		if (e.which == 13) {
+
+			filtrar_comensales();
+		}
+	});
 	/*
 	 * $('#btn_cancelar_comensal').click(function() {
 	 * 
