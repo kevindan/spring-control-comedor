@@ -50,24 +50,23 @@ public class ComensalController {
 		return "comensales";
 	}
 
-
-	@RequestMapping(value = {"/filtrar/{apellidoPaterno}","/filtrar/"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "/filtrar/{apellidoPaterno}", "/filtrar/" }, method = RequestMethod.GET)
 	private String filtrarPorApellidoPaterno(@RequestParam(name = "page", defaultValue = "0") int page,
-			@PathVariable(value = "apellidoPaterno" , required = false) String apellidoPaterno, Model model) {
+			@PathVariable(value = "apellidoPaterno", required = false) String apellidoPaterno, Model model) {
 
 		Comensal comensal = new Comensal();
 
 		Pageable pageRequest = PageRequest.of(page, 5);
-		
+
 		Page<Comensal> comensales = null;
-		
+
 		if (apellidoPaterno != null) {
-			
+
 			comensales = comensalService.findbySurname(apellidoPaterno, pageRequest);
-		}else {
-			
+		} else {
+
 			return "redirect:/comensales";
-		}	
+		}
 		PageRender<Comensal> pageRender = new PageRender<>("", comensales);
 
 		model.addAttribute("comensal", comensal);
@@ -79,11 +78,18 @@ public class ComensalController {
 
 	}
 
+	// Metodos utilizando mediante petición asíncrona (AJAX)
 	@GetMapping(value = "/buscar/{idComensal}", produces = { "application/json" })
 	public @ResponseBody Comensal buscarComensal(@PathVariable Long idComensal) {
 		return comensalService.finOne(idComensal);
 	}
 
+	@GetMapping(value = "/buscarcomensaldni/{dni}", produces = { "application/jason" })
+	public @ResponseBody Comensal buscarComensalDni(@PathVariable String dni) {
+		return comensalService.findByDni(dni);
+	}
+	// ------------------------------------------------------
+	
 	@RequestMapping(value = "/grabar", method = RequestMethod.POST)
 	public String grabar(@Valid Comensal comensal, BindingResult result, Model model, RedirectAttributes flash,
 			SessionStatus status) {
@@ -123,7 +129,7 @@ public class ComensalController {
 
 		return "redirect:/comensales";
 	}
-	
+
 	/*
 	 * @RequestMapping(value = "/editar/{idComensal}") public String
 	 * editar(@PathVariable(value = "idComensal") Long idComensal,

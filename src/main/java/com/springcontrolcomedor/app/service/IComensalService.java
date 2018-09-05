@@ -21,4 +21,6 @@ public interface IComensalService {
 
 	public Page<Comensal> findbySurname(String apellidoPaterno, Pageable pageable);
 
+	public Comensal findByDni(String dni);
+
 }
