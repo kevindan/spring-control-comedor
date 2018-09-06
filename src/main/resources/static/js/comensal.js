@@ -51,6 +51,12 @@ function valida_formulario() {
 					},
 					notEmpty : {
 						message : 'El DNI es requerido'
+					},
+					remote	: {
+						
+							type: 'POST',
+							url : '/comensales/buscarcomensaldni',
+							message: 'El dni ya se encuentra registrado'											
 					}
 				}
 			},

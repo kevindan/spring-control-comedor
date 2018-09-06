@@ -59,7 +59,7 @@ public class IComensalServiceImpl implements IComensalService {
 	@Override
 	public Comensal findByDni(String dni) {
 
-		return comensalDao.findByDniLikeIgnoreCase(dni);
+		return comensalDao.findByDni(dni);
 	}
 
 }

@@ -10,6 +10,6 @@ public interface IComensalDao extends PagingAndSortingRepository<Comensal, Long>
 
 	public Page<Comensal> findByApellidoPaternoLikeIgnoreCase(String apellidoPaterno, Pageable pageable);
 
-	public Comensal findByDniLikeIgnoreCase(String dni);
+	public Comensal findByDni(String dni);
 
 }

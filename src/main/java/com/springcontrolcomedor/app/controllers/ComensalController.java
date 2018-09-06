@@ -84,13 +84,41 @@ public class ComensalController {
 		return comensalService.finOne(idComensal);
 	}
 
-	@GetMapping(value = "/buscarcomensaldni/{dni}", produces = { "application/jason" })
-	public @ResponseBody Comensal buscarComensalDni(@PathVariable String dni) {
-		return comensalService.findByDni(dni);
+	@RequestMapping(value = "/buscarcomensaldni", method = RequestMethod.POST, produces = { "application/json" })
+	public @ResponseBody Boolean buscarComensalDni(String dni) {
+
+		boolean valid = false;
+
+		Comensal comensal = comensalService.findByDni(dni);
+		 
+		if (comensal == null) {
+
+			valid = true;
+		}
+		
+		System.out.println(valid);
+
+		return valid;
 	}
 	// ------------------------------------------------------
-	
-	@RequestMapping(value = "/grabar", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/buscarcomensaldni/{dni}", method = RequestMethod.GET)
+	public @ResponseBody void buscarComensalpordni(@PathVariable(value = "dni") String dni) {
+
+		String valid = "false";
+
+		Comensal comensal = new Comensal();
+		comensal = comensalService.findByDni(dni);
+
+		if (comensal == null) {
+
+			valid = "true";
+		}
+		System.out.println(valid);
+
+	}
+
+	@RequestMapping(value = "/grabar", method = RequestMethod.GET)
 	public String grabar(@Valid Comensal comensal, BindingResult result, Model model, RedirectAttributes flash,
 			SessionStatus status) {
 
