@@ -85,7 +85,7 @@ public class ComensalController {
 	}
 
 	@RequestMapping(value = "/buscarcomensaldni", method = RequestMethod.POST, produces = { "application/json" })
-	public @ResponseBody Boolean buscarComensalDni(String dni) {
+	public @ResponseBody String buscarComensalDni(String dni) {
 
 		boolean valid = false;
 
@@ -96,9 +96,9 @@ public class ComensalController {
 			valid = true;
 		}
 		
-		System.out.println(valid);
+		System.out.println(dni);
 
-		return valid;
+		return "{\"valid\":"+valid+"}";
 	}
 	// ------------------------------------------------------
 
