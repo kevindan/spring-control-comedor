@@ -102,23 +102,7 @@ public class ComensalController {
 	}
 	// ------------------------------------------------------
 
-	@RequestMapping(value = "/buscarcomensaldni/{dni}", method = RequestMethod.GET)
-	public @ResponseBody void buscarComensalpordni(@PathVariable(value = "dni") String dni) {
-
-		String valid = "false";
-
-		Comensal comensal = new Comensal();
-		comensal = comensalService.findByDni(dni);
-
-		if (comensal == null) {
-
-			valid = "true";
-		}
-		System.out.println(valid);
-
-	}
-
-	@RequestMapping(value = "/grabar", method = RequestMethod.GET)
+	@RequestMapping(value = "/grabar", method = RequestMethod.POST)
 	public String grabar(@Valid Comensal comensal, BindingResult result, Model model, RedirectAttributes flash,
 			SessionStatus status) {
 
@@ -157,43 +141,5 @@ public class ComensalController {
 
 		return "redirect:/comensales";
 	}
-
-	/*
-	 * @RequestMapping(value = "/editar/{idComensal}") public String
-	 * editar(@PathVariable(value = "idComensal") Long idComensal,
-	 * 
-	 * @RequestParam(name = "page", defaultValue = "0") int page, Model model,
-	 * RedirectAttributes flash) {
-	 * 
-	 * Comensal comensal = null;
-	 * 
-	 * if (idComensal > 0) {
-	 * 
-	 * comensal = comensalService.finOne(idComensal);
-	 * 
-	 * if (comensal == null) {
-	 * 
-	 * flash.addFlashAttribute("error",
-	 * "¡El id del comensal no existe en la base de datos!"); return
-	 * "redirect:/comensales"; }
-	 * 
-	 * } else {
-	 * 
-	 * flash.addFlashAttribute("error",
-	 * "¡El id del comensal no puede ser 0 o nulo!"); return "redirect:/comensales";
-	 * }
-	 * 
-	 * Pageable pageRequest = PageRequest.of(page, 5);
-	 * 
-	 * Page<Comensal> comensales = comensalService.findAll(pageRequest);
-	 * 
-	 * PageRender<Comensal> pageRender = new PageRender<>("", comensales);
-	 * 
-	 * model.addAttribute("comensal", comensal); model.addAttribute("titulo",
-	 * "Listado de Comensales"); model.addAttribute("comensales", comensales);
-	 * model.addAttribute("page", pageRender);
-	 * 
-	 * return "comensales"; }
-	 */
 
 }

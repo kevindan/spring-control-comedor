@@ -1,14 +1,12 @@
 //Inicializa los elementos de la vista Comensales
 $(document).ready(function() {
 
-	valida_formulario();
-
 	$('li').removeClass("active");
 	$('#menu_registros').addClass("active");
 	$('#menu_comensales').addClass("active");
 
 	$("#boton_nuevo_comensal").click(function() {
-
+		valida_formulario();
 		$('#panel_mensaje_success').hide();
 		form_comensal_habilitado(true);
 		mostrar_modal_comensal();
@@ -37,6 +35,7 @@ function valida_formulario() {
 
 	$('#form_comensal').bootstrapValidator({
 		feedbackIcons : {
+			
 			valid : 'glyphicon glyphicon-ok',
 			invalid : 'glyphicon glyphicon-remove',
 			validating : 'glyphicon glyphicon-refresh'
@@ -52,11 +51,11 @@ function valida_formulario() {
 					notEmpty : {
 						message : 'El DNI es requerido'
 					},
-					remote	: {
-						
-							type: 'POST',
-							url : '/comensales/buscarcomensaldni',
-							message: 'El dni ya se encuentra registrado'											
+					remote : {
+
+						type : 'POST',
+						url : '/comensales/buscarcomensaldni',						
+						message : 'El dni ya se encuentra registrado'
 					}
 				}
 			},
@@ -88,6 +87,58 @@ function valida_formulario() {
 	});
 
 }
+
+function valida_formularioActualizar() {
+
+	$('#form_comensal').bootstrapValidator({
+		feedbackIcons : {
+			
+			valid : 'glyphicon glyphicon-ok',
+			invalid : 'glyphicon glyphicon-remove',
+			validating : 'glyphicon glyphicon-refresh'
+		},
+		fields : {
+			dni : {
+				validators : {
+					stringLength : {
+						min : 8,
+						max : 8,
+						message : 'Debe ingresar los 8 dígitos'
+					},
+					notEmpty : {
+						message : 'El DNI es requerido'
+					}					
+				}
+			},
+			nombres : {
+				validators : {
+					notEmpty : {
+						message : 'El nombre es requerido'
+					}
+				}
+			},
+			apellidoPaterno : {
+				validators : {
+					notEmpty : {
+						message : 'El apellido paterno es requerido'
+					}
+				}
+			},
+			email : {
+				validators : {
+					emailAddress : {
+						message : 'Escriba un email válido'
+					},
+					notEmpty : {
+						message : 'El email es requerido'
+					}
+				}
+			}
+		}
+	});
+
+}
+
 // función para buscar Comesal por Id
 function buscar_comensal(comensalId) {
 
@@ -131,9 +182,11 @@ function filtrar_comensales() {
 }
 
 function editar_comensal(comensalId) {
-
-	buscar_comensal(comensalId);
+	
+	buscar_comensal(comensalId);	
+	valida_formularioActualizar();	
 	form_comensal_habilitado(true);
+	$('#dni').attr('readonly','readonly')
 	mostrar_modal_comensal();
 
 }
@@ -167,8 +220,8 @@ function eliminar_comensal(idComensal) {
 	modalConfirm(function(confirm) {
 
 		if (confirm) {
-			location.href = '/comensales/eliminar/' + idComensal;
-			;
+			
+			location.href = '/comensales/eliminar/' + idComensal;			
 		}
 	});
 
