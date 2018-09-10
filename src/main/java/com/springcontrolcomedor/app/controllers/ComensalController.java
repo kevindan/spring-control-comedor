@@ -38,11 +38,14 @@ public class ComensalController {
 
 		Pageable pageRequest = PageRequest.of(page, 5);
 
-		Page<Comensal> comensales = comensalService.findAll(pageRequest);
+		Page<Comensal> comensales = comensalService.findByActivos(0, pageRequest);
+
+		int numElementos = (int) comensales.getTotalElements();
 
 		PageRender<Comensal> pageRender = new PageRender<>("", comensales);
 
 		model.addAttribute("comensal", comensal);
+		model.addAttribute("numeroElementos", numElementos);
 		model.addAttribute("titulo", "Listado de Comensales");
 		model.addAttribute("comensales", comensales);
 		model.addAttribute("page", pageRender);
@@ -62,14 +65,18 @@ public class ComensalController {
 
 		if (apellidoPaterno != null) {
 
-			comensales = comensalService.findbySurname(apellidoPaterno, pageRequest);
+			comensales = comensalService.findbySurname(apellidoPaterno, 0, pageRequest);
 		} else {
 
 			return "redirect:/comensales";
 		}
+
+		int numElementos = (int) comensales.getTotalElements();
+
 		PageRender<Comensal> pageRender = new PageRender<>("", comensales);
 
 		model.addAttribute("comensal", comensal);
+		model.addAttribute("numeroElementos", numElementos);
 		model.addAttribute("titulo", "Listado de Comensales");
 		model.addAttribute("comensales", comensales);
 		model.addAttribute("page", pageRender);
@@ -90,15 +97,15 @@ public class ComensalController {
 		boolean valid = false;
 
 		Comensal comensal = comensalService.findByDni(dni);
-		 
+
 		if (comensal == null) {
 
 			valid = true;
 		}
-		
+
 		System.out.println(dni);
 
-		return "{\"valid\":"+valid+"}";
+		return "{\"valid\":" + valid + "}";
 	}
 	// ------------------------------------------------------
 
@@ -135,7 +142,7 @@ public class ComensalController {
 
 		if (idComensal > 0) {
 
-			comensalService.delete(idComensal);
+			comensalService.eliminarComensal(1, idComensal);
 			flash.addFlashAttribute("success", "¡Comensal eliminado con éxito!");
 		}
 

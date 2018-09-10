@@ -53,7 +53,7 @@
 				</div>
 				<p>
 				<div class="row">					
-						<div class="col-xs-12">					
+						<div class="col-xs-12">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="lista_comensales" name="lista_comensales">
 									<caption>Cantidad de comensales encontrados: 10</caption>
@@ -84,7 +84,10 @@
 											<td class="text-center" th:text="${comensal.apellidoPaterno}"></td>
 											<td class="text-center" th:text="${comensal.apellidoMaterno}"></td>
 											<td class="text-center" th:text="${comensal.dni}"></td>
-										</tr>									
+										</tr>
+										<tr>
+											<td class="info text-center" colspan="5" th:if="${numeroElementos == 0}">No hay comensales registrados</td>
+										</tr>																			
 									</tbody>
 									<tfoot>
 										<tr style="background-color: gray; color: white;">

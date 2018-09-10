@@ -51,15 +51,28 @@ public class IComensalServiceImpl implements IComensalService {
 	}
 
 	@Override
-	public Page<Comensal> findbySurname(String apellidoPaterno, Pageable pageable) {
+	public Page<Comensal> findbySurname(String apellidoPaterno, int eliminado,Pageable pageable) {
 
-		return comensalDao.findByApellidoPaternoLikeIgnoreCase("%" + apellidoPaterno + "%", pageable);
+		return comensalDao.findByApellidoPaternoLikeIgnoreCaseAndEliminado("%" + apellidoPaterno + "%", eliminado,pageable);
 	}
 
 	@Override
 	public Comensal findByDni(String dni) {
 
 		return comensalDao.findByDni(dni);
+	}
+
+	@Override
+	public Page<Comensal> findByActivos(int eliminado, Pageable pageable) {
+		
+		return comensalDao.findByEliminado(eliminado, pageable);
+	}
+
+	@Override
+	@Transactional
+	public void eliminarComensal(int eliminar, Long idComensal) {
+		
+		comensalDao.eliminaComensal(eliminar, idComensal);		
 	}
 
 }

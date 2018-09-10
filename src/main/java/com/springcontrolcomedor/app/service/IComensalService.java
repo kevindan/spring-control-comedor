@@ -13,13 +13,17 @@ public interface IComensalService {
 
 	public Page<Comensal> findAll(Pageable pageable);
 
+	public Page<Comensal> findByActivos(int eliminado, Pageable pageable);
+
 	public void save(Comensal comensal);
 
 	public Comensal finOne(Long id);
 
 	public void delete(Long id);
+	
+	public void eliminarComensal(int eliminar, Long idComensal);
 
-	public Page<Comensal> findbySurname(String apellidoPaterno, Pageable pageable);
+	public Page<Comensal> findbySurname(String apellidoPaterno,int eliminado ,Pageable pageable);
 
 	public Comensal findByDni(String dni);
 
