@@ -56,7 +56,7 @@
 						<div class="col-xs-12">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="lista_comensales" name="lista_comensales">
-									<caption>Cantidad de comensales encontrados: 10</caption>
+									<caption th:text="'Cantidad de comensales encontrados : '+ ${numeroElementos}"></caption>
 									<thead>
 										<tr class="bg-blue">
 											<th class="text-center">Acciones</th>											
@@ -86,7 +86,7 @@
 											<td class="text-center" th:text="${comensal.dni}"></td>
 										</tr>
 										<tr>
-											<td class="info text-center" colspan="5" th:if="${numeroElementos == 0}">No hay comensales registrados</td>
+											<td class="info text-center" colspan="5" th:if="${numeroElementos == 0}" th:text="${mensajeTabla}"></td>
 										</tr>																			
 									</tbody>
 									<tfoot>

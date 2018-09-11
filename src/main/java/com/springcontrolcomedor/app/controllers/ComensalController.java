@@ -38,14 +38,21 @@ public class ComensalController {
 
 		Pageable pageRequest = PageRequest.of(page, 5);
 
-		Page<Comensal> comensales = comensalService.findByActivos(0, pageRequest);
+		Page<Comensal> comensales = comensalService.findByActivos(pageRequest);
 
 		int numElementos = (int) comensales.getTotalElements();
+		String mensajeTabla = "";
+
+		if (numElementos == 0) {
+
+			mensajeTabla = "No hay comensales registrados";
+		}
 
 		PageRender<Comensal> pageRender = new PageRender<>("", comensales);
 
 		model.addAttribute("comensal", comensal);
 		model.addAttribute("numeroElementos", numElementos);
+		model.addAttribute("mensajeTabla", mensajeTabla);
 		model.addAttribute("titulo", "Listado de Comensales");
 		model.addAttribute("comensales", comensales);
 		model.addAttribute("page", pageRender);
@@ -65,18 +72,25 @@ public class ComensalController {
 
 		if (apellidoPaterno != null) {
 
-			comensales = comensalService.findbySurname(apellidoPaterno, 0, pageRequest);
+			comensales = comensalService.findbySurname(apellidoPaterno, pageRequest);
 		} else {
 
 			return "redirect:/comensales";
 		}
 
 		int numElementos = (int) comensales.getTotalElements();
+		String mensajeTabla = "";
+		
+		if(numElementos==0) {
+			
+			mensajeTabla = "No se han encontrado coincidencias";
+		}
 
 		PageRender<Comensal> pageRender = new PageRender<>("", comensales);
 
 		model.addAttribute("comensal", comensal);
 		model.addAttribute("numeroElementos", numElementos);
+		model.addAttribute("mensajeTabla", mensajeTabla);
 		model.addAttribute("titulo", "Listado de Comensales");
 		model.addAttribute("comensales", comensales);
 		model.addAttribute("page", pageRender);
@@ -88,7 +102,7 @@ public class ComensalController {
 	// Metodos utilizando mediante petición asíncrona (AJAX)
 	@GetMapping(value = "/buscar/{idComensal}", produces = { "application/json" })
 	public @ResponseBody Comensal buscarComensal(@PathVariable Long idComensal) {
-		return comensalService.finOne(idComensal);
+		return comensalService.findOne(idComensal);
 	}
 
 	@RequestMapping(value = "/buscarcomensaldni", method = RequestMethod.POST, produces = { "application/json" })
@@ -117,7 +131,7 @@ public class ComensalController {
 
 			Pageable pageRequest = PageRequest.of(0, 5);
 
-			Page<Comensal> comensales = comensalService.findAll(pageRequest);
+			Page<Comensal> comensales = comensalService.findByActivos(pageRequest);
 
 			PageRender<Comensal> pageRender = new PageRender<>("", comensales);
 
@@ -142,7 +156,7 @@ public class ComensalController {
 
 		if (idComensal > 0) {
 
-			comensalService.eliminarComensal(1, idComensal);
+			comensalService.eliminarComensal(idComensal);
 			flash.addFlashAttribute("success", "¡Comensal eliminado con éxito!");
 		}
 

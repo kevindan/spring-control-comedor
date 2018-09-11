@@ -1,7 +1,5 @@
 package com.springcontrolcomedor.app.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,61 +16,66 @@ public class IComensalServiceImpl implements IComensalService {
 	private IComensalDao comensalDao;
 
 	@Override
-	@Transactional(readOnly = true)
-	public List<Comensal> findAll() {
-
-		return (List<Comensal>) comensalDao.findAll();
-	}
-
-	@Override
 	@Transactional
 	public void save(Comensal comensal) {
 		comensalDao.save(comensal);
-
-	}
-
-	@Override
-	public Comensal finOne(Long id) {
-
-		return comensalDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
-	public void delete(Long id) {
-		comensalDao.deleteById(id);
+	public void eliminarComensal(Long idComensal) {
 
+		comensalDao.eliminaComensal(1, idComensal);
 	}
 
 	@Override
-	public Page<Comensal> findAll(Pageable pageable) {
+	public Comensal findOne(Long idComensal) {
 
-		return comensalDao.findAll(pageable);
+		return comensalDao.findByIdComensalAndEliminado(idComensal, 0);
 	}
 
 	@Override
-	public Page<Comensal> findbySurname(String apellidoPaterno, int eliminado,Pageable pageable) {
+	public Page<Comensal> findbySurname(String apellidoPaterno, Pageable pageable) {
 
-		return comensalDao.findByApellidoPaternoLikeIgnoreCaseAndEliminado("%" + apellidoPaterno + "%", eliminado,pageable);
+		return comensalDao.findByApellidoPaternoLikeIgnoreCaseAndEliminado("%" + apellidoPaterno + "%", 0, pageable);
 	}
 
 	@Override
 	public Comensal findByDni(String dni) {
 
-		return comensalDao.findByDni(dni);
+		return comensalDao.findByDniAndEliminado(dni, 0);
 	}
 
 	@Override
-	public Page<Comensal> findByActivos(int eliminado, Pageable pageable) {
-		
-		return comensalDao.findByEliminado(eliminado, pageable);
+	public Page<Comensal> findByActivos(Pageable pageable) {
+
+		return comensalDao.findByEliminado(0, pageable);
 	}
 
 	@Override
-	@Transactional
-	public void eliminarComensal(int eliminar, Long idComensal) {
-		
-		comensalDao.eliminaComensal(eliminar, idComensal);		
+	public Comensal findByEmail(String email) {
+
+		return comensalDao.findByEmailAndEliminado(email, 0);
 	}
+
+//	@Override
+//	@Transactional(readOnly = true)
+//	public List<Comensal> findAll() {
+//
+//		return (List<Comensal>) comensalDao.findAll();
+//	}
+
+//	@Override
+//	@Transactional
+//	public void delete(Long id) {
+//		comensalDao.deleteById(id);
+//
+//	}
+
+//	@Override
+//	public Page<Comensal> findAll(Pageable pageable) {
+//
+//		return comensalDao.findAll(pageable);
+//	}
 
 }
