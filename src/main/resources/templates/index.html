@@ -24,8 +24,19 @@
     <section class="content">
       <!-- Small boxes (Stat box) -->
       <div class="row">
-      	<div class="col-lg-3 col-xs-6">
-          <!-- small box -->
+      	<div class="col-md-3 col-sm-6 col-xs-12">
+        	<div class="info-box">
+        		<span class="info-box-icon bg-green"><i class="fa fa-users"></i></span>
+        		
+        		<div class="info-box-content">
+        			<span class="info-box-text">Comensales registrados</span>
+        			<span class="info-box-number">150</span>
+        			<span class="info-box-link"><a th:href="@{/comensales}">Ver detalles  </a><i class="fa fa-arrow-circle-right"></i></span>
+        		</div>
+        	</div>
+        </div> 
+      <!--  
+      	
           <div class="small-box bg-yellow">
             <div class="inner">
               <h3>10</h3>
@@ -37,250 +48,8 @@
             <a th:href="@{/paciente}" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-purple">
-            <div class="inner">
-              <h3>04</h3>
-              <p>Citas programadas</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-clock-o"></i>
-            </div>
-            <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>45</h3>
-              <p>Citas atendidas</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-calendar-check-o"></i>
-            </div>
-            <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>7</h3>
-              <p>Citas Anuladas</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-calendar-times-o"></i>
-            </div>
-            <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
+        -->              
       </div>
-      
-<!--    
-      <div class="row">
-      	<section class="col-lg-6 col-xs-12 connectorSortable">
-      		<div class="box box-success">
-	            <div class="box-header">
-	             <i class="fa fa-clock-o"></i>	
-	             <h3 class="box-title">Citas programadas para hoy</h3>		              
-	            </div>
-	            <div class="box-body" id="panel_citas_hoy">
-	             	<div class="row">
-					<div class="col-xs-12">
-						<div class="table-responsive">
-							<table class="table table-bordered">								
-								<thead>
-									<tr style="background-color: #ccc;">
-										<th class="text-center">Acciones</th>										
-										<th class="text-center">Nombres</th>
-										<th class="text-center">Ap.Paterno</th>
-										<th class="text-center">Ap.Materno</th>
-										<th class="text-center">Hora</th>
-										
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td class="text-center">
-											<div class="btn-group">
-                                               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                               		<i class="fa fa-th margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
-                                               </button>
-                                               <ul class="dropdown-menu">
-                                               		<li class="bg-success"><a onclick=""><i class="fa fa-check margin-r-5"></i>Atender</a></li>
-                                                    <li class="bg-warning"><a onclick=""><i class="fa fa-clock-o margin-r-5"></i>Reprogramar</a></li>
-                                               </ul>
-                                            </div>											
-										</td>										
-										<td class="text-center">Arturo Eugenio</td>
-										<td class="text-center">Sandoval</td>
-										<td class="text-center">Gutierrez</td>
-										<td class="text-center">09:00 am</td>
-										
-									</tr>	
-									<tr>
-										<td class="text-center">
-											<div class="btn-group">
-                                               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                               		<i class="fa fa-th margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
-                                               </button>
-                                               <ul class="dropdown-menu">
-                                               		<li class="bg-success"><a onclick=""><i class="fa fa-check margin-r-5"></i>Atender</a></li>
-                                                    <li class="bg-warning"><a onclick=""><i class="fa fa-clock-o margin-r-5"></i>Reprogramar</a></li>
-                                               </ul>
-                                            </div>											
-										</td>										
-										<td class="text-center">Arturo Eugenio</td>
-										<td class="text-center">Sandoval</td>
-										<td class="text-center">Gutierrez</td>
-										<td class="text-center">09:00 am</td>										
-									</tr>
-									<tr>
-										<td class="text-center">
-											<div class="btn-group">
-                                               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                               		<i class="fa fa-th margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
-                                               </button>
-                                               <ul class="dropdown-menu">
-                                               		<li class="bg-success"><a onclick=""><i class="fa fa-check margin-r-5"></i>Atender</a></li>
-                                                    <li class="bg-warning"><a onclick=""><i class="fa fa-clock-o margin-r-5"></i>Reprogramar</a></li>
-                                               </ul>
-                                            </div>											
-										</td>										
-										<td class="text-center">Arturo Eugenio</td>
-										<td class="text-center">Sandoval</td>
-										<td class="text-center">Gutierrez</td>
-										<td class="text-center">09:00 am</td>										
-									</tr>
-									<tr>
-										<td class="text-center">
-											<div class="btn-group">
-                                               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                               		<i class="fa fa-th margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
-                                               </button>
-                                               <ul class="dropdown-menu">
-                                               		<li class="bg-success"><a onclick=""><i class="fa fa-check margin-r-5"></i>Atender</a></li>
-                                                    <li class="bg-warning"><a onclick=""><i class="fa fa-clock-o margin-r-5"></i>Reprogramar</a></li>
-                                               </ul>
-                                            </div>											
-										</td>										
-										<td class="text-center">Arturo Eugenio</td>
-										<td class="text-center">Sandoval</td>
-										<td class="text-center">Gutierrez</td>
-										<td class="text-center">09:00 am</td>										
-									</tr>								
-								</tbody>
-								<tfoot>
-									<tr style="background-color: gray; color: white;">
-										<th class="text-center">Acciones</th>										
-										<th class="text-center">Nombres</th>
-										<th class="text-center">Ap.Paterno</th>
-										<th class="text-center">Ap.Materno</th>
-										<th class="text-center">Hora</th>										
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-						<div class="box-footer clearfix">
-			                <div class="row">
-			                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			                		<ul class="pagination pagination-sm no-margin pull-right">
-			                			<li><a href=""rel="back">Anterior</a></li>
-			                			<li class="active" data-ci-pagination-page="1"><a href="#">1</a></li>
-			                			<li><a href="" data-ci-pagination-page="2">2</a></li>
-			                			<li><a href="" data-ci-pagination-page="3">3</a></li>
-			                			<li><a href="" data-ci-pagination-page="2" rel="next">Siguiente</a></li>
-			                		</ul>
-			                	</div>
-			                </div>
-			            </div>						
-					</div>
-				</div>            
-	            </div>            
-          </div>
-      	</section>
-      	<section class="col-lg-6 col-xs-12 connectorSortable">
-      		<div class="box box-success">
-	            <div class="box-header">
-	              <i class="fa fa-users"></i>	
-	              <h3 class="box-title">Ultimos pacientes registrados</h3>		              
-	            </div>
-	            <div class="box-body" id="panel_pacientes_registrados">
-	            	<div class="row">
-					<div class="col-xs-12">
-						<div class="table-responsive">
-							<table class="table table-bordered">								
-								<thead>
-									<tr style="background-color: #ccc;">										
-										<th class="text-center">Nombres</th>
-										<th class="text-center">Ap.Paterno</th>
-										<th class="text-center">Ap.Materno</th>
-										<th class="text-center">Fecha registro</th>
-									</tr>
-								</thead>
-								<tbody>									
-									<tr>										
-										<td class="text-center">Arturo Eugenio</td>
-										<td class="text-center">Sandoval</td>
-										<td class="text-center">Gutierrez</td>
-										<td class="text-center">23/05/2018</td>
-									</tr>
-									<tr>										
-										<td class="text-center">Arturo Eugenio</td>
-										<td class="text-center">Sandoval</td>
-										<td class="text-center">Gutierrez</td>
-										<td class="text-center">23/05/2018</td>
-									</tr>
-									<tr>										
-										<td class="text-center">Arturo Eugenio</td>
-										<td class="text-center">Sandoval</td>
-										<td class="text-center">Gutierrez</td>
-										<td class="text-center">23/05/2018</td>
-									</tr>
-									<tr>										
-										<td class="text-center">Arturo Eugenio</td>
-										<td class="text-center">Sandoval</td>
-										<td class="text-center">Gutierrez</td>
-										<td class="text-center">23/05/2018</td>
-									</tr>
-									<tr>										
-										<td class="text-center">Arturo Eugenio</td>
-										<td class="text-center">Sandoval</td>
-										<td class="text-center">Gutierrez</td>
-										<td class="text-center">23/05/2018</td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr style="background-color: gray; color: white;">										
-										<th class="text-center">Nombres</th>
-										<th class="text-center">Ap.Paterno</th>
-										<th class="text-center">Ap.Materno</th>
-										<th class="text-center">Fecha registro</th>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-						<div class="box-footer">
-				        	<div class="row">
-				        		<div class="col-xs-12">
-					        		<div class="form-group">
-					                	<a th:href="@{/paciente}" class="small-box-footer pull-right">Ver todos los pacientes</a>
-					            	</div>
-					           	</div>
-				            </div>
-			            </div>						
-					</div>
-				</div> 	            
-	            </div>            
-          </div>
-      	</section>      
-      </div>
- -->      
     </section>    
   </div> 
   <footer th:replace="layout/layout :: footer"></footer>  
@@ -289,7 +58,6 @@
 </div>
 
 <script>
-
 $(document).ready(function(){
 	
     $('li').removeClass("active");

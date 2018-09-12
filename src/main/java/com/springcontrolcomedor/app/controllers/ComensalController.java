@@ -35,7 +35,7 @@ public class ComensalController {
 	private String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 
 		Comensal comensal = new Comensal();
-
+		
 		Pageable pageRequest = PageRequest.of(page, 5);
 
 		Page<Comensal> comensales = comensalService.findByActivos(pageRequest);
@@ -73,6 +73,7 @@ public class ComensalController {
 		if (apellidoPaterno != null) {
 
 			comensales = comensalService.findbySurname(apellidoPaterno, pageRequest);
+			
 		} else {
 
 			return "redirect:/comensales";
@@ -118,6 +119,22 @@ public class ComensalController {
 		}
 
 		System.out.println(dni);
+
+		return "{\"valid\":" + valid + "}";
+	}
+	@RequestMapping(value = "/buscarcomensalemail", method = RequestMethod.POST, produces = { "application/json" })
+	public @ResponseBody String buscarComensalEmail(String email) {
+
+		boolean valid = false;
+
+		Comensal comensal = comensalService.findByEmail(email);
+
+		if (comensal == null) {
+
+			valid = true;
+		}
+
+		System.out.println(email);
 
 		return "{\"valid\":" + valid + "}";
 	}

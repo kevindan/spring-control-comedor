@@ -20,22 +20,15 @@ $(document).ready(function() {
 			filtrar_comensales();
 		}
 	});
-	/*
-	 * $('#btn_cancelar_comensal').click(function() {
-	 * 
-	 * limpiar_form_comensal(); ocultar_modal_comensal();
-	 * 
-	 * });
-	 */
+	
 });
 
 // Funcion que inicializa la validacion de los campos del formulario
-
 function valida_formulario() {
 
 	$('#form_comensal').bootstrapValidator({
 		feedbackIcons : {
-			
+
 			valid : 'glyphicon glyphicon-ok',
 			invalid : 'glyphicon glyphicon-remove',
 			validating : 'glyphicon glyphicon-refresh'
@@ -54,7 +47,7 @@ function valida_formulario() {
 					remote : {
 
 						type : 'POST',
-						url : '/comensales/buscarcomensaldni',						
+						url : '/comensales/buscarcomensaldni',
 						message : 'El dni ya se encuentra registrado'
 					}
 				}
@@ -80,6 +73,12 @@ function valida_formulario() {
 					},
 					notEmpty : {
 						message : 'El email es requerido'
+					},
+					remote : {
+
+						type : 'POST',
+						url : '/comensales/buscarcomensalemail',
+						message : 'El email ya se encuentra registrado'
 					}
 				}
 			}
@@ -92,7 +91,7 @@ function valida_formularioActualizar() {
 
 	$('#form_comensal').bootstrapValidator({
 		feedbackIcons : {
-			
+
 			valid : 'glyphicon glyphicon-ok',
 			invalid : 'glyphicon glyphicon-remove',
 			validating : 'glyphicon glyphicon-refresh'
@@ -107,7 +106,7 @@ function valida_formularioActualizar() {
 					},
 					notEmpty : {
 						message : 'El DNI es requerido'
-					}					
+					}
 				}
 			},
 			nombres : {
@@ -182,11 +181,12 @@ function filtrar_comensales() {
 }
 
 function editar_comensal(comensalId) {
-	
-	buscar_comensal(comensalId);	
-	valida_formularioActualizar();	
+
+	buscar_comensal(comensalId);
+	valida_formularioActualizar();
 	form_comensal_habilitado(true);
-	$('#dni').attr('readonly','readonly')
+	$('#dni').attr('readonly', 'readonly')
+	$('#email').attr('readonly', 'readonly')
 	mostrar_modal_comensal();
 
 }
@@ -220,8 +220,8 @@ function eliminar_comensal(idComensal) {
 	modalConfirm(function(confirm) {
 
 		if (confirm) {
-			
-			location.href = '/comensales/eliminar/' + idComensal;			
+
+			location.href = '/comensales/eliminar/' + idComensal;
 		}
 	});
 

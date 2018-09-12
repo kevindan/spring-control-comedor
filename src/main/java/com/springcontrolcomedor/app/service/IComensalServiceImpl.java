@@ -29,30 +29,35 @@ public class IComensalServiceImpl implements IComensalService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Comensal findOne(Long idComensal) {
 
 		return comensalDao.findByIdComensalAndEliminado(idComensal, 0);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Page<Comensal> findbySurname(String apellidoPaterno, Pageable pageable) {
 
 		return comensalDao.findByApellidoPaternoLikeIgnoreCaseAndEliminado("%" + apellidoPaterno + "%", 0, pageable);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Comensal findByDni(String dni) {
 
 		return comensalDao.findByDniAndEliminado(dni, 0);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Page<Comensal> findByActivos(Pageable pageable) {
 
 		return comensalDao.findByEliminado(0, pageable);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Comensal findByEmail(String email) {
 
 		return comensalDao.findByEmailAndEliminado(email, 0);
