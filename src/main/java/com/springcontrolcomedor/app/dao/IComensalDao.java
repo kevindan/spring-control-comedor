@@ -1,5 +1,7 @@
 package com.springcontrolcomedor.app.dao;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,11 +15,15 @@ public interface IComensalDao extends PagingAndSortingRepository<Comensal, Long>
 	 * Esta clase implementa los métodos save = grabar/guardar; merge = actualizar y
 	 * la lista paginable;
 	 */
+	// Mtetodo para listar los comensales activos sin paginar
+	public List<Comensal> findByEliminado(int eliminado);
+
 	// Método para listar comensales que se encuentran activos
 	public Page<Comensal> findByEliminado(int eliminado, Pageable pageable);
 
 	// Método para filtrar comensales por apellido paterno
-	public Page<Comensal> findByApellidoPaternoLikeIgnoreCaseAndEliminado(String apellidoPaterno, int eliminado, Pageable pageable);
+	public Page<Comensal> findByApellidoPaternoLikeIgnoreCaseAndEliminado(String apellidoPaterno, int eliminado,
+			Pageable pageable);
 
 	public Comensal findByIdComensalAndEliminado(Long idComensal, int eliminado);
 

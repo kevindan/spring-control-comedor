@@ -181,7 +181,7 @@ function filtrar_comensales() {
 }
 
 function editar_comensal(comensalId) {
-
+	$('#panel_mensaje_success').hide();
 	buscar_comensal(comensalId);
 	valida_formularioActualizar();
 	form_comensal_habilitado(true);
@@ -192,13 +192,14 @@ function editar_comensal(comensalId) {
 }
 
 function ver_comensal(comensalId) {
+	$('#panel_mensaje_success').hide();
 	buscar_comensal(comensalId);
 	form_comensal_habilitado(false);
 	mostrar_modal_comensal();
 }
 
 function eliminar_comensal(idComensal) {
-
+	$('#panel_mensaje_success').hide();
 	$('#texto_eliminar_comensal').html('¿Seguro de eliminar al comensal?');
 	$('#modal_confirma_eliminar_comensal').modal({
 		keyboard : false

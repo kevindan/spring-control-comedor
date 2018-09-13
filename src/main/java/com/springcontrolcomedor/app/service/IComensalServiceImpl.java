@@ -1,5 +1,7 @@
 package com.springcontrolcomedor.app.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +32,20 @@ public class IComensalServiceImpl implements IComensalService {
 
 	@Override
 	@Transactional(readOnly = true)
+	public Page<Comensal> findByActivos(Pageable pageable) {
+
+		return comensalDao.findByEliminado(0, pageable);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Comensal> findByActivos() {
+
+		return comensalDao.findByEliminado(0);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
 	public Comensal findOne(Long idComensal) {
 
 		return comensalDao.findByIdComensalAndEliminado(idComensal, 0);
@@ -47,13 +63,6 @@ public class IComensalServiceImpl implements IComensalService {
 	public Comensal findByDni(String dni) {
 
 		return comensalDao.findByDniAndEliminado(dni, 0);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Page<Comensal> findByActivos(Pageable pageable) {
-
-		return comensalDao.findByEliminado(0, pageable);
 	}
 
 	@Override

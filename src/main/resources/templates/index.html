@@ -30,25 +30,11 @@
         		
         		<div class="info-box-content">
         			<span class="info-box-text">Comensales registrados</span>
-        			<span class="info-box-number">150</span>
+        			<span class="info-box-number" th:text="${numeroComensales}"></span>
         			<span class="info-box-link"><a th:href="@{/comensales}">Ver detalles  </a><i class="fa fa-arrow-circle-right"></i></span>
         		</div>
         	</div>
         </div> 
-      <!--  
-      	
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>10</h3>
-              <p>Comensales registrados</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-users"></i>
-            </div>
-            <a th:href="@{/paciente}" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        -->              
       </div>
     </section>    
   </div> 
