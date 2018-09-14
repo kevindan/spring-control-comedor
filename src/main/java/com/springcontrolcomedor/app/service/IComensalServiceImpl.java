@@ -32,6 +32,13 @@ public class IComensalServiceImpl implements IComensalService {
 
 	@Override
 	@Transactional(readOnly = true)
+	public Long cantidadComensales() {
+
+		return comensalDao.countByEliminado(0);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
 	public Page<Comensal> findByActivos(Pageable pageable) {
 
 		return comensalDao.findByEliminado(0, pageable);
@@ -70,26 +77,7 @@ public class IComensalServiceImpl implements IComensalService {
 	public Comensal findByEmail(String email) {
 
 		return comensalDao.findByEmailAndEliminado(email, 0);
+
 	}
-
-//	@Override
-//	@Transactional(readOnly = true)
-//	public List<Comensal> findAll() {
-//
-//		return (List<Comensal>) comensalDao.findAll();
-//	}
-
-//	@Override
-//	@Transactional
-//	public void delete(Long id) {
-//		comensalDao.deleteById(id);
-//
-//	}
-
-//	@Override
-//	public Page<Comensal> findAll(Pageable pageable) {
-//
-//		return comensalDao.findAll(pageable);
-//	}
 
 }

@@ -15,6 +15,8 @@ public interface IComensalDao extends PagingAndSortingRepository<Comensal, Long>
 	 * Esta clase implementa los métodos save = grabar/guardar; merge = actualizar y
 	 * la lista paginable;
 	 */
+	//Método para pasar contra todos los comensales activos
+	public Long countByEliminado(int eliminado);
 	// Mtetodo para listar los comensales activos sin paginar
 	public List<Comensal> findByEliminado(int eliminado);
 
