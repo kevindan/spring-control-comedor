@@ -70,6 +70,7 @@ public class Comensal implements Serializable {
 	private int eliminado;
 
 	public Comensal() {
+		
 		consumos = new ArrayList<Consumo>();
 		fechaRegistro = new Date();
 		eliminado = 0;
