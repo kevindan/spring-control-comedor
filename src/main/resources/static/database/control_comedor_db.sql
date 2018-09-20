@@ -1,15 +1,15 @@
-CREATE DATABASE  IF NOT EXISTS `control_comedor_db` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE  IF NOT EXISTS `control_comedor_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
 USE `control_comedor_db`;
--- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: control_comedor_db
+-- Host: localhost    Database: control_comedor_db
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	8.0.12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,7 +23,7 @@ USE `control_comedor_db`;
 
 DROP TABLE IF EXISTS `comensales`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `comensales` (
   `id_comensal` bigint(20) NOT NULL AUTO_INCREMENT,
   `apellido_materno` varchar(255) DEFAULT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE `comensales` (
   `telefono` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_comensal`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `comensales` (
 
 LOCK TABLES `comensales` WRITE;
 /*!40000 ALTER TABLE `comensales` DISABLE KEYS */;
-INSERT INTO `comensales` VALUES (1,'Velazco','Alvarado','Edificio Los olmos 1002, Residencial San Felipe, Jesús María','45698745',0,'2018-06-27','Ignacio Gabriel','Hombre','3220330','ignacio@hotmail.com'),(2,'Pomalca','Versalles','Calle Los Pinos 478, Miraflores','47893366',0,'2018-06-27','Andrea','Mujer','3220329','andrea@gmail.com'),(3,'Huaranca','Berrio','Dominicos 1023, Callao','47102466',0,'2018-06-27','Valentina','Mujer','3226952','valentinaguliana@gmail.com'),(4,'Sumarriva','Valenzuela','Los Álamos 1002, San Borja','10236548',0,'2018-06-27','Fernando','Hombre','3220330','fernando.valenzuela@deeconsultores.pe');
+INSERT INTO `comensales` VALUES (1,'Huarancca','Berrio','Jr. Los Dominicos 456, Callao','45874589',0,'2018-09-11','Valentina Guliana','Mujer','987654321','valentina.berrio@deeconsultores.pe'),(2,'Flores','Acuña','Jr. Los Pinos 132, Santiago de Surco','45871125',0,'2018-09-11','Sol María','Mujer','999854786','sol.acuna@deeconsultores.pe'),(3,'Huertas','Ojeda','Av. Mariano Cornejo 478, Pueblo libre','01201254',0,'2018-09-11','Susana','Mujer','987433256','susana.ojeda@deeconsultores.pe'),(4,'Sumarriva','Valenzuela','Calle Murillo 158, San Borja','12203698',0,'2018-09-11','Fernando','Hombre','987422214','fernando.valenzuela@deeconsultores.pe'),(5,'Urbina','León','Jr. Calle Suecia 165, Salamanca, Ate Vitarte','12047789',0,'2018-09-11','Fanny Ines','Mujer','987466523','fanny.león@deeconsultores.pe'),(6,'Mayuri','Piña','Jr. Perú 256, La Banda de Shilcayo','98745632',0,'2018-09-11','Lucía','Mujer','999658326','lucia.pina@deeconsultores.pe');
 /*!40000 ALTER TABLE `comensales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,7 +56,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `consumo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `consumo` (
   `id_consumo` bigint(20) NOT NULL AUTO_INCREMENT,
   `eliminado` int(11) DEFAULT NULL,
@@ -96,7 +96,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `detalle_consumo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `detalle_consumo` (
   `id_detalle_consumo` bigint(20) NOT NULL AUTO_INCREMENT,
   `cantidad` int(11) DEFAULT NULL,
@@ -127,7 +127,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `locales`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `locales` (
   `id_local` bigint(20) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) DEFAULT NULL,
@@ -151,7 +151,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `productos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `productos` (
   `id_producto` bigint(20) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) DEFAULT NULL,
@@ -184,7 +184,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `roles` (
   `id_rol` bigint(20) NOT NULL AUTO_INCREMENT,
   `fecha_registro` date NOT NULL,
@@ -211,13 +211,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tipo_producto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `tipo_producto` (
   `id_tipo_producto` bigint(20) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) DEFAULT NULL,
   `eliminado` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_tipo_producto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,6 +226,7 @@ CREATE TABLE `tipo_producto` (
 
 LOCK TABLES `tipo_producto` WRITE;
 /*!40000 ALTER TABLE `tipo_producto` DISABLE KEYS */;
+INSERT INTO `tipo_producto` VALUES (1,'Menú',0),(2,'Complementos',0),(3,'Aperitivo',0),(4,'Bebidas',0),(5,'Snacks',0);
 /*!40000 ALTER TABLE `tipo_producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +236,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `usuarios` (
   `id_usuario` bigint(20) NOT NULL AUTO_INCREMENT,
   `apellido_materno` varchar(255) DEFAULT NULL,
@@ -261,10 +262,6 @@ LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'control_comedor_db'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -275,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-27 18:16:28
+-- Dump completed on 2018-09-20 18:15:02
