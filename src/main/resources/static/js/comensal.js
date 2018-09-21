@@ -7,32 +7,32 @@ $(document).ready(function() {
 
 	$("#boton_nuevo_comensal").click(function() {
 		valida_formulario();
-		$('#panel_mensaje_success').hide();
+		ocultar_mensajes();
 		form_comensal_habilitado(true);
 		mostrar_modal_comensal();
 
 	});
-	
-	$("#btn_cancelar_comensal").click(function() {		
-		
+
+	$("#btn_cancelar_comensal").click(function() {
+
 		limpiar_form_comensal();
 		ocultar_modal_comensal();
 	});
-	
-	$("#btn_cancelar_vista_comensal").click(function() {		
-		
-		$('#modal_vista_comensal').modal('hide');		
+
+	$("#btn_cancelar_vista_comensal").click(function() {
+
+		$('#modal_vista_comensal').modal('hide');
 	});
 
 	// Ejecuta el filtrado al pulsar la tecla ENTER
 	$('#filtro_comensal_apellido').keypress(function(e) {
-		
+
 		if (e.which == 13) {
-			
+
 			filtrar_comensales();
 		}
 	});
-	
+
 });
 
 // Funcion que inicializa la validacion de los campos del formulario
@@ -151,7 +151,7 @@ function valida_formularioActualizar() {
 }
 
 // función para buscar Comesal por Id
-function buscar_comensal(comensalId,opcion) {
+function buscar_comensal(comensalId, opcion) {
 
 	$.ajax({
 
@@ -162,12 +162,12 @@ function buscar_comensal(comensalId,opcion) {
 			comensalId : comensalId,
 		},
 		success : function(data) {
-			
-			if(opcion === 1){
-				
+
+			if (opcion === 1) {
+
 				$('#idComensal').val(data.idComensal);
 				$('#eliminado').val(data.eliminado);
-				
+
 				$('#dni').val(data.dni);
 				$('#nombres').val(data.nombres);
 				$('#apellidoPaterno').val(data.apellidoPaterno);
@@ -178,20 +178,20 @@ function buscar_comensal(comensalId,opcion) {
 				$('#telefono').val(data.telefono);
 
 				$('#fechaRegistro').val(data.fechaRegistro);
-				
-			}else if(opcion === 2){			
-				
+
+			} else if (opcion === 2) {
+
 				$('#dni_ver').text(data.dni);
 				$('#nombres_ver').text(data.nombres);
 				$('#apellidoPaterno_ver').text(data.apellidoPaterno);
 				$('#apellidoMaterno_ver').text(data.apellidoMaterno);
-				
-				if(data.sexo == 'Hombre'){
+
+				if (data.sexo == 'Hombre') {
 					$('#sexo_ver').text("Masculino");
-				}else if(data.sexo == 'Mujer'){
+				} else if (data.sexo == 'Mujer') {
 					$('#sexo_ver').text("Femenino");
 				}
-				
+
 				$('#direccion_ver').text(data.direccion);
 				$('#email_ver').text(data.email);
 				$('#telefono_ver').text(data.telefono);
@@ -215,8 +215,8 @@ function filtrar_comensales() {
 }
 
 function editar_comensal(comensalId) {
-	$('#panel_mensaje_success').hide();
-	buscar_comensal(comensalId,1);
+	ocultar_mensajes();
+	buscar_comensal(comensalId, 1);
 	valida_formularioActualizar();
 	form_comensal_habilitado(true);
 	$('#dni').attr('readonly', true)
@@ -226,13 +226,13 @@ function editar_comensal(comensalId) {
 }
 
 function ver_comensal(comensalId) {
-	$('#panel_mensaje_success').hide();
-	buscar_comensal(comensalId,2);	
+	ocultar_mensajes();
+	buscar_comensal(comensalId, 2);
 	$('#modal_vista_comensal').modal();
 }
 
 function eliminar_comensal(idComensal) {
-	$('#panel_mensaje_success').hide();
+	ocultar_mensajes();
 	$('#texto_eliminar_comensal').html('¿Seguro de eliminar al comensal?');
 	$('#modal_confirma_eliminar_comensal').modal({
 		keyboard : false
@@ -284,7 +284,7 @@ function form_comensal_habilitado(condicion) {
 	$('#email').attr('readonly', condicion_inversa);
 	$('#telefono').attr('readonly', condicion_inversa);
 
-	//$('#btn_grabar_comensal').attr('disabled', condicion_inversa);
+	// $('#btn_grabar_comensal').attr('disabled', condicion_inversa);
 
 }
 
@@ -320,4 +320,12 @@ function mostrar_modal_comensal() {
 	$('#modal_registro_comensal').modal({
 		keyboard : false
 	});
+}
+
+function ocultar_mensajes() {
+
+	$('#panel_mensaje_success_comensal').hide();
+	$('#panel_mensaje_error_comensal').hide();
+	$('#panel_mensaje_warning_comensal').hide();
+	$('#panel_mensaje_info_comensal').hide();
 }

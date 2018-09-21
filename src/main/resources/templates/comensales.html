@@ -22,10 +22,10 @@
     </section>   
     <!-- Main content -->
     <section class="content">
-    	<div class="alert alert-success" th:if="${success != null}" th:text="${success}" id="panel_mensaje_success"></div>
-		<div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
-		<div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
-		<div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+    	<div class="alert alert-success" th:if="${success != null}" th:text="${success}" id="panel_mensaje_success_comensal"></div>
+		<div class="alert alert-danger" th:if="${error != null}" th:text="${error}" id="panel_mensaje_error_comensal"></div>
+		<div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}" id="panel_mensaje_warning_comensal"></div>
+		<div class="alert alert-info" th:if="${info != null}" th:text="${info}" id="panel_mensaje_info_comensal"></div>
       <div class="row">      	      	
       	<section class="col-xs-12 connectorSortable">
       		<div class="box box-success">      		 
@@ -38,7 +38,7 @@
 							<div class="form-group">
 								<label for="filtro">Búsqueda por apellido paterno</label>
 		                        <div class="input-group">
-									<input type="text" name="filtro_comensal_apellido" id="filtro_comensal_apellido" class="form-control" placeholder="Ingrese un apellido" value="" autocomplete="off">
+									<input type="text" name="filtro_comensal_apellido" id="filtro_comensal_apellido" class="form-control" placeholder="Ingrese un apellido" autocomplete="off">
 									<div class="input-group-btn">
 										<a class="btn btn-success" id="btn_filtrar_comensales" th:onclick="'filtrar_comensales()'"><i class="fa fa-search"></i></a>
 									</div>
@@ -56,7 +56,7 @@
 				<div class="row">					
 						<div class="col-xs-12">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="lista_comensales" name="lista_comensales">
+								<table class="table table-bordered" id="lista_comensales">
 									<caption th:text="'Cantidad de comensales encontrados : '+ ${numeroElementos}"></caption>
 									<thead>
 										<tr class="bg-blue">

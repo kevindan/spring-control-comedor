@@ -26,6 +26,10 @@ public class TipoProducto implements Serializable {
 	@Column(name = "eliminado")
 	private int eliminado;
 
+	public TipoProducto() {
+		eliminado = 0;
+	}
+
 	public Long getIdTipoProducto() {
 		return idTipoProducto;
 	}
