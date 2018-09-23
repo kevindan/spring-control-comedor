@@ -1,24 +1,23 @@
 //Inicializa los elementos de la vista Comensales
 $(document).ready(function() {
-
+		
 	$('li').removeClass("active");
 	$('#menu_registros').addClass("active");
 	$('#menu_comensales').addClass("active");
-
-	$("#boton_nuevo_comensal").click(function() {
-		valida_formulario();
-		ocultar_mensajes();
-		form_comensal_habilitado(true);
-		mostrar_modal_comensal();
-
-	});
-
+	
+	valida_formulario_editar();
+	//valida_formulario();
+		
 	$("#btn_cancelar_comensal").click(function() {
-
 		limpiar_form_comensal();
 		ocultar_modal_comensal();
 	});
-
+	
+	$("#btn_cancelar_comensal_edit").click(function() {
+		limpiar_form_comensal_editar();
+		ocultar_modal_comensal_editar();
+	});
+	
 	$("#btn_cancelar_vista_comensal").click(function() {
 
 		$('#modal_vista_comensal').modal('hide');
@@ -35,73 +34,82 @@ $(document).ready(function() {
 
 });
 
+$("#boton_nuevo_comensal").click(function() {		
+	
+	ocultar_mensajes();
+	form_comensal_habilitado(true);
+	mostrar_modal_comensal();
+});
+
+
 // Funcion que inicializa la validacion de los campos del formulario
 function valida_formulario() {
 
-	$('#form_comensal').bootstrapValidator({
-		feedbackIcons : {
+		$('#form_comensal').bootstrapValidator({
 
-			valid : 'glyphicon glyphicon-ok',
-			invalid : 'glyphicon glyphicon-remove',
-			validating : 'glyphicon glyphicon-refresh'
-		},
-		fields : {
-			dni : {
-				validators : {
-					stringLength : {
-						min : 8,
-						max : 8,
-						message : 'Debe ingresar los 8 dígitos'
-					},
-					notEmpty : {
-						message : 'El DNI es requerido'
-					},
-					remote : {
+			feedbackIcons : {
 
-						type : 'POST',
-						url : '/comensales/buscarcomensaldni',
-						message : 'El dni ya se encuentra registrado'
-					}
-				}
+				valid : 'glyphicon glyphicon-ok',
+				invalid : 'glyphicon glyphicon-remove',
+				validating : 'glyphicon glyphicon-refresh'
 			},
-			nombres : {
-				validators : {
-					notEmpty : {
-						message : 'El nombre es requerido'
-					}
-				}
-			},
-			apellidoPaterno : {
-				validators : {
-					notEmpty : {
-						message : 'El apellido paterno es requerido'
-					}
-				}
-			},
-			email : {
-				validators : {
-					emailAddress : {
-						message : 'Escriba un email válido'
-					},
-					notEmpty : {
-						message : 'El email es requerido'
-					},
-					remote : {
+			fields : {
+				dni : {
+					validators : {
+						stringLength : {
+							min : 8,
+							max : 8,
+							message : 'Debe ingresar los 8 dígitos'
+						},
+						notEmpty : {
+							message : 'El DNI es requerido'
+						},
+						remote : {
 
-						type : 'POST',
-						url : '/comensales/buscarcomensalemail',
-						message : 'El email ya se encuentra registrado'
+							type : 'POST',
+							url : '/comensales/buscarcomensaldni',
+							message : 'El dni ya se encuentra registrado'
+						}
+					}
+				},
+				nombres : {
+					validators : {
+						notEmpty : {
+							message : 'El nombre es requerido'
+						}
+					}
+				},
+				apellidoPaterno : {
+					validators : {
+						notEmpty : {
+							message : 'El apellido paterno es requerido'
+						}
+					}
+				},
+				email : {
+					validators : {
+						emailAddress : {
+							message : 'Escriba un email válido'
+						},
+						notEmpty : {
+							message : 'El email es requerido'
+						},
+						remote : {
+
+							type : 'POST',
+							url : '/comensales/buscarcomensalemail',
+							message : 'El email ya se encuentra registrado'
+						}
 					}
 				}
 			}
-		}
-	});
-
+	});	
 }
 
-function valida_formularioActualizar() {
+function valida_formulario_editar() {
 
-	$('#form_comensal').bootstrapValidator({
+	$('#form_comensal_edit').bootstrapValidator({
+
 		feedbackIcons : {
 
 			valid : 'glyphicon glyphicon-ok',
@@ -109,45 +117,22 @@ function valida_formularioActualizar() {
 			validating : 'glyphicon glyphicon-refresh'
 		},
 		fields : {
-			dni : {
-				validators : {
-					stringLength : {
-						min : 8,
-						max : 8,
-						message : 'Debe ingresar los 8 dígitos'
-					},
-					notEmpty : {
-						message : 'El DNI es requerido'
-					}
-				}
-			},
-			nombres : {
+			editNombres : {
 				validators : {
 					notEmpty : {
 						message : 'El nombre es requerido'
 					}
 				}
 			},
-			apellidoPaterno : {
+			editApellidoPaterno : {
 				validators : {
 					notEmpty : {
 						message : 'El apellido paterno es requerido'
 					}
 				}
-			},
-			email : {
-				validators : {
-					emailAddress : {
-						message : 'Escriba un email válido'
-					},
-					notEmpty : {
-						message : 'El email es requerido'
-					}
-				}
-			}
+			}			
 		}
-	});
-
+	});	
 }
 
 // función para buscar Comesal por Id
@@ -165,19 +150,19 @@ function buscar_comensal(comensalId, opcion) {
 
 			if (opcion === 1) {
 
-				$('#idComensal').val(data.idComensal);
-				$('#eliminado').val(data.eliminado);
+				$('#editIdComensal').val(data.idComensal);
+				$('#editEliminado').val(data.eliminado);
 
-				$('#dni').val(data.dni);
-				$('#nombres').val(data.nombres);
-				$('#apellidoPaterno').val(data.apellidoPaterno);
-				$('#apellidoMaterno').val(data.apellidoMaterno);
-				$('#sexo').val(data.sexo);
-				$('#direccion').val(data.direccion);
-				$('#email').val(data.email);
-				$('#telefono').val(data.telefono);
+				$('#editDni').val(data.dni);
+				$('#editNombres').val(data.nombres);
+				$('#editApellidoPaterno').val(data.apellidoPaterno);
+				$('#editApellidoMaterno').val(data.apellidoMaterno);
+				$('#editSexo').val(data.sexo);
+				$('#editDireccion').val(data.direccion);
+				$('#editEmail').val(data.email);
+				$('#editTelefono').val(data.telefono);
 
-				$('#fechaRegistro').val(data.fechaRegistro);
+				$('#editFechaRegistro').val(data.fechaRegistro);
 
 			} else if (opcion === 2) {
 
@@ -211,17 +196,13 @@ function filtrar_comensales() {
 
 		location.href = "/comensales/filtrar/" + apellidoPaterno;
 	}
-
 }
 
 function editar_comensal(comensalId) {
 	ocultar_mensajes();
 	buscar_comensal(comensalId, 1);
-	valida_formularioActualizar();
-	form_comensal_habilitado(true);
-	$('#dni').attr('readonly', true)
-	$('#email').attr('readonly', true)
-	mostrar_modal_comensal();
+	form_comensal_habilitado_editar(true);	
+	mostrar_modal_comensal_editar();
 
 }
 
@@ -284,7 +265,28 @@ function form_comensal_habilitado(condicion) {
 	$('#email').attr('readonly', condicion_inversa);
 	$('#telefono').attr('readonly', condicion_inversa);
 
-	// $('#btn_grabar_comensal').attr('disabled', condicion_inversa);
+}
+
+function form_comensal_habilitado_editar(condicion) {
+
+	var condicion_inversa = "";
+
+	if (condicion == true) {
+
+		condicion_inversa = false;
+
+	} else if (condicion == false) {
+
+		condicion_inversa = true;
+
+	}
+
+	$('#editNombres').attr('readonly', condicion_inversa);
+	$('#editApellidoPaterno').attr('readonly', condicion_inversa);
+	$('#editApellidoMaterno').attr('readonly', condicion_inversa);
+	$('#editSexo').attr('readonly', condicion_inversa);
+	$('#editDireccion').attr('readonly', condicion_inversa);	
+	$('#editTelefono').attr('readonly', condicion_inversa);
 
 }
 
@@ -298,7 +300,7 @@ function valida_numeros(e) {
 
 function limpiar_form_comensal() {
 
-	$('#form_comensal').data('bootstrapValidator').resetForm();
+	//$('#form_comensal').data('bootstrapValidator').resetForm();
 	$('#idComensal').val('');
 	$('#fechaRegistro').val('');
 	$('#eliminado').val('');
@@ -310,9 +312,28 @@ function limpiar_form_comensal() {
 
 }
 
+function limpiar_form_comensal_editar() {
+
+	$('#form_comensal_edit').data('bootstrapValidator').resetForm();
+	$('#editIdComensal').val('');
+	$('#editFechaRegistro').val('');
+	$('#editEliminado').val('');
+	$('#form_comensal_edit').trigger('reset');
+
+	form_comensal_habilitado_editar(true);
+
+	console.log($('#editIdComensal').val() + '');
+
+}
+
 function ocultar_modal_comensal() {
 
 	$('#modal_registro_comensal').modal('hide');
+}
+
+function ocultar_modal_comensal_editar() {
+
+	$('#modal_edicion_comensal').modal('hide');
 }
 
 function mostrar_modal_comensal() {
@@ -322,6 +343,12 @@ function mostrar_modal_comensal() {
 	});
 }
 
+function mostrar_modal_comensal_editar() {
+
+	$('#modal_edicion_comensal').modal({
+		keyboard : false
+	});
+}
 function ocultar_mensajes() {
 
 	$('#panel_mensaje_success_comensal').hide();

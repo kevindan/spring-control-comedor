@@ -29,9 +29,9 @@
       	<section class="col-xs-12 connectorSortable">
       		<div class="box box-success">      		 
 	          <div class="box-header with-border">	             
-	          	<h3 class="box-title">Lista de productos registrados</h3>		              
+	          	<h3 class="box-title">Lista de productos registrados</h3>	              
 	          </div>
-	          <div class="box-body" id="panel_comensales_registrados">
+	          <div class="box-body" id="panel_productos_registrados">
 	          		<div class="row">					
 						<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
 							<div class="form-group">
@@ -92,7 +92,7 @@
 											<td class="text-left" th:text="${producto.stockActual}"></td>											
 										</tr>
 										<tr>
-											<td class="info text-center" colspan="5" th:if="${numeroElementos == 0}" th:text="${mensajeTabla}"></td>
+											<td class="info text-center" colspan="8" th:if="${numeroElementos == 0}" th:text="${mensajeTabla}"></td>
 										</tr>																			
 									</tbody>
 									<tfoot>
@@ -109,13 +109,15 @@
 									</tfoot>																		
 								</table>								
 							</div>
+							
 							<div class="box-footer clearfix">
 				                <div class="row">
 				                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				                		<nav th:replace="paginator-nav :: paginator"></nav>				                		
 				                	</div>
 				                </div>
-				            </div>						
+				            </div>	
+				            				
 						</div>					
 			 		</div>	             	            
 	          	</div>	                       
@@ -129,7 +131,7 @@
 
 <!-- MODAL REGISTRO DE PRODUCTOS -->
 <div class="modal fade" id="modal_registro_producto" data-backdrop="static">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<form th:action="@{/productos/grabar}" id="form_producto" th:object="${producto}" method="post" accept-charset="utf-8">
 				<div class="modal-header bg-primary">
@@ -137,13 +139,13 @@
 				</div>
 				<div class="modal-body">
 					<div class="row">
-						<div class="col-xs-12">										            
+						<div class="col-lg-12">										            
 					            	<div class="row">
-					            		<div class="col-md-6">
+					            		<div class="col-md-12">
 					            			<div class="row">
 					            				<div class="col-lg-12">		            	
 								            		<div class="form-group">
-								            			<label class="control-label" for="producto_descripcion">Descripción</label>
+								            			<label class="control-label" for="descripcion">Descripción</label>
 								            			<div class="input-group">
 								            				<span class="input-group-addon"><i class="fa fa-th"></i></span>
 					                  						<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion" name="descripcion" placeholder="Ingrese el nombre del producto" autocomplete="off"/>					            				
@@ -151,83 +153,67 @@
 								            			<small class="form-text text-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small>
 								            		</div>
 								            	</div>
-					            			</div>
-					            			<div class="row">
-					            				<div class="col-xs-12">
-													<div class="form-group">
-						                  				<label for="nombres">Nombres</label>
-						                  				<div class="input-group">
-						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
-						                  					<input type="text" th:field="*{nombres}" class="form-control" id="nombres" name="nombres" placeholder="Ingrese un nombre" autocomplete="off"/>
-						                				</div>
-						                				<small class="form-text text-danger" th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}"></small>
-						                			</div>
-						                		</div>
-						                		<div class="col-xs-12">
-						                			<div class="form-group">			                			
-						                  				<label class="control-label" for="apellidoPaterno">Apellido Paterno</label>
-						                  				<div class="input-group">
-						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
-						                  					<input type="text" th:field="*{apellidoPaterno}" class="form-control" id="apellidoPaterno" name="apellidoPaterno" placeholder="Ingrese apellido paterno" autocomplete="off"/>			                					
-						                				</div>
-						                				<small class="form-text text-danger" th:if="${#fields.hasErrors('apellidoPaterno')}" th:errors="*{apellidoPaterno}"></small>
-						                			</div>
-						                		</div>
-						                		<div class="col-xs-12">
-						                			<div class="form-group">
-						                  				<label for="apellidoMaterno">Apellido Materno</label>
-						                  				<div class="input-group">
-						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
-						                  					<input type="text" th:field="*{apellidoMaterno}" class="form-control" id="apellidoMaterno" name="apellidoMaterno" placeholder="Ingrese apellido materno" autocomplete="off"/>
-						                				</div>
-						                			</div>
-						                		</div>			                			
-											</div>	
-					            		</div>
-					            		<div class="col-md-6">
-											<div class="row">
-												<div class="col-xs-6">
-				                					<div class="form-group">                				                			
-					                					<label for="sexo">Sexo</label>
+								            	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+													<div class="form-group">                				                			
+					                					<label for="tipoProducto">Tipo producto</label>
 					                					<div class="input-group">
-					                						<span class="input-group-addon"><i class="fa fa-intersex"></i></span>
-						                					<select class="form-control" id="sexo" name="sexo" th:field="*{sexo}">
-						                               			<option value="Hombre">Masculino</option>
-						                                		<option value="Mujer">Femenino</option>
+					                						<span class="input-group-addon"><i class="fa fa-th"></i></span>
+						                					<select class="form-control" id="tipoProducto" name="tipoProducto" th:field="*{tipoProducto}">
+						                               			<option th:each="tipoProducto : ${tipoProductos}" th:value="${tipoProducto.idTipoProducto}" th:text="${tipoProducto.descripcion}"></option>					                                		
 						                            		</select>
 					                        			</div>
-					                        		</div>	                                            				
-				                				</div>	                				
-				                				<div class="col-xs-12">
+					                        		</div>
+						                		</div>
+						                		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						                			<div class="form-group">			                			
+						                  				<label class="control-label" for="presentacion">Presentación</label>
+						                  				<div class="input-group">
+						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
+						                  					<input type="text" th:field="*{presentacion}" class="form-control" id="presentacion" name="presentacion" placeholder="Ingrese una presentacion" autocomplete="off"/>			                					
+						                				</div>
+						                				<small class="form-text text-danger" th:if="${#fields.hasErrors('presentacion')}" th:errors="*{presentacion}"></small>
+						                			</div>
+						                		</div>						                		
+					            			</div>
+					            			<div class="row">
+						                		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+						                			<div class="form-group">
+						                  				<label for="precioCompra">P. compra</label>
+						                  				<div class="input-group">
+						                  					<span class="input-group-addon"><i class="fa">S/.</i></span>
+						                  					<input type="text" th:field="*{precioCompra}" class="form-control" id="precioCompra" name="precioCompra" placeholder="0.00" autocomplete="off"/>
+						                				</div>
+						                			</div>
+						                		</div>
+						                		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
 				                					<div class="form-group">
-			               								<label for="direccion">Direcci�n</label>
+						                  				<label for="precioVenta">P. venta</label>
+						                  				<div class="input-group">
+						                  					<span class="input-group-addon"><i class="fa">S/.</i></span>
+						                  					<input type="text" th:field="*{precioVenta}" class="form-control" id="precioVenta" name="precioVenta" placeholder="0.00" autocomplete="off"/>
+						                				</div>
+						                			</div>	                                            				
+				                				</div>
+				                				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+				                					<div class="form-group">
+			               								<label for="stockMinimo">Stock mínimo</label>
 			               								<div class="input-group">
-			               									<span class="input-group-addon"><i class="fa fa-address-card-o"></i></span>
-			               									<input type="text" th:field="*{direccion}" class="form-control" id="direccion" name="direccion" placeholder="Ingrese una direcci�n" autocomplete="off"/>
+			               									<span class="input-group-addon"><i class="fa fa-th"></i></span>
+			               									<input type="number" min="0" th:field="*{stockMinimo}" class="form-control" id="stockMinimo" name="stockMinimo" placeholder="0" autocomplete="off"/>
 			               								</div>
 			               							</div>		
 				                				</div>	                				
-				                				<div class="col-xs-12">
+				                				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
 				                					<div class="form-group">
-				                						<label for="email">E-mail</label>
-				                				 		<div class="input-group">
-				                							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-				                							<input type="email" id="email" th:field="*{email}" name="email" class="form-control" placeholder="Ingrese e-mail" autocomplete="off"/>
-				              					 		</div>
-				              					 		<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
-				              						</div>
-				                				</div>
-				                				<div class="col-xs-6">
-				                					<div class="form-group">
-				                						<label for="telefono">Tel�fono</label>
-				                				 		<div class="input-group">
-				                							<span class="input-group-addon"><i class="fa fa-phone"></i></span>
-				                							<input type="text" id="telefono" th:field="*{telefono}" name="telefono" class="form-control" placeholder="Ingrese un tel�fono" autocomplete="off"/>
-				              					 		</div>
-				              						</div>
-				                				</div>	
-											</div>			            		
-					            		</div>				            		
+			               								<label for="stockActual">Stock actual</label>
+			               								<div class="input-group">
+			               									<span class="input-group-addon"><i class="fa fa-th"></i></span>
+			               									<input type="number" min="0" th:field="*{stockActual}" class="form-control" id="stockActual" name="stockActual" placeholder="0" autocomplete="off"/>
+			               								</div>
+			               							</div>
+				                				</div>			                			
+											</div>											
+					            		</div>					            						            		
 					            	</div>	            
 						         <input type="hidden" id="idProducto" th:field="*{idProducto}"/>
 						         <input type="hidden" id="fechaRegistro" th:field="*{fechaRegistro}"/>
@@ -273,7 +259,7 @@
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<div class="modal-header bg-primary">
-				<h4 class="modal-title">Informaci�n del Comensal</h4>
+				<h4 class="modal-title">Información del Producto</h4>
 			</div>
 			<div class="modal-body">				
 				<div class="row">

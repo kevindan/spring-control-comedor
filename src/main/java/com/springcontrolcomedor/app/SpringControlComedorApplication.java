@@ -12,6 +12,4 @@ public class SpringControlComedorApplication{
 		SpringApplication.run(SpringControlComedorApplication.class, args);
 	}
 
-		
-
 }

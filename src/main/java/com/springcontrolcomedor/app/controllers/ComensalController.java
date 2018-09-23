@@ -158,7 +158,7 @@ public class ComensalController {
 
 			return "comensales";
 		}
-
+		
 		String mensajaeFlash = (comensal.getIdComensal() != null) ? "¡Comensal editado con éxito!"
 				: "¡Comensal grabado con éxito!";
 
@@ -166,6 +166,7 @@ public class ComensalController {
 		flash.addFlashAttribute("success", mensajaeFlash);
 		status.setComplete();
 		return "redirect:/comensales";
+
 	}
 
 	@RequestMapping(value = "/eliminar/{idComensal}")

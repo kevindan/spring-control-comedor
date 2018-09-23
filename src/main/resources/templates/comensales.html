@@ -241,6 +241,108 @@
 </div>
 <!--  FIN MODAL REGISTRO DE COMENSALES -->
 
+<!-- MODAL EDICION DE COMENSALES -->
+<div class="modal fade" id="modal_edicion_comensal" data-backdrop="static">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form th:action="@{/comensales/grabar}" id="form_comensal_edit" th:object="${comensal}" method="post" accept-charset="utf-8">
+				<div class="modal-header bg-primary">
+					<h4 class="modal-title">Datos del Comensal</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12">										            
+					            	<div class="row">
+					            		<div class="col-md-6">					            		
+					            			<div class="row">
+					            				<div class="col-xs-12">
+													<div class="form-group">
+						                  				<label for="editNombres">Nombres</label>
+						                  				<div class="input-group">
+						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
+						                  					<input type="text" th:field="*{nombres}" class="form-control" id="editNombres" name="editNombres" placeholder="Ingrese un nombre" autocomplete="off"/>
+						                				</div>
+						                				<small class="form-text text-danger" th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}"></small>
+						                			</div>
+						                		</div>
+						                		<div class="col-xs-12">
+						                			<div class="form-group">			                			
+						                  				<label class="control-label" for="editApellidoPaterno">Apellido Paterno</label>
+						                  				<div class="input-group">
+						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
+						                  					<input type="text" th:field="*{apellidoPaterno}" class="form-control" id="editApellidoPaterno" name="editApellidoPaterno" placeholder="Ingrese apellido paterno" autocomplete="off"/>			                					
+						                				</div>
+						                				<small class="form-text text-danger" th:if="${#fields.hasErrors('apellidoPaterno')}" th:errors="*{apellidoPaterno}"></small>
+						                			</div>
+						                		</div>
+						                		<div class="col-xs-12">
+						                			<div class="form-group">
+						                  				<label for="editApellidoMaterno">Apellido Materno</label>
+						                  				<div class="input-group">
+						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
+						                  					<input type="text" th:field="*{apellidoMaterno}" class="form-control" id="editApellidoMaterno" name="editApellidoMaterno" placeholder="Ingrese apellido materno" autocomplete="off"/>
+						                				</div>
+						                			</div>
+						                		</div>			                			
+											</div>	
+					            		</div>
+					            		<div class="col-md-6">
+											<div class="row">
+												<div class="col-xs-6">
+				                					<div class="form-group">                				                			
+					                					<label for="editSexo">Sexo</label>
+					                					<div class="input-group">
+					                						<span class="input-group-addon"><i class="fa fa-intersex"></i></span>
+						                					<select class="form-control" id="editSexo" name="editSexo" th:field="*{sexo}">
+						                               			<option value="Hombre">Masculino</option>
+						                                		<option value="Mujer">Femenino</option>
+						                            		</select>
+					                        			</div>
+					                        		</div>	                                            				
+				                				</div>	                				
+				                				<div class="col-xs-12">
+				                					<div class="form-group">
+			               								<label for="editDireccion">Dirección</label>
+			               								<div class="input-group">
+			               									<span class="input-group-addon"><i class="fa fa-address-card-o"></i></span>
+			               									<input type="text" th:field="*{direccion}" class="form-control" id="editDireccion" name="editDireccion" placeholder="Ingrese una dirección" autocomplete="off"/>
+			               								</div>
+			               							</div>		
+				                				</div>
+				                				<div class="col-xs-6">
+				                					<div class="form-group">
+				                						<label for="editTelefono">Teléfono</label>
+				                				 		<div class="input-group">
+				                							<span class="input-group-addon"><i class="fa fa-phone"></i></span>
+				                							<input type="text" id="editTelefono" th:field="*{telefono}" name="editTelefono" class="form-control" placeholder="Ingrese un teléfono" autocomplete="off"/>
+				              					 		</div>
+				              						</div>
+				                				</div>	
+											</div>			            		
+					            		</div>				            		
+					            	</div>	            
+						         <input type="hidden" id="editIdComensal" th:field="*{idComensal}"/>
+						         <input type="hidden" id="editDni" th:field="*{dni}"/>
+						         <input type="hidden" id="editEmail" th:field="*{email}"/>
+						         <input type="hidden" id="editFechaRegistro" th:field="*{fechaRegistro}"/>
+						         <input type="hidden" id="editEliminado" th:field="*{eliminado}"/>			             
+						</div>
+					</div>    			
+				</div>
+				<div class="modal-footer">
+					<div class="row">
+					 	<div class="col-xs-12">
+					    	<button type="submit" class="btn btn-primary" id="btn_grabar_comensal_edit" name="btn_grabar_comensal_edit">Grabar</button>		            	
+							<button type="button" class="btn btn-default" id="btn_cancelar_comensal_edit" name="btn_cancelar_comensal_edit">Cancelar</button>
+				    	</div>
+				    </div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!--  FIN MODAL EDICION DE COMENSALES -->
+
 <!-- MODAL CONFIRMA ELIMINAR COMENSAL -->
 <div class="modal fade" id="modal_confirma_eliminar_comensal" data-backdrop="static">
 	<div class="modal-dialog modal-sm">
