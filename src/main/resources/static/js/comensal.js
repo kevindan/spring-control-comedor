@@ -6,7 +6,7 @@ $(document).ready(function() {
 	$('#menu_comensales').addClass("active");
 	
 	valida_formulario_editar();
-	//valida_formulario();
+	valida_formulario();
 		
 	$("#btn_cancelar_comensal").click(function() {
 		limpiar_form_comensal();
@@ -117,14 +117,14 @@ function valida_formulario_editar() {
 			validating : 'glyphicon glyphicon-refresh'
 		},
 		fields : {
-			editNombres : {
+			nombres : {
 				validators : {
 					notEmpty : {
 						message : 'El nombre es requerido'
 					}
 				}
 			},
-			editApellidoPaterno : {
+			apellidoPaterno : {
 				validators : {
 					notEmpty : {
 						message : 'El apellido paterno es requerido'
@@ -300,7 +300,7 @@ function valida_numeros(e) {
 
 function limpiar_form_comensal() {
 
-	//$('#form_comensal').data('bootstrapValidator').resetForm();
+	$('#form_comensal').data('bootstrapValidator').resetForm();
 	$('#idComensal').val('');
 	$('#fechaRegistro').val('');
 	$('#eliminado').val('');

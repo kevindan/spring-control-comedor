@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$('li').removeClass("active");
 	$('#menu_registros').addClass("active");
 	$('#menu_productos').addClass("active");
-
+	
 	$("#boton_nuevo_producto").click(function() {
 		// valida_formulario();
 		// ocultar_mensajes();
