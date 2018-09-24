@@ -14,7 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "productos")
@@ -39,9 +40,7 @@ public class Producto implements Serializable {
 	@Column(name = "precio_compra")
 	private Double precioCompra;
 
-	@Column(name = "precio_venta")
-	@NotNull
-	@NotEmpty
+	@Column(name = "precio_venta")	
 	private Double precioVenta;
 
 	@Column(name = "stock_minimo")
@@ -50,9 +49,9 @@ public class Producto implements Serializable {
 	@Column(name = "stock_actual")
 	private int stockActual;
 
-	@Temporal(TemporalType.DATE)
-	@NotNull
+	@Temporal(TemporalType.DATE)	
 	@Column(name = "fecha_registro")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")	
 	private Date fechaRegistro;
 
 	@Column(name = "eliminado")
@@ -144,6 +143,15 @@ public class Producto implements Serializable {
 	public void setEliminado(int eliminado) {
 		this.eliminado = eliminado;
 	}
+	
+	@Override
+	public String toString() {
+		return "Producto [idProducto=" + idProducto + ", descripcion=" + descripcion + ", tipoProducto=" + tipoProducto
+				+ ", presentacion=" + presentacion + ", precioCompra=" + precioCompra + ", precioVenta=" + precioVenta
+				+ ", stockMinimo=" + stockMinimo + ", stockActual=" + stockActual + ", fechaRegistro=" + fechaRegistro
+				+ ", eliminado=" + eliminado + "]";
+	}
+
 
 	private static final long serialVersionUID = 1L;
 

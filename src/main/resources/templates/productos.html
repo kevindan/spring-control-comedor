@@ -21,7 +21,7 @@
     </section>
     <!-- Main content -->
     <section class="content">
-      <div class="alert alert-success" th:if="${success != null}" th:text="${success}" id="panel_mensaje_success_producto"></div>
+      	<div class="alert alert-success" th:if="${success != null}" th:text="${success}" id="panel_mensaje_success_producto"></div>
 		<div class="alert alert-danger" th:if="${error != null}" th:text="${error}" id="panel_mensaje_error_producto"></div>
 		<div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}" id="panel_mensaje_warning_producto"></div>
 		<div class="alert alert-info" th:if="${info != null}" th:text="${info}" id="panel_mensaje_info_producto"></div>
@@ -149,8 +149,7 @@
 								            			<div class="input-group">
 								            				<span class="input-group-addon"><i class="fa fa-th"></i></span>
 					                  						<input type="text" class="form-control" th:field="*{descripcion}" id="descripcion" name="descripcion" placeholder="Ingrese el nombre del producto" autocomplete="off"/>					            				
-								            			</div>
-								            			<small class="form-text text-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small>
+								            			</div>								            			
 								            		</div>
 								            	</div>
 								            	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -170,8 +169,7 @@
 						                  				<div class="input-group">
 						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
 						                  					<input type="text" th:field="*{presentacion}" class="form-control" id="presentacion" name="presentacion" placeholder="Ingrese una presentacion" autocomplete="off"/>			                					
-						                				</div>
-						                				<small class="form-text text-danger" th:if="${#fields.hasErrors('presentacion')}" th:errors="*{presentacion}"></small>
+						                				</div>						                				
 						                			</div>
 						                		</div>						                		
 					            			</div>
@@ -198,7 +196,7 @@
 				                					<div class="form-group">
 			               								<label for="stockMinimo">Stock mínimo</label>
 			               								<div class="input-group">
-			               									
+			               									<span class="input-group-addon"><i class="fa fa-th"></i></span>			               									
 			               									<input type="number" min="0" th:field="*{stockMinimo}" class="form-control" id="stockMinimo" name="stockMinimo" placeholder="0" autocomplete="off"/>
 			               								</div>
 			               							</div>		
@@ -207,7 +205,7 @@
 				                					<div class="form-group">
 			               								<label for="stockActual">Stock actual</label>
 			               								<div class="input-group">
-			               								
+			               									<span class="input-group-addon"><i class="fa fa-th"></i></span>			               								
 			               									<input type="number" min="0" th:field="*{stockActual}" class="form-control" id="stockActual" name="stockActual" placeholder="0" autocomplete="off"/>
 			               								</div>
 			               							</div>

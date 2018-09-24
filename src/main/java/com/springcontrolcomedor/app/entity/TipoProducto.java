@@ -53,6 +53,15 @@ public class TipoProducto implements Serializable {
 	public void setEliminado(int eliminado) {
 		this.eliminado = eliminado;
 	}
+	
+	@Override
+	public String toString() {
+		return "TipoProducto [idTipoProducto=" + idTipoProducto + ", descripcion=" + descripcion + ", eliminado="
+				+ eliminado + "]";
+	}
+
+
+
 
 	private static final long serialVersionUID = 1L;
 
