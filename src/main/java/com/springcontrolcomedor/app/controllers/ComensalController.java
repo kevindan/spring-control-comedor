@@ -122,6 +122,7 @@ public class ComensalController {
 
 		return "{\"valid\":" + valid + "}";
 	}
+	
 	@RequestMapping(value = "/buscarcomensalemail", method = RequestMethod.POST, produces = { "application/json" })
 	public @ResponseBody String buscarComensalEmail(String email) {
 

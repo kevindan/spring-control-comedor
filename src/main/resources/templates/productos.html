@@ -84,12 +84,12 @@
 	                                            </div>											
 											</td>																						
 											<td class="text-left"><i class="fa fa-ship"></i>&nbsp;&nbsp;<span th:text="${producto.descripcion}"></span></td>
-											<td class="text-left" th:text="${producto.tipoProducto.descripcion}"></td>
-											<td class="text-left" th:text="${producto.presentacion}"></td>
-											<td class="text-left" th:text="${producto.precioCompra}"></td>
-											<td class="text-left" th:text="${producto.precioVenta}"></td>
-											<td class="text-left" th:text="${producto.stockMinimo}"></td>
-											<td class="text-left" th:text="${producto.stockActual}"></td>											
+											<td class="text-left"><span th:text="${producto.tipoProducto.descripcion}"></span></td>
+											<td class="text-left"><span th:text="${producto.presentacion}"></span></td>
+											<td class="text-left">S/. <span th:text="${producto.precioCompra}"></span></td>
+											<td class="text-left">S/. <span th:text="${producto.precioVenta}"></span></td>
+											<td class="text-center"><span  th:text="${producto.stockMinimo}"></span></td>
+											<td class="text-center"><span  th:text="${producto.stockActual}"></span></td>											
 										</tr>
 										<tr>
 											<td class="info text-center" colspan="8" th:if="${numeroElementos == 0}" th:text="${mensajeTabla}"></td>
@@ -197,7 +197,7 @@
 			               								<label for="stockMinimo">Stock mínimo</label>
 			               								<div class="input-group">
 			               									<span class="input-group-addon"><i class="fa fa-th"></i></span>			               									
-			               									<input type="number" min="0" th:field="*{stockMinimo}" class="form-control" id="stockMinimo" name="stockMinimo" placeholder="0" autocomplete="off"/>
+			               									<input type="number" min="1" th:field="*{stockMinimo}" class="form-control" id="stockMinimo" name="stockMinimo" placeholder="0" autocomplete="off"/>
 			               								</div>
 			               							</div>		
 				                				</div>	                				

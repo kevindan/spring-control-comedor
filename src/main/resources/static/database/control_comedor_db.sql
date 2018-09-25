@@ -31,13 +31,13 @@ CREATE TABLE `comensales` (
   `direccion` varchar(255) DEFAULT NULL,
   `dni` varchar(255) DEFAULT NULL,
   `eliminado` int(11) DEFAULT NULL,
-  `fecha_registro` date NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `fecha_registro` date DEFAULT NULL,
   `nombres` varchar(255) DEFAULT NULL,
   `sexo` varchar(255) DEFAULT NULL,
   `telefono` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_comensal`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `comensales` (
 
 LOCK TABLES `comensales` WRITE;
 /*!40000 ALTER TABLE `comensales` DISABLE KEYS */;
-INSERT INTO `comensales` VALUES (1,'Huarancca','Berrio','Jr. Los Dominicos 456, Callao','45874589',0,'2018-09-11','Valentina Guliana','Mujer','987654321','valentina.berrio@deeconsultores.pe'),(2,'Flores','Acuña','Jr. Los Pinos 132, Santiago de Surco','45871125',0,'2018-09-11','Sol María','Mujer','999854786','sol.acuna@deeconsultores.pe'),(3,'Huertas','Ojeda','Av. Mariano Cornejo 478, Pueblo libre','01201254',0,'2018-09-11','Susana','Mujer','987433256','susana.ojeda@deeconsultores.pe'),(4,'Sumarriva','Valenzuela','Calle Murillo 158, San Borja','12203698',0,'2018-09-11','Fernando','Hombre','987422214','fernando.valenzuela@deeconsultores.pe'),(5,'Urbina','León','Jr. Calle Suecia 165, Salamanca, Ate Vitarte','12047789',0,'2018-09-11','Fanny Ines','Mujer','987466523','fanny.león@deeconsultores.pe'),(6,'Mayuri','Piña','Jr. Perú 256, La Banda de Shilcayo','98745632',0,'2018-09-11','Lucía','Mujer','999658326','lucia.pina@deeconsultores.pe');
+INSERT INTO `comensales` VALUES (1,'Huarancca','Berrio','Av. Dominicos 456, Callao','45874698',0,'valentina.berrio@deeconsultores.pe','2018-09-25','Valentina','Mujer','998745632'),(2,'Córdova','Acuña','Jr. Alfonso Ugarte 588, Tarapoto','78965412',0,'brettsacuna@gmail.com','2018-09-25','Davis Bretts','Hombre','925874569'),(3,'Huertas','Ojeda','Av. Mariano Cornejo 456, Pueblo Libre','01254789',0,'susana.ojeda@deeconsultores.pe','2018-09-25','Susana','Mujer','965874563'),(4,'Mamani','Chambi','Calle Los Cedros 285, San isidro','01269855',0,'nestitor@deeconsultores.pe','2018-09-25','Néstor','Hombre','987456333'),(5,'Bustamante','Salazar','Av. Javier Prado 2569, Salamanca','45688888',0,'gabriela.salazar@deeconsultores.pe','2018-09-25','Gabriela','Mujer','999874123'),(6,'Flores','Acuña','Av. Los Pinos 456, Santiago de Surco','99874522',0,'sol.acuna@deeconsultores.pe','2018-09-25','Sol María','Mujer','933658965'),(7,'Montilla','Robles','Jr. Loreto 457, Callao','01012369',0,'soila.maxima@gmail.com','2018-09-25','Zoila Luisa','Mujer','982236598');
 /*!40000 ALTER TABLE `comensales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,11 +63,11 @@ CREATE TABLE `consumo` (
   `estado_saldo` int(11) DEFAULT NULL,
   `fecha_consumo` date NOT NULL,
   `fecha_registro` date NOT NULL,
-  `monto_cancelado` double DEFAULT NULL,
-  `monto_igv` double DEFAULT NULL,
-  `monto_sin_igv` double DEFAULT NULL,
-  `monto_total` double DEFAULT NULL,
-  `saldo` double DEFAULT NULL,
+  `monto_cancelado` decimal(10,2) DEFAULT '0.00',
+  `monto_igv` decimal(10,2) DEFAULT '0.00',
+  `monto_sin_igv` decimal(10,2) DEFAULT '0.00',
+  `monto_total` decimal(10,2) DEFAULT '0.00',
+  `saldo` decimal(10,2) DEFAULT '0.00',
   `id_comensal` bigint(20) DEFAULT NULL,
   `id_local` bigint(20) DEFAULT NULL,
   `id_usuario` bigint(20) DEFAULT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE `consumo` (
   CONSTRAINT `FKfea1g8rty46694tupl4218vne` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   CONSTRAINT `FKgkfgm45a61uj5ht9sc9eikj5y` FOREIGN KEY (`id_comensal`) REFERENCES `comensales` (`id_comensal`),
   CONSTRAINT `FKsd41cwjud86j436ua83fvhmvc` FOREIGN KEY (`id_local`) REFERENCES `locales` (`id_local`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,8 +100,8 @@ DROP TABLE IF EXISTS `detalle_consumo`;
 CREATE TABLE `detalle_consumo` (
   `id_detalle_consumo` bigint(20) NOT NULL AUTO_INCREMENT,
   `cantidad` int(11) DEFAULT NULL,
-  `precio` double DEFAULT NULL,
-  `sub_total` double DEFAULT NULL,
+  `precio` decimal(10,2) DEFAULT '0.00',
+  `sub_total` decimal(10,2) DEFAULT '0.00',
   `id_producto` bigint(20) DEFAULT NULL,
   `id_consumo` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id_detalle_consumo`),
@@ -109,7 +109,7 @@ CREATE TABLE `detalle_consumo` (
   KEY `FK3y2drak3tkqjhj7jkcfqa4e9u` (`id_consumo`),
   CONSTRAINT `FK3y2drak3tkqjhj7jkcfqa4e9u` FOREIGN KEY (`id_consumo`) REFERENCES `consumo` (`id_consumo`),
   CONSTRAINT `FKt9bq8qvpcwfmy0s1rb8ggynke` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +133,7 @@ CREATE TABLE `locales` (
   `descripcion` varchar(255) DEFAULT NULL,
   `eliminado` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_local`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,9 +156,9 @@ CREATE TABLE `productos` (
   `id_producto` bigint(20) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) DEFAULT NULL,
   `eliminado` int(11) DEFAULT NULL,
-  `fecha_registro` date NOT NULL,
-  `precio_compra` double DEFAULT NULL,
-  `precio_venta` double NOT NULL,
+  `fecha_registro` date DEFAULT NULL,
+  `precio_compra` decimal(10,2) DEFAULT '0.00',
+  `precio_venta` decimal(10,2) DEFAULT '0.00',
   `presentacion` varchar(255) DEFAULT NULL,
   `stock_actual` int(11) DEFAULT NULL,
   `stock_minimo` int(11) DEFAULT NULL,
@@ -166,7 +166,7 @@ CREATE TABLE `productos` (
   PRIMARY KEY (`id_producto`),
   KEY `FKojclx01cd3urfm3ac7l3aafud` (`id_tipo_producto`),
   CONSTRAINT `FKojclx01cd3urfm3ac7l3aafud` FOREIGN KEY (`id_tipo_producto`) REFERENCES `tipo_producto` (`id_tipo_producto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,6 +175,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+INSERT INTO `productos` VALUES (1,'Coca Cola personal de 500 ml',0,'2018-09-25',1.80,2.50,'Envase no retornable de 500 ml',15,5,4),(2,'Guaraná Backus personal de 500 ml',0,'2018-09-25',1.50,2.00,'Envase no retornable de 500 ml',10,5,4),(3,'Chicha Morada',0,'2018-09-25',0.00,1.50,'Vaso mediano de 200 ml',10,1,4),(4,'Desayuno',0,'2018-09-25',0.00,8.00,'Desayuno completo: Entrada, segundo y postre',40,5,1),(5,'Almuerzo',0,'2018-09-25',0.00,8.00,'Almuerzo Completo: Entrada, segundo y postre',50,5,1),(6,'Cena',0,'2018-09-25',0.00,8.00,'Cena completa: Entrada, segundo y postre',35,5,1),(7,'Papas fritas',0,'2018-09-25',0.00,4.50,'Plato de porción mediana',6,2,2),(8,'Arroz cocido',0,'2018-09-25',0.00,3.00,'Plato de porción pequeña',6,1,2),(9,'Huevo frito',0,'2018-09-25',0.00,1.50,'Unidad',10,3,2),(10,'Empanada de Pollo',0,'2018-09-25',2.00,3.50,'Unidad de tamaño mediano',9,2,3),(11,'Sandwich Triple de pollo, durazno y jamón',0,'2018-09-25',2.30,3.00,'Unidad de tamaño grande',8,3,3),(12,'Ensalada César',0,'2018-09-25',0.00,3.50,'Bowl de tamaño pequeño',7,2,3),(13,'Sandwich de pollo a la brasa',0,'2018-09-25',2.50,3.50,'Unidad de tamaño mediano',8,2,3),(14,'Chifles piuranos',0,'2018-09-25',1.00,1.50,'Bolsa de 120 gr',9,2,5),(15,'Doritos',0,'2018-09-25',1.00,1.50,'Bolsa de 85 gr',10,2,5),(16,'Chicharrón de soya',0,'2018-09-25',1.00,1.50,'Bolsa de 90 gr',15,3,5),(17,'Pie de limón',0,'2018-09-25',0.00,4.00,'Unidad de 250 gr',5,2,6),(18,'Chesse cake de maracuyá',0,'2018-09-25',2.00,3.50,'Unidad de 250 gr',8,2,6),(19,'Mazamorra morada',0,'2018-09-25',1.50,2.50,'Vaso de 200 ml',7,2,6),(20,'Leche asada',0,'2018-09-25',2.00,3.50,'Pirex de 250 gr',6,2,6);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +194,7 @@ CREATE TABLE `roles` (
   PRIMARY KEY (`id_rol`),
   UNIQUE KEY `UK9yypc1um53qngb28qq2tg9kbe` (`id_usuario`,`rol`),
   CONSTRAINT `FK45bly479quh36chhc94sc4xvx` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,7 +218,7 @@ CREATE TABLE `tipo_producto` (
   `descripcion` varchar(255) DEFAULT NULL,
   `eliminado` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_tipo_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,7 +227,7 @@ CREATE TABLE `tipo_producto` (
 
 LOCK TABLES `tipo_producto` WRITE;
 /*!40000 ALTER TABLE `tipo_producto` DISABLE KEYS */;
-INSERT INTO `tipo_producto` VALUES (1,'Menú',0),(2,'Complementos',0),(3,'Aperitivo',0),(4,'Bebidas',0),(5,'Snacks',0);
+INSERT INTO `tipo_producto` VALUES (1,'Menú',0),(2,'Complementos',0),(3,'Aperitivo',0),(4,'Bebidas',0),(5,'Snacks',0),(6,'Postres',0);
 /*!40000 ALTER TABLE `tipo_producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,7 +252,7 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `UK_3m5n1w5trapxlbo2s42ugwdmd` (`usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,4 +273,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-20 18:15:02
+-- Dump completed on 2018-09-25 17:59:17

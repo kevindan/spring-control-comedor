@@ -5,16 +5,18 @@ $(document).ready(function() {
 	$('#menu_registros').addClass("active");
 	$('#menu_productos').addClass("active");
 	
+	$('#precioCompra').numeric('.');
+	$('#precioVenta').numeric('.');
+
 	$("#boton_nuevo_producto").click(function() {
-		// valida_formulario();
-		// ocultar_mensajes();
+		valida_formulario();
+		ocultar_mensajes();
 		// form_producto_habilitado(true);
 		mostrar_modal_producto();
 
 	});
 
 	$("#btn_cancelar_producto").click(function() {
-
 		limpiar_form_producto();
 		ocultar_modal_producto();
 
@@ -26,80 +28,71 @@ $(document).ready(function() {
 	// });
 	//
 	// // Ejecuta el filtrado al pulsar la tecla ENTER
-	// $('#filtro_comensal_apellido').keypress(function(e) {
-	//
-	// if (e.which == 13) {
-	//
-	// filtrar_comensales();
-	// }
-	// });
+	$('#filtro_producto_descripcion').keypress(function(e) {
+
+		if (e.which == 13) {
+
+			filtrar_productos();
+		}
+	});
 
 });
 
 // Funcion que inicializa la validacion de los campos del formulario
-// function valida_formulario() {
-//
-// $('#form_comensal').bootstrapValidator({
-// feedbackIcons : {
-//
-// valid : 'glyphicon glyphicon-ok',
-// invalid : 'glyphicon glyphicon-remove',
-// validating : 'glyphicon glyphicon-refresh'
-// },
-// fields : {
-// dni : {
-// validators : {
-// stringLength : {
-// min : 8,
-// max : 8,
-// message : 'Debe ingresar los 8 dígitos'
-// },
-// notEmpty : {
-// message : 'El DNI es requerido'
-// },
-// remote : {
-//
-// type : 'POST',
-// url : '/comensales/buscarcomensaldni',
-// message : 'El dni ya se encuentra registrado'
-// }
-// }
-// },
-// nombres : {
-// validators : {
-// notEmpty : {
-// message : 'El nombre es requerido'
-// }
-// }
-// },
-// apellidoPaterno : {
-// validators : {
-// notEmpty : {
-// message : 'El apellido paterno es requerido'
-// }
-// }
-// },
-// email : {
-// validators : {
-// emailAddress : {
-// message : 'Escriba un email válido'
-// },
-// notEmpty : {
-// message : 'El email es requerido'
-// },
-// remote : {
-//
-// type : 'POST',
-// url : '/comensales/buscarcomensalemail',
-// message : 'El email ya se encuentra registrado'
-// }
-// }
-// }
-// }
-// });
-//
-// }
-//
+function valida_formulario() {
+
+	$('#form_producto').bootstrapValidator({
+		feedbackIcons : {
+
+			valid : 'glyphicon glyphicon-ok',
+			invalid : 'glyphicon glyphicon-remove',
+			validating : 'glyphicon glyphicon-refresh'
+		},
+		fields : {
+			descripcion : {
+				validators : {
+					notEmpty : {
+						message : 'La descripción es requerida'
+					}
+				}
+			},
+			presentacion : {
+				validators : {
+					notEmpty : {
+						message : 'La presentación es requerida'
+					}
+				}
+			},
+			precioVenta : {
+				validators : {
+					notEmpty : {
+						message : 'Campo Obligatorio'
+					}
+				}
+			},
+			stockMinimo : {
+				validators : {
+					notEmpty : {
+						message : 'Campo Obligatorio'
+					},
+					greaterThan : {
+						value : 0,
+						message : 'Debe ser mayor a 0'
+					}
+				}
+			},
+			stockActual : {
+				validators : {
+					notEmpty : {
+						message : 'Campo Obligatorio'
+					}
+				}
+			}
+		}
+	});
+
+}
+
 // function valida_formularioActualizar() {
 //
 // $('#form_comensal').bootstrapValidator({
@@ -150,70 +143,69 @@ $(document).ready(function() {
 // });
 //
 // }
+
+ function buscar_producto(comensalId, opcion) {
+
+	$.ajax({
+
+		url : "/productos/buscar/" + comensalId,
+		type : 'GET',
+		dataType : "json",
+		data : {
+			comensalId : comensalId,
+		},
+		success : function(data) {
+
+			if (opcion === 1) {
+
+				$('#idComensal').val(data.idComensal);
+				$('#eliminado').val(data.eliminado);
+
+				$('#dni').val(data.dni);
+				$('#nombres').val(data.nombres);
+				$('#apellidoPaterno').val(data.apellidoPaterno);
+				$('#apellidoMaterno').val(data.apellidoMaterno);
+				$('#sexo').val(data.sexo);
+				$('#direccion').val(data.direccion);
+				$('#email').val(data.email);
+				$('#telefono').val(data.telefono);
+
+				$('#fechaRegistro').val(data.fechaRegistro);
+
+			} else if (opcion === 2) {
+
+				$('#dni_ver').text(data.dni);
+				$('#nombres_ver').text(data.nombres);
+				$('#apellidoPaterno_ver').text(data.apellidoPaterno);
+				$('#apellidoMaterno_ver').text(data.apellidoMaterno);
+
+				if (data.sexo == 'Hombre') {
+					$('#sexo_ver').text("Masculino");
+				} else if (data.sexo == 'Mujer') {
+					$('#sexo_ver').text("Femenino");
+				}
+
+				$('#direccion_ver').text(data.direccion);
+				$('#email_ver').text(data.email);
+				$('#telefono_ver').text(data.telefono);
+
+				$('#fechaRegistro_ver').text(data.fechaRegistro);
+
+			}
+		}
+	});
+}
 //
-// // función para buscar Comesal por Id
-// function buscar_comensal(comensalId, opcion) {
-//
-// $.ajax({
-//
-// url : "/comensales/buscar/" + comensalId,
-// type : 'GET',
-// dataType : "json",
-// data : {
-// comensalId : comensalId,
-// },
-// success : function(data) {
-//
-// if (opcion === 1) {
-//
-// $('#idComensal').val(data.idComensal);
-// $('#eliminado').val(data.eliminado);
-//
-// $('#dni').val(data.dni);
-// $('#nombres').val(data.nombres);
-// $('#apellidoPaterno').val(data.apellidoPaterno);
-// $('#apellidoMaterno').val(data.apellidoMaterno);
-// $('#sexo').val(data.sexo);
-// $('#direccion').val(data.direccion);
-// $('#email').val(data.email);
-// $('#telefono').val(data.telefono);
-//
-// $('#fechaRegistro').val(data.fechaRegistro);
-//
-// } else if (opcion === 2) {
-//
-// $('#dni_ver').text(data.dni);
-// $('#nombres_ver').text(data.nombres);
-// $('#apellidoPaterno_ver').text(data.apellidoPaterno);
-// $('#apellidoMaterno_ver').text(data.apellidoMaterno);
-//
-// if (data.sexo == 'Hombre') {
-// $('#sexo_ver').text("Masculino");
-// } else if (data.sexo == 'Mujer') {
-// $('#sexo_ver').text("Femenino");
-// }
-//
-// $('#direccion_ver').text(data.direccion);
-// $('#email_ver').text(data.email);
-// $('#telefono_ver').text(data.telefono);
-//
-// $('#fechaRegistro_ver').text(data.fechaRegistro);
-//
-// }
-// }
-// });
-// }
-//
-// function filtrar_comensales() {
-//
-// var apellidoPaterno = $('#filtro_comensal_apellido').val();
-//
-// if (apellidoPaterno != null || apellidoPaterno != '') {
-//
-// location.href = "/comensales/filtrar/" + apellidoPaterno;
-// }
-//
-// }
+ function filtrar_productos() {
+
+	var descripcion = $('#filtro_producto_descripcion').val();
+
+	if (descripcion != null || descripcion != '') {
+
+		location.href = "/productos/filtrar/" + descripcion;
+	}
+
+}
 //
 // function editar_comensal(comensalId) {
 // ocultar_mensajes();
@@ -297,19 +289,19 @@ $(document).ready(function() {
 // return (key >= 48 && key <= 57);
 // }
 //
- function limpiar_form_producto() {
+function limpiar_form_producto() {
 
-// $('#form_producto').data('bootstrapValidator').resetForm();
- $('#idProducto').val('');
- $('#fechaRegistro').val('');
- $('#eliminado').val('');
- $('#form_producto').trigger('reset');
+	$('#form_producto').data('bootstrapValidator').resetForm();
+	$('#idProducto').val('');
+	$('#fechaRegistro').val('');
+	$('#eliminado').val('');
+	$('#form_producto').trigger('reset');
 
- //form_producto_habilitado(true);
+	// form_producto_habilitado(true);
 
- console.log($('#idProducto').val() + '');
+	console.log($('#idProducto').val() + '');
 
- }
+}
 
 function ocultar_modal_producto() {
 
@@ -323,10 +315,10 @@ function mostrar_modal_producto() {
 	});
 }
 
-// function ocultar_mensajes() {
-//
-// $('#panel_mensaje_success_comensal').hide();
-// $('#panel_mensaje_error_comensal').hide();
-// $('#panel_mensaje_warning_comensal').hide();
-// $('#panel_mensaje_info_comensal').hide();
-// }
+function ocultar_mensajes() {
+
+	$('#panel_mensaje_success_producto').hide();
+	$('#panel_mensaje_error_producto').hide();
+	$('#panel_mensaje_warning_producto').hide();
+	$('#panel_mensaje_info_producto').hide();
+}

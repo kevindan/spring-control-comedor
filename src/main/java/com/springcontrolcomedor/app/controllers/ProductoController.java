@@ -11,10 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -111,23 +113,23 @@ public class ProductoController {
 	@RequestMapping(value = "/grabar", method = RequestMethod.POST)
 	public String grabar(@Valid Producto producto, BindingResult result, Model model, RedirectAttributes flash,
 			SessionStatus status) {
-		
-		System.err.println(producto.toString());
-		System.out.println(result.getAllErrors());
-				
+
+//		System.err.println(producto.toString());
+//		System.out.println(result.getAllErrors());
+//				
 		if (result.hasErrors()) {
 
 			Pageable pageRequest = PageRequest.of(0, 5);
 
 			Page<Producto> productos = productoService.findByActivos(pageRequest);
 			List<TipoProducto> tipoProductos = tipoProductoService.findByActivos();
-			
+
 			int numElementos = (int) productos.getTotalElements();
 			String mensajeTabla = "";
 
 			if (numElementos == 0) {
 
-				mensajeTabla = "No se han encontrado coincidencias";
+				mensajeTabla = "No hay productos registrados";
 			}
 
 			PageRender<Producto> pageRender = new PageRender<>("", productos);
@@ -141,16 +143,49 @@ public class ProductoController {
 
 			return "productos";
 		}
-		
 
-		String mensajaeFlash = (producto.getIdProducto() != null) ? "¡Producto editado con éxito!"
+		String mensajeFlash = (producto.getIdProducto() != null) ? "¡Producto editado con éxito!"
 				: "¡Producto grabado con éxito!";
 
 		productoService.save(producto);
-		flash.addFlashAttribute("success", mensajaeFlash);
+		flash.addFlashAttribute("success", mensajeFlash);
 		status.setComplete();
 		return "redirect:/productos";
 
+	}
+
+	@GetMapping(value = "/buscar/{idProducto}", produces = { "application/json" })
+	public @ResponseBody Producto buscarProducto(@PathVariable Long idProducto) {
+		return productoService.findOne(idProducto);
+	}
+	
+	@RequestMapping(value = "/buscarproductodescripcion", method = RequestMethod.POST, produces = { "application/json" })
+	public @ResponseBody String buscarProductoDescripcion(String descripcion) {
+
+		boolean valid = false;
+
+		Producto producto = productoService.findByDescripcion(descripcion);
+
+		if (producto == null) {
+
+			valid = true;
+		}
+
+		System.out.println(descripcion);
+
+		return "{\"valid\":" + valid + "}";
+	}
+	
+	@RequestMapping(value = "/eliminar/{idProducto}")
+	public String eliminar(@PathVariable(value = "idProducto") Long idProducto, RedirectAttributes flash) {
+
+		if (idProducto > 0) {
+
+			productoService.eliminarProducto(idProducto);
+			flash.addFlashAttribute("success", "¡Producto eliminado con éxito!");
+		}
+
+		return "redirect:/productos";
 	}
 
 }

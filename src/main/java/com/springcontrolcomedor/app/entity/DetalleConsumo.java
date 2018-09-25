@@ -28,10 +28,10 @@ public class DetalleConsumo implements Serializable {
 	@Column(name = "cantidad")
 	private Integer cantidad;
 
-	@Column(name = "precio")
+	@Column(name = "precio", columnDefinition="Decimal(10,2) default '0.00'")
 	private Double precio;
 
-	@Column(name = "sub_total")
+	@Column(name = "sub_total", columnDefinition="Decimal(10,2) default '0.00'")
 	private Double subTotal;
 
 	public Long getIdDetalleConsumo() {

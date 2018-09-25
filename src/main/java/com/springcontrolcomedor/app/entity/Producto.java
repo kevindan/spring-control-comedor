@@ -37,10 +37,10 @@ public class Producto implements Serializable {
 	@Column(name = "presentacion")
 	private String presentacion;
 
-	@Column(name = "precio_compra")
+	@Column(name = "precio_compra", columnDefinition="Decimal(10,2) default '0.00'")
 	private Double precioCompra;
 
-	@Column(name = "precio_venta")	
+	@Column(name = "precio_venta", columnDefinition="Decimal(10,2) default '0.00'")
 	private Double precioVenta;
 
 	@Column(name = "stock_minimo")
@@ -49,21 +49,21 @@ public class Producto implements Serializable {
 	@Column(name = "stock_actual")
 	private int stockActual;
 
-	@Temporal(TemporalType.DATE)	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_registro")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaRegistro;
 
 	@Column(name = "eliminado")
 	private int eliminado;
 
 	public Producto() {
-		
+
 		tipoProducto = new TipoProducto();
 		fechaRegistro = new Date();
-		eliminado = 0;		
+		eliminado = 0;
 	}
-	
+
 	public Long getIdProducto() {
 		return idProducto;
 	}
@@ -143,7 +143,7 @@ public class Producto implements Serializable {
 	public void setEliminado(int eliminado) {
 		this.eliminado = eliminado;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Producto [idProducto=" + idProducto + ", descripcion=" + descripcion + ", tipoProducto=" + tipoProducto
@@ -151,7 +151,6 @@ public class Producto implements Serializable {
 				+ ", stockMinimo=" + stockMinimo + ", stockActual=" + stockActual + ", fechaRegistro=" + fechaRegistro
 				+ ", eliminado=" + eliminado + "]";
 	}
-
 
 	private static final long serialVersionUID = 1L;
 

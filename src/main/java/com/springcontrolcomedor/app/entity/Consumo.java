@@ -48,19 +48,19 @@ public class Consumo implements Serializable {
 	@Column(name = "fecha_consumo")
 	private Date fechaConsumo;
 
-	@Column(name = "monto_sin_igv")
+	@Column(name = "monto_sin_igv", columnDefinition="Decimal(10,2) default '0.00'")
 	private Double montoSinIgv;
 
-	@Column(name = "monto_igv")
+	@Column(name = "monto_igv", columnDefinition="Decimal(10,2) default '0.00'")
 	private Double montoIgv;
 
-	@Column(name = "monto_total")
+	@Column(name = "monto_total", columnDefinition="Decimal(10,2) default '0.00'")
 	private Double montoTotal;
 
-	@Column(name = "monto_cancelado")
+	@Column(name = "monto_cancelado", columnDefinition="Decimal(10,2) default '0.00'")
 	private Double montoCancelado;
 
-	@Column(name = "saldo")
+	@Column(name = "saldo", columnDefinition="Decimal(10,2) default '0.00'")
 	private Double saldo;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
