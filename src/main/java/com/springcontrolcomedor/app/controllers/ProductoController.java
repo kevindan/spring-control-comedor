@@ -156,10 +156,12 @@ public class ProductoController {
 
 	@GetMapping(value = "/buscar/{idProducto}", produces = { "application/json" })
 	public @ResponseBody Producto buscarProducto(@PathVariable Long idProducto) {
+		System.out.println(productoService.findOne(idProducto));
 		return productoService.findOne(idProducto);
 	}
-	
-	@RequestMapping(value = "/buscarproductodescripcion", method = RequestMethod.POST, produces = { "application/json" })
+
+	@RequestMapping(value = "/buscarproductodescripcion", method = RequestMethod.POST, produces = {
+			"application/json" })
 	public @ResponseBody String buscarProductoDescripcion(String descripcion) {
 
 		boolean valid = false;
@@ -176,6 +178,17 @@ public class ProductoController {
 		return "{\"valid\":" + valid + "}";
 	}
 	
+	@GetMapping(value = "/listar/{opcion}", produces = { "application/json" })
+	public @ResponseBody List<Producto> listarProductos(@PathVariable int opcion) {
+		
+		if(opcion == 1) {
+			System.out.println(productoService.findByActivos());
+			return productoService.findByActivos();
+		}
+		
+		return productoService.findByActivos();
+	}
+
 	@RequestMapping(value = "/eliminar/{idProducto}")
 	public String eliminar(@PathVariable(value = "idProducto") Long idProducto, RedirectAttributes flash) {
 

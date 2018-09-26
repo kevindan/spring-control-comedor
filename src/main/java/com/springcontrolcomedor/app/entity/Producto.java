@@ -16,6 +16,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "productos")
@@ -32,15 +33,16 @@ public class Producto implements Serializable {
 	// relacionar
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_tipo_producto")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private TipoProducto tipoProducto;
 
 	@Column(name = "presentacion")
 	private String presentacion;
 
-	@Column(name = "precio_compra", columnDefinition="Decimal(10,2) default '0.00'")
+	@Column(name = "precio_compra", columnDefinition = "Decimal(10,2) default '0.00'")
 	private Double precioCompra;
 
-	@Column(name = "precio_venta", columnDefinition="Decimal(10,2) default '0.00'")
+	@Column(name = "precio_venta", columnDefinition = "Decimal(10,2) default '0.00'")
 	private Double precioVenta;
 
 	@Column(name = "stock_minimo")
@@ -48,6 +50,9 @@ public class Producto implements Serializable {
 
 	@Column(name = "stock_actual")
 	private int stockActual;
+
+	@Column(name = "alerta", columnDefinition = "bit default '0'")
+	private int alerta;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_registro")
@@ -144,12 +149,20 @@ public class Producto implements Serializable {
 		this.eliminado = eliminado;
 	}
 
+	public int getAlerta() {
+		return alerta;
+	}
+
+	public void setAlerta(int alerta) {
+		this.alerta = alerta;
+	}
+
 	@Override
 	public String toString() {
 		return "Producto [idProducto=" + idProducto + ", descripcion=" + descripcion + ", tipoProducto=" + tipoProducto
 				+ ", presentacion=" + presentacion + ", precioCompra=" + precioCompra + ", precioVenta=" + precioVenta
-				+ ", stockMinimo=" + stockMinimo + ", stockActual=" + stockActual + ", fechaRegistro=" + fechaRegistro
-				+ ", eliminado=" + eliminado + "]";
+				+ ", stockMinimo=" + stockMinimo + ", stockActual=" + stockActual + ", alerta=" + alerta
+				+ ", fechaRegistro=" + fechaRegistro + ", eliminado=" + eliminado + "]";
 	}
 
 	private static final long serialVersionUID = 1L;

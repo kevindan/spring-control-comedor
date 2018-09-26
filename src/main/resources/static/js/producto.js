@@ -1,17 +1,26 @@
-//Inicializa los elementos de la vista Comensales
 $(document).ready(function() {
 
 	$('li').removeClass("active");
 	$('#menu_registros').addClass("active");
 	$('#menu_productos').addClass("active");
-	
+
 	$('#precioCompra').numeric('.');
 	$('#precioVenta').numeric('.');
 
+	$('#checkAlertaStock').bootstrapToggle({
+		on : 'Si',
+		off : 'No',
+		onstyle : 'success',
+		offstyle : 'default'
+	});
+
+	initializerToggleAll(1);
+
+	valida_formulario();
+
 	$("#boton_nuevo_producto").click(function() {
-		valida_formulario();
+		limpiar_form_producto()
 		ocultar_mensajes();
-		// form_producto_habilitado(true);
 		mostrar_modal_producto();
 
 	});
@@ -21,11 +30,23 @@ $(document).ready(function() {
 		ocultar_modal_producto();
 
 	});
+
+	$('#checkAlertaStock').change(function() {
+		if ($(this).prop('checked')) {
+
+			$('#alertaStock').val(1);
+		} else {
+
+			$('#alertaStock').val(0);
+		}
+		console.log('Valor a enviar : ' + $('#alertaStock').val());
+	});
+
 	//
-	// $("#btn_cancelar_vista_comensal").click(function() {
-	//
-	// $('#modal_vista_comensal').modal('hide');
-	// });
+	$("#btn_cancelar_vista_producto").click(function() {
+
+		$('#modal_vista_producto').modal('hide');
+	});
 	//
 	// // Ejecuta el filtrado al pulsar la tecla ENTER
 	$('#filtro_producto_descripcion').keypress(function(e) {
@@ -37,6 +58,36 @@ $(document).ready(function() {
 	});
 
 });
+
+function initializerToggleAll(opcion) {
+
+	$.ajax({
+
+		url : "/productos/listar/" + opcion,
+		type : 'GET',
+		dataType : "json",
+		data : {
+			opcion : opcion,
+		},
+		success : function(data) {
+
+			for ( var i in data) {
+				console.log(data[i].descripcion);
+
+				$('#checkAlertaStock_ext_' + data[i].idProducto)
+						.bootstrapToggle({
+							on : 'Si',
+							off : 'No',
+							onstyle : 'success',
+							offstyle : 'default'
+						});
+
+			}
+
+		}
+	});
+
+}
 
 // Funcion que inicializa la validacion de los campos del formulario
 function valida_formulario() {
@@ -93,110 +144,70 @@ function valida_formulario() {
 
 }
 
-// function valida_formularioActualizar() {
-//
-// $('#form_comensal').bootstrapValidator({
-// feedbackIcons : {
-//
-// valid : 'glyphicon glyphicon-ok',
-// invalid : 'glyphicon glyphicon-remove',
-// validating : 'glyphicon glyphicon-refresh'
-// },
-// fields : {
-// dni : {
-// validators : {
-// stringLength : {
-// min : 8,
-// max : 8,
-// message : 'Debe ingresar los 8 dígitos'
-// },
-// notEmpty : {
-// message : 'El DNI es requerido'
-// }
-// }
-// },
-// nombres : {
-// validators : {
-// notEmpty : {
-// message : 'El nombre es requerido'
-// }
-// }
-// },
-// apellidoPaterno : {
-// validators : {
-// notEmpty : {
-// message : 'El apellido paterno es requerido'
-// }
-// }
-// },
-// email : {
-// validators : {
-// emailAddress : {
-// message : 'Escriba un email válido'
-// },
-// notEmpty : {
-// message : 'El email es requerido'
-// }
-// }
-// }
-// }
-// });
-//
-// }
-
- function buscar_producto(comensalId, opcion) {
+function buscar_producto(productoId, opcion) {
 
 	$.ajax({
 
-		url : "/productos/buscar/" + comensalId,
+		url : "/productos/buscar/" + productoId,
 		type : 'GET',
 		dataType : "json",
 		data : {
-			comensalId : comensalId,
+			productoId : productoId,
 		},
 		success : function(data) {
 
+			console.log(data);
+
 			if (opcion === 1) {
 
-				$('#idComensal').val(data.idComensal);
+				$('#idProducto').val(data.idProducto);
 				$('#eliminado').val(data.eliminado);
 
-				$('#dni').val(data.dni);
-				$('#nombres').val(data.nombres);
-				$('#apellidoPaterno').val(data.apellidoPaterno);
-				$('#apellidoMaterno').val(data.apellidoMaterno);
-				$('#sexo').val(data.sexo);
-				$('#direccion').val(data.direccion);
-				$('#email').val(data.email);
-				$('#telefono').val(data.telefono);
+				$('#descripcion').val(data.descripcion);
+				$('#tipoProducto').val(data.tipoProducto.idTipoProducto);
+				$('#presentacion').val(data.presentacion);
+				$('#precioCompra').val(data.precioCompra);
+				$('#precioVenta').val(data.precioVenta);
+				$('#stockMinimo').val(data.stockMinimo);
+				$('#stockActual').val(data.stockActual);
+
+				if (data.alerta === 1) {
+
+					$('#checkAlertaStock').bootstrapToggle('on');
+
+				} else if (data.alerta === 0) {
+
+					$('#checkAlertaStock').bootstrapToggle('off');
+				}
 
 				$('#fechaRegistro').val(data.fechaRegistro);
 
 			} else if (opcion === 2) {
 
-				$('#dni_ver').text(data.dni);
-				$('#nombres_ver').text(data.nombres);
-				$('#apellidoPaterno_ver').text(data.apellidoPaterno);
-				$('#apellidoMaterno_ver').text(data.apellidoMaterno);
+				$('#descripcion_ver').text(data.descripcion);
+				$('#tipoProducto_ver').text(data.tipoProducto.idTipoProducto);
+				$('#presentacion_ver').text(data.presentacion);
+				$('#precioCompra_ver').text('S/. ' + data.precioCompra);
+				$('#precioVenta_ver').text('S/. ' + data.precioVenta);
+				$('#stockMinimo_ver').text(data.stockMinimo);
+				$('#stockActual_ver').text(data.stockActual);
 
-				if (data.sexo == 'Hombre') {
-					$('#sexo_ver').text("Masculino");
-				} else if (data.sexo == 'Mujer') {
-					$('#sexo_ver').text("Femenino");
+				if (data.alerta === 1) {
+
+					$('#alerta_ver').text('Si');
+
+				} else if (data.alerta === 0) {
+
+					$('#alerta_ver').text('No');
 				}
 
-				$('#direccion_ver').text(data.direccion);
-				$('#email_ver').text(data.email);
-				$('#telefono_ver').text(data.telefono);
-
 				$('#fechaRegistro_ver').text(data.fechaRegistro);
-
 			}
 		}
 	});
 }
-//
- function filtrar_productos() {
+
+function filtrar_productos() {
 
 	var descripcion = $('#filtro_producto_descripcion').val();
 
@@ -206,89 +217,50 @@ function valida_formulario() {
 	}
 
 }
-//
-// function editar_comensal(comensalId) {
-// ocultar_mensajes();
-// buscar_comensal(comensalId, 1);
-// valida_formularioActualizar();
-// form_comensal_habilitado(true);
-// $('#dni').attr('readonly', true)
-// $('#email').attr('readonly', true)
-// mostrar_modal_comensal();
-//
-// }
-//
-// function ver_comensal(comensalId) {
-// ocultar_mensajes();
-// buscar_comensal(comensalId, 2);
-// $('#modal_vista_comensal').modal();
-// }
-//
-// function eliminar_comensal(idComensal) {
-// ocultar_mensajes();
-// $('#texto_eliminar_comensal').html('¿Seguro de eliminar al comensal?');
-// $('#modal_confirma_eliminar_comensal').modal({
-// keyboard : false
-// });
-//
-// var modalConfirm = function(callback) {
-//
-// $('#btn_confirma_eliminar_comensal').on("click", function() {
-// callback(true);
-// $('#modal_confirma_eliminar_comensal').modal('hide');
-// });
-//
-// $('#btn_cancela_eliminar_comensal').on("click", function() {
-// callback(false);
-// $('#modal_confirma_eliminar_comensal').modal('hide');
-// });
-// }
-//
-// modalConfirm(function(confirm) {
-//
-// if (confirm) {
-//
-// location.href = '/comensales/eliminar/' + idComensal;
-// }
-// });
-//
-// }
-//
-// function form_comensal_habilitado(condicion) {
-//
-// var condicion_inversa = "";
-//
-// if (condicion == true) {
-//
-// condicion_inversa = false;
-//
-// } else if (condicion == false) {
-//
-// condicion_inversa = true;
-//
-// }
-//
-// $('#dni').attr('readonly', condicion_inversa);
-// $('#nombres').attr('readonly', condicion_inversa);
-// $('#apellidoPaterno').attr('readonly', condicion_inversa);
-// $('#apellidoMaterno').attr('readonly', condicion_inversa);
-// $('#sexo').attr('readonly', condicion_inversa);
-// $('#direccion').attr('readonly', condicion_inversa);
-// $('#email').attr('readonly', condicion_inversa);
-// $('#telefono').attr('readonly', condicion_inversa);
-//
-// // $('#btn_grabar_comensal').attr('disabled', condicion_inversa);
-//
-// }
-//
-// // Función que permite ingresar solo números en un input
-// function valida_numeros(e) {
-//
-// key = window.Event ? e.keyCode : e.which;
-//
-// return (key >= 48 && key <= 57);
-// }
-//
+
+function editar_producto(productoId) {
+	console.log(productoId);
+	ocultar_mensajes();
+	buscar_producto(productoId, 1);
+	mostrar_modal_producto();
+
+}
+
+function ver_producto(productoId) {
+	ocultar_mensajes();
+	buscar_producto(productoId, 2);
+	$('#modal_vista_producto').modal();
+}
+
+function eliminar_producto(idProducto) {
+	ocultar_mensajes();
+	$('#texto_eliminar_producto').html('¿Seguro de eliminar el producto?');
+	$('#modal_confirma_eliminar_producto').modal({
+		keyboard : false
+	});
+
+	var modalConfirm = function(callback) {
+
+		$('#btn_confirma_eliminar_producto').on("click", function() {
+			callback(true);
+			$('#modal_confirma_eliminar_producto').modal('hide');
+		});
+
+		$('#btn_cancela_eliminar_producto').on("click", function() {
+			callback(false);
+			$('#modal_confirma_eliminar_producto').modal('hide');
+		});
+	}
+
+	modalConfirm(function(confirm) {
+
+		if (confirm) {
+
+			location.href = '/productos/eliminar/' + idProducto;
+		}
+	});
+}
+
 function limpiar_form_producto() {
 
 	$('#form_producto').data('bootstrapValidator').resetForm();
@@ -296,8 +268,7 @@ function limpiar_form_producto() {
 	$('#fechaRegistro').val('');
 	$('#eliminado').val('');
 	$('#form_producto').trigger('reset');
-
-	// form_producto_habilitado(true);
+	$('#checkAlertaStock').bootstrapToggle('off');
 
 	console.log($('#idProducto').val() + '');
 

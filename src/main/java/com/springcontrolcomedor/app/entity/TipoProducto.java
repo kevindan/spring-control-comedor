@@ -60,9 +60,6 @@ public class TipoProducto implements Serializable {
 				+ eliminado + "]";
 	}
 
-
-
-
 	private static final long serialVersionUID = 1L;
 
 }

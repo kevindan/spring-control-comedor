@@ -163,10 +163,11 @@ CREATE TABLE `productos` (
   `stock_actual` int(11) DEFAULT NULL,
   `stock_minimo` int(11) DEFAULT NULL,
   `id_tipo_producto` bigint(20) DEFAULT NULL,
+  `alerta` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id_producto`),
   KEY `FKojclx01cd3urfm3ac7l3aafud` (`id_tipo_producto`),
   CONSTRAINT `FKojclx01cd3urfm3ac7l3aafud` FOREIGN KEY (`id_tipo_producto`) REFERENCES `tipo_producto` (`id_tipo_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +176,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Coca Cola personal de 500 ml',0,'2018-09-25',1.80,2.50,'Envase no retornable de 500 ml',15,5,4),(2,'Guaraná Backus personal de 500 ml',0,'2018-09-25',1.50,2.00,'Envase no retornable de 500 ml',10,5,4),(3,'Chicha Morada',0,'2018-09-25',0.00,1.50,'Vaso mediano de 200 ml',10,1,4),(4,'Desayuno',0,'2018-09-25',0.00,8.00,'Desayuno completo: Entrada, segundo y postre',40,5,1),(5,'Almuerzo',0,'2018-09-25',0.00,8.00,'Almuerzo Completo: Entrada, segundo y postre',50,5,1),(6,'Cena',0,'2018-09-25',0.00,8.00,'Cena completa: Entrada, segundo y postre',35,5,1),(7,'Papas fritas',0,'2018-09-25',0.00,4.50,'Plato de porción mediana',6,2,2),(8,'Arroz cocido',0,'2018-09-25',0.00,3.00,'Plato de porción pequeña',6,1,2),(9,'Huevo frito',0,'2018-09-25',0.00,1.50,'Unidad',10,3,2),(10,'Empanada de Pollo',0,'2018-09-25',2.00,3.50,'Unidad de tamaño mediano',9,2,3),(11,'Sandwich Triple de pollo, durazno y jamón',0,'2018-09-25',2.30,3.00,'Unidad de tamaño grande',8,3,3),(12,'Ensalada César',0,'2018-09-25',0.00,3.50,'Bowl de tamaño pequeño',7,2,3),(13,'Sandwich de pollo a la brasa',0,'2018-09-25',2.50,3.50,'Unidad de tamaño mediano',8,2,3),(14,'Chifles piuranos',0,'2018-09-25',1.00,1.50,'Bolsa de 120 gr',9,2,5),(15,'Doritos',0,'2018-09-25',1.00,1.50,'Bolsa de 85 gr',10,2,5),(16,'Chicharrón de soya',0,'2018-09-25',1.00,1.50,'Bolsa de 90 gr',15,3,5),(17,'Pie de limón',0,'2018-09-25',0.00,4.00,'Unidad de 250 gr',5,2,6),(18,'Chesse cake de maracuyá',0,'2018-09-25',2.00,3.50,'Unidad de 250 gr',8,2,6),(19,'Mazamorra morada',0,'2018-09-25',1.50,2.50,'Vaso de 200 ml',7,2,6),(20,'Leche asada',0,'2018-09-25',2.00,3.50,'Pirex de 250 gr',6,2,6);
+INSERT INTO `productos` VALUES (1,'Coca Cola personal de 500 ml',0,'2018-09-25',1.80,2.50,'Envase no retornable de 500 ml',15,5,4,_binary ''),(2,'Guaraná Backus personal de 500 ml',0,'2018-09-25',1.50,2.00,'Envase no retornable de 500 ml',10,5,4,_binary ''),(3,'Chicha Morada',0,'2018-09-25',0.00,1.50,'Vaso mediano de 200 ml',10,1,4,_binary ''),(4,'Desayuno',0,'2018-09-25',0.00,8.00,'Desayuno completo: Entrada, segundo y postre',40,5,1,_binary '\0'),(5,'Almuerzo',0,'2018-09-25',0.00,8.00,'Almuerzo Completo: Entrada, segundo y postre',50,5,1,_binary '\0'),(6,'Cena',0,'2018-09-25',0.00,8.00,'Cena completa: Entrada, segundo y postre',35,5,1,_binary '\0'),(7,'Papas fritas',0,'2018-09-25',0.00,4.50,'Plato de porción mediana',6,2,2,_binary '\0'),(8,'Arroz cocido',0,'2018-09-25',0.00,3.00,'Plato de porción pequeña',6,1,2,_binary '\0'),(9,'Huevo frito',0,'2018-09-25',0.00,1.50,'Unidad',10,3,2,_binary '\0'),(10,'Empanada de Pollo',0,'2018-09-25',2.00,3.50,'Unidad de tamaño mediano',9,2,3,_binary ''),(11,'Sandwich Triple de pollo, durazno y jamón',0,'2018-09-25',2.30,3.00,'Unidad de tamaño grande',8,3,3,_binary ''),(12,'Ensalada César',0,'2018-09-25',0.00,3.50,'Bowl de tamaño pequeño',7,2,3,_binary '\0'),(13,'Sandwich de pollo a la brasa',0,'2018-09-25',2.50,3.50,'Unidad de tamaño mediano',8,2,3,_binary ''),(14,'Chifles piuranos',0,'2018-09-25',1.00,1.50,'Bolsa de 120 gr',9,2,5,_binary ''),(15,'Doritos',0,'2018-09-25',1.00,1.50,'Bolsa de 85 gr',10,2,5,_binary ''),(16,'Chicharrón de soya',0,'2018-09-25',1.00,1.50,'Bolsa de 90 gr',15,3,5,_binary ''),(17,'Pie de limón',0,'2018-09-25',0.00,4.00,'Unidad de 250 gr',5,2,6,_binary ''),(18,'Chesse cake de maracuyá',0,'2018-09-25',2.00,3.50,'Unidad de 250 gr',8,2,6,_binary ''),(19,'Mazamorra morada',0,'2018-09-25',1.50,2.50,'Vaso de 200 ml',7,2,6,_binary ''),(20,'Leche asada',0,'2018-09-25',2.00,3.50,'Pirex de 250 gr',6,2,6,_binary ''),(21,'Mote Frito picante',1,'2018-09-26',1.00,1.50,'Bolsa de 150 gr',15,1,5,_binary '');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,4 +274,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-25 17:59:17
+-- Dump completed on 2018-09-26 18:17:06
