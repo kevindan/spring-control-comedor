@@ -155,8 +155,7 @@ public class ProductoController {
 	}
 
 	@GetMapping(value = "/buscar/{idProducto}", produces = { "application/json" })
-	public @ResponseBody Producto buscarProducto(@PathVariable Long idProducto) {
-		System.out.println(productoService.findOne(idProducto));
+	public @ResponseBody Producto buscarProducto(@PathVariable Long idProducto) {		
 		return productoService.findOne(idProducto);
 	}
 
@@ -173,20 +172,31 @@ public class ProductoController {
 			valid = true;
 		}
 
-		System.out.println(descripcion);
-
 		return "{\"valid\":" + valid + "}";
 	}
-	
-	@GetMapping(value = "/listar/{opcion}", produces = { "application/json" })
-	public @ResponseBody List<Producto> listarProductos(@PathVariable int opcion) {
-		
-		if(opcion == 1) {
-			System.out.println(productoService.findByActivos());
-			return productoService.findByActivos();
-		}
-		
+
+	@GetMapping(value = "/listar", produces = { "application/json" })
+	public @ResponseBody List<Producto> listarProductos() {
+
 		return productoService.findByActivos();
+	}
+
+	@GetMapping(value = "/actualizaalerta/{idProducto}/{alerta}", produces = { "application/json" })
+	public @ResponseBody int actualizaAlerta(@PathVariable Long idProducto, @PathVariable int alerta) {
+		System.out.println("cod: " + idProducto + " Alerta : " + alerta);
+
+		int estado = 0;
+		Producto producto = productoService.findOne(idProducto);
+
+		if (producto == null) {
+			System.out.println(estado);
+		} else {
+			productoService.actualizaAlerta(alerta, idProducto);
+			estado = 1;
+			System.out.println(estado);
+
+		}
+		return estado;
 	}
 
 	@RequestMapping(value = "/eliminar/{idProducto}")

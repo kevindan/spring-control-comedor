@@ -56,6 +56,13 @@ public class IProductoServiceImpl implements IProductoService {
 	public void eliminarProducto(Long idProducto) {
 		productoDao.eliminaProducto(1, idProducto);
 	}
+	
+	@Override
+	@Transactional
+	public void actualizaAlerta(int alerta, Long idProducto) {
+		productoDao.actualizaAlerta(alerta, idProducto);
+		
+	}	
 
 	@Override
 	@Transactional(readOnly = true)

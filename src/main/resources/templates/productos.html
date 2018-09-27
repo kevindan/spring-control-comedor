@@ -84,7 +84,7 @@
 	                                               </ul>
 	                                            </div>											
 											</td>
-											<td class="text-center"><input type="checkbox" data-goggle="toggle" th:id="'checkAlertaStock_ext_'+${producto.idProducto}"/></td>																						
+											<td class="text-center"><input type="checkbox" data-goggle="toggle" th:id="'checkAlertaStock_ext_'+${producto.idProducto}" th:onchange="'actualizar_alerta('+${producto.idProducto}+')'"/></td>																						
 											<td class="text-left"><i class="fa fa-ship"></i>&nbsp;&nbsp;<span th:text="${producto.descripcion}"></span></td>
 											<td class="text-left"><span th:text="${producto.tipoProducto.descripcion}"></span></td>
 											<td class="text-left"><span th:text="${producto.presentacion}"></span></td>

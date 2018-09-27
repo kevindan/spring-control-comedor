@@ -7,15 +7,15 @@ $(document).ready(function() {
 	$('#precioCompra').numeric('.');
 	$('#precioVenta').numeric('.');
 
+	initializerToggleAll();
+	
 	$('#checkAlertaStock').bootstrapToggle({
 		on : 'Si',
 		off : 'No',
 		onstyle : 'success',
 		offstyle : 'default'
 	});
-
-	initializerToggleAll(1);
-
+	
 	valida_formulario();
 
 	$("#boton_nuevo_producto").click(function() {
@@ -39,7 +39,6 @@ $(document).ready(function() {
 
 			$('#alertaStock').val(0);
 		}
-		console.log('Valor a enviar : ' + $('#alertaStock').val());
 	});
 
 	//
@@ -59,20 +58,16 @@ $(document).ready(function() {
 
 });
 
-function initializerToggleAll(opcion) {
+function initializerToggleAll() {
 
 	$.ajax({
 
-		url : "/productos/listar/" + opcion,
+		url : "/productos/listar",
 		type : 'GET',
 		dataType : "json",
-		data : {
-			opcion : opcion,
-		},
 		success : function(data) {
 
-			for ( var i in data) {
-				console.log(data[i].descripcion);
+			for (var i in data) {
 
 				$('#checkAlertaStock_ext_' + data[i].idProducto)
 						.bootstrapToggle({
@@ -82,6 +77,8 @@ function initializerToggleAll(opcion) {
 							offstyle : 'default'
 						});
 
+				consulta_alerta_producto(data[i].idProducto,
+						'#checkAlertaStock_ext_' + data[i].idProducto);
 			}
 
 		}
@@ -89,7 +86,73 @@ function initializerToggleAll(opcion) {
 
 }
 
-// Funcion que inicializa la validacion de los campos del formulario
+function consulta_alerta_producto(productoId, control) {
+
+	$.ajax({
+
+		url : "/productos/buscar/" + productoId,
+		type : 'GET',
+		dataType : "json",
+		data : {
+			productoId : productoId,
+		},
+		success : function(data) {
+
+			if (data.alerta === 1) {
+
+				$(control).bootstrapToggle('on');
+
+			} else if (data.alerta === 0) {
+
+				$(control).bootstrapToggle('off');
+			}
+		}
+	});
+}
+
+function actualizar_alerta(idProducto) {
+	
+	console.log(idProducto);
+	/*
+		if ($('#checkAlertaStock_ext_' + idProducto).prop('checked')) {
+
+			grabar_estado_alerta(idProducto, 1);
+			console.log('Id : ' + idProducto + ', valor nuevo :', 1);
+
+		} else {
+
+			grabar_estado_alerta(idProducto, 0);
+			console.log('Id : ' + idProducto + ', valor nuevo :', 1);
+		}
+
+*/
+}
+
+function grabar_estado_alerta(productoId, alerta) {
+
+	$.ajax({
+
+		url : "/productos/actualizaalerta/" + productoId + "/" + alerta + "",
+		type : 'GET',
+		dataType : "json",
+		data : {
+			idProducto : productoId,
+			alerta : alerta
+		},
+		success : function(result) {
+
+			if (result === 1) {
+
+				console.log('Ok');
+
+			} else if (result === 0) {
+
+				console.log('Error');
+			}
+		}
+	});
+}
+
 function valida_formulario() {
 
 	$('#form_producto').bootstrapValidator({
