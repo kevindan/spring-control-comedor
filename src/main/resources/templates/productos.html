@@ -59,22 +59,23 @@
 									<caption th:text="'Cantidad de productos encontrados : '+ ${numeroElementos}"></caption>
 									<thead>
 										<tr class="bg-warning">
-											<th class="text-center">Acciones</th>
-											<th class="text-center">Alerta Stock</th>											
+											<th class="text-center">Acciones</th>																						
 											<th class="text-center">Descripción</th>											
-											<th class="text-center">Tipo Producto</th>
+											<th class="text-center">Tipo</th>
 											<th class="text-center">Presentación</th>
 											<th class="text-center">P. Compra</th>
 											<th class="text-center">P. Venta</th>
 											<th class="text-center">Stock Min.</th>
-											<th class="text-center">Stock Act.</th>
+											<th class="text-center">Stock Act.</th>	
+											<th class="text-center">Alerta</th>
+											<th class="text-center">Stock</th>	
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:each="producto : ${productos}">
 											<td class="text-center">
 												<div class="btn-group">
-	                                               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+	                                               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 	                                               		<i class="fa fa-cogs margin-r-5"></i>&nbsp;&nbsp;<span class="caret"></span>
 	                                               </button>
 	                                               <ul class="dropdown-menu">
@@ -83,10 +84,6 @@
 	                                                  	<li><a id="eliminar_producto" th:onclick="'eliminar_producto('+${producto.idProducto}+')'"><i class="fa fa-trash margin-r-5"></i>Eliminar</a></li>
 	                                               </ul>
 	                                            </div>											
-											</td>
-											<td class="text-center">
-												<input type="checkbox" th:if="${producto.alerta == 1}" checked data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="success" th:id="'checkAlertaStock_ext_'+${producto.idProducto}" th:onchange="'actualizar_alerta('+${producto.idProducto}+')'"/>
-												<input type="checkbox" th:if="${producto.alerta == 0}" data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="success" th:id="'checkAlertaStock_ext_'+${producto.idProducto}" th:onchange="'actualizar_alerta('+${producto.idProducto}+')'"/>
 											</td>																						
 											<td class="text-left"><i class="fa fa-ship"></i>&nbsp;&nbsp;<span th:text="${producto.descripcion}"></span></td>
 											<td class="text-left"><span th:text="${producto.tipoProducto.descripcion}"></span></td>
@@ -94,7 +91,14 @@
 											<td class="text-left">S/. <span th:text="${producto.precioCompra}"></span></td>
 											<td class="text-left">S/. <span th:text="${producto.precioVenta}"></span></td>
 											<td class="text-center"><span  th:text="${producto.stockMinimo}"></span></td>
-											<td class="text-center"><span  th:text="${producto.stockActual}"></span></td>											
+											<td class="text-center"><span  th:text="${producto.stockActual}"></span></td>
+											<td class="text-center">
+												<input type="checkbox" th:if="${producto.alerta == 1}" checked data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="success" th:id="'checkAlertaStock_ext_'+${producto.idProducto}" th:onchange="'actualizar_alerta('+${producto.idProducto}+')'"/>
+												<input type="checkbox" th:if="${producto.alerta == 0}" data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="success" th:id="'checkAlertaStock_ext_'+${producto.idProducto}" th:onchange="'actualizar_alerta('+${producto.idProducto}+')'"/>
+											</td>
+											<td class="text-center">
+												<button type="button" th:if="${producto.alerta == 1}" th:class="${producto.stockActual <= producto.stockMinimo}? 'btn btn-danger' : 'btn btn-default'" th:text="${producto.stockActual <= producto.stockMinimo}? 'Urgente' : 'Agregar'" th:id="'boton_stock_'+${producto.idProducto}"></button>												
+											</td>											
 										</tr>
 										<tr>
 											<td class="info text-center" colspan="8" th:if="${numeroElementos == 0}" th:text="${mensajeTabla}"></td>
@@ -102,20 +106,20 @@
 									</tbody>
 									<tfoot>
 										<tr style="background-color: gray; color: white;">
-											<th class="text-center">Acciones</th>
-											<th class="text-center">Alerta Stock</th>											
-											<th class="text-left">Descripción</th>											
-											<th class="text-left">Tipo Producto</th>
-											<th class="text-left">Presentación</th>
-											<th class="text-left">P. Compra</th>
-											<th class="text-left">P. Venta</th>
+											<th class="text-center">Acciones</th>																					
+											<th class="text-center">Descripción</th>											
+											<th class="text-center">Tipo</th>
+											<th class="text-center">Presentación</th>
+											<th class="text-center">P. Compra</th>
+											<th class="text-center">P. Venta</th>
 											<th class="text-center">Stock Min.</th>
 											<th class="text-center">Stock Act.</th>
+											<th class="text-center">Alerta</th>
+											<th class="text-center">Stock</th>												
 										</tr>																				
 									</tfoot>																		
 								</table>								
-							</div>
-							
+							</div>							
 							<div class="box-footer clearfix">
 				                <div class="row">
 				                	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
