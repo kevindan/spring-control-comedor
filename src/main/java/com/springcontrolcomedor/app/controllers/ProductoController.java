@@ -114,9 +114,6 @@ public class ProductoController {
 	public String grabar(@Valid Producto producto, BindingResult result, Model model, RedirectAttributes flash,
 			SessionStatus status) {
 
-//		System.err.println(producto.toString());
-//		System.out.println(result.getAllErrors());
-//				
 		if (result.hasErrors()) {
 
 			Pageable pageRequest = PageRequest.of(0, 5);
@@ -155,7 +152,7 @@ public class ProductoController {
 	}
 
 	@GetMapping(value = "/buscar/{idProducto}", produces = { "application/json" })
-	public @ResponseBody Producto buscarProducto(@PathVariable Long idProducto) {		
+	public @ResponseBody Producto buscarProducto(@PathVariable Long idProducto) {
 		return productoService.findOne(idProducto);
 	}
 
@@ -183,7 +180,6 @@ public class ProductoController {
 
 	@GetMapping(value = "/actualizaalerta/{idProducto}/{alerta}", produces = { "application/json" })
 	public @ResponseBody int actualizaAlerta(@PathVariable Long idProducto, @PathVariable int alerta) {
-		System.out.println("cod: " + idProducto + " Alerta : " + alerta);
 
 		int estado = 0;
 		Producto producto = productoService.findOne(idProducto);
@@ -193,7 +189,6 @@ public class ProductoController {
 		} else {
 			productoService.actualizaAlerta(alerta, idProducto);
 			estado = 1;
-			System.out.println(estado);
 
 		}
 		return estado;
