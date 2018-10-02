@@ -32,4 +32,7 @@ public interface IProductoDao extends PagingAndSortingRepository<Producto, Long>
 	@Query("update Producto p set p.alerta = ?1 where p.idProducto = ?2")
 	public void actualizaAlerta(int alerta, Long idProducto);
 
+	@Modifying
+	@Query("update Producto p set p.stockActual = ?1 where p.idProducto = ?2")
+	public void actualizaStock(int stockActual, Long idProducto);
 }

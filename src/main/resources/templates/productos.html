@@ -58,7 +58,7 @@
 								<table class="table table-bordered" id="lista_productos">
 									<caption th:text="'Cantidad de productos encontrados : '+ ${numeroElementos}"></caption>
 									<thead>
-										<tr class="bg-warning">
+										<tr class="bg-orange">
 											<th class="text-center">Acciones</th>																						
 											<th class="text-center">Descripción</th>											
 											<th class="text-center">Tipo</th>
@@ -72,7 +72,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="producto : ${productos}">
+										<tr th:each="producto : ${productos}" class="active" th:class="${producto.stockActual <= producto.stockMinimo}? 'bg-danger'">
 											<td class="text-center">
 												<div class="btn-group">
 	                                               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -97,7 +97,8 @@
 												<input type="checkbox" th:if="${producto.alerta == 0}" data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="success" th:id="'checkAlertaStock_ext_'+${producto.idProducto}" th:onchange="'actualizar_alerta('+${producto.idProducto}+')'"/>
 											</td>
 											<td class="text-center">
-												<button type="button" th:if="${producto.alerta == 1}" th:class="${producto.stockActual <= producto.stockMinimo}? 'btn btn-danger' : 'btn btn-default'" th:text="${producto.stockActual <= producto.stockMinimo}? 'Urgente' : 'Agregar'" th:id="'boton_stock_'+${producto.idProducto}"></button>												
+												<button type="button" th:if="${producto.alerta == 1}" th:class="${producto.stockActual <= producto.stockMinimo}? 'btn btn-danger' : 'btn btn-default'" th:text="${producto.stockActual <= producto.stockMinimo}? 'Urgente' : 'Agregar'" th:id="'boton_stock_'+${producto.idProducto}" th:onclick="'mostrar_modal_actualizar_stock_producto('+${producto.idProducto}+')'"></button>												
+												<button type="button" th:if="${producto.alerta == 0}" style="display: none;" th:class="${producto.stockActual <= producto.stockMinimo}? 'btn btn-danger' : 'btn btn-default'" th:text="${producto.stockActual <= producto.stockMinimo}? 'Urgente' : 'Agregar'" th:id="'boton_stock_'+${producto.idProducto}" th:onclick="'mostrar_modal_actualizar_stock_producto('+${producto.idProducto}+')'"></button>
 											</td>											
 										</tr>
 										<tr>
@@ -162,6 +163,15 @@
 								            			</div>								            			
 								            		</div>
 								            	</div>
+								            	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						                			<div class="form-group">			                			
+						                  				<label class="control-label" for="presentacion">Presentación</label>
+						                  				<div class="input-group">
+						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
+						                  					<input type="text" th:field="*{presentacion}" class="form-control" id="presentacion" name="presentacion" placeholder="Ingrese una presentacion" autocomplete="off"/>			                					
+						                				</div>						                				
+						                			</div>
+						                		</div>
 								            	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 													<div class="form-group">                				                			
 					                					<label for="tipoProducto">Tipo producto</label>
@@ -173,18 +183,18 @@
 					                        			</div>
 					                        		</div>
 						                		</div>
-						                		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						                			<div class="form-group">			                			
-						                  				<label class="control-label" for="presentacion">Presentación</label>
-						                  				<div class="input-group">
-						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
-						                  					<input type="text" th:field="*{presentacion}" class="form-control" id="presentacion" name="presentacion" placeholder="Ingrese una presentacion" autocomplete="off"/>			                					
-						                				</div>						                				
-						                			</div>
-						                		</div>						                		
+						                		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					                				<div class="form-group">
+					                					<label>Requiere alerta stock</label>
+					                					<div class="input-group">
+						                					<input type="checkbox" data-goggle="toggle" id="checkAlertaStock"/>
+						                					<input type="hidden" id="alertaStock" th:field="*{alerta}" name="alerta" value="0"/>
+					                					</div>
+					                				</div>
+					                			</div>						                								                		
 					            			</div>
 					            			<div class="row">
-						                		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+						                		<div id="col_precioCompra" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 						                			<div class="form-group">
 						                  				<label for="precioCompra">P. compra</label>
 						                  				<div class="input-group">
@@ -193,7 +203,7 @@
 						                				</div>
 						                			</div>
 						                		</div>
-						                		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+						                		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 				                					<div class="form-group">
 						                  				<label for="precioVenta">P. venta</label>
 						                  				<div class="input-group">
@@ -202,7 +212,7 @@
 						                				</div>
 						                			</div>	                                            				
 				                				</div>
-				                				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+				                				<div id="col_stockMinimo" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 				                					<div class="form-group">
 			               								<label for="stockMinimo">Stock mínimo</label>
 			               								<div class="input-group">
@@ -211,7 +221,7 @@
 			               								</div>
 			               							</div>		
 				                				</div>	                				
-				                				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+				                				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 				                					<div class="form-group">
 			               								<label for="stockActual">Stock actual</label>
 			               								<div class="input-group">
@@ -219,16 +229,7 @@
 			               									<input type="number" min="0" th:field="*{stockActual}" class="form-control" id="stockActual" name="stockActual" placeholder="0" autocomplete="off"/>
 			               								</div>
 			               							</div>
-				                				</div>
-				                				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					                				<div class="form-group">
-					                					<label>Requiere alerta stock</label>
-					                					<div class="input-group">
-						                					<input type="checkbox" data-goggle="toggle" id="checkAlertaStock"/>
-						                					<input type="hidden" id="alertaStock" th:field="*{alerta}" name="alerta" value="0"/>
-					                					</div>
-					                				</div>
-					                			</div>			                			
+				                				</div>				                							                			
 											</div>											
 					            		</div>					            						            		
 					            	</div>	            
@@ -332,6 +333,37 @@
 	</div>
 </div>
 <!-- FIN MODAL VISTA DE DATOS PRODUCTO  -->
+
+<!-- MODAL ACTUALIZAR STOCK -->
+<div class="modal fade" id="modal_actualizar_stock_producto" data-backdrop="static">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header bg-orange">
+				<h4 class="modal-title">Información de stock actual</h4>
+			</div>
+			<div class="modal-body">				
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					    	<div class="form-group">
+				            	<label for="stockActual">Stock actual</label>
+				               	<div class="input-group">
+				               		<span class="input-group-addon"><i class="fa fa-th"></i></span>			               								
+				               		<input type="number" min="0" class="form-control input-lg text-center text-bold" id="stockActual_actualizar" name="stockActual_actualizar" placeholder="0" autocomplete="off"/>
+				               		<!-- <input type="hidden" id="idProducto_"/> -->
+				               	</div>			               	
+				            </div>
+				            <div class="form-group">
+				            	<button type="submit" class="btn btn-success btn-block" id="btn_actualizar_stock_producto" name="btn_actualizar_stock_producto" th:onclic="'actualizar_stock_producto()'">Actualizar</button>
+								<button type="button" class="btn btn-default btn-block" id="btn_cancelar_stock_producto" name="btn_cancelar_stock_producto">Cancelar</button>
+				            </div>				    	
+					</div>			
+				</div>					
+			</div>									
+		</div>		
+	</div>
+</div>
+<!--FIN MODAL ACTUALIZAR STOCK -->
+
 <script th:src="@{/js/producto.js}" ></script>
 
 </body>

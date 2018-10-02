@@ -1,52 +1,36 @@
-function initializerToggleAll() {
+//function initializerToggleAll() {
+//
+//	$.ajax({
+//
+//		url : "/productos/listar",
+//		type : 'GET',
+//		dataType : "json",
+//		success : function(data) {
+//
+//			for ( var i in data) {
+//
+//				$('#checkAlertaStock_ext_' + data[i].idProducto)
+//						.bootstrapToggle({
+//							on : 'Si',
+//							off : 'No',
+//							onstyle : 'success',
+//							offstyle : 'default'
+//						});
+//
+//				consulta_alerta_producto(data[i].idProducto,
+//						'#checkAlertaStock_ext_' + data[i].idProducto);
+//			}
+//
+//		}
+//	});
+//
+//}
 
-	$.ajax({
-
-		url : "/productos/listar",
-		type : 'GET',
-		dataType : "json",
-		success : function(data) {
-
-			for ( var i in data) {
-
-				$('#checkAlertaStock_ext_' + data[i].idProducto)
-						.bootstrapToggle({
-							on : 'Si',
-							off : 'No',
-							onstyle : 'success',
-							offstyle : 'default'
-						});
-
-				consulta_alerta_producto(data[i].idProducto,
-						'#checkAlertaStock_ext_' + data[i].idProducto);
-			}
-
-		}
-	});
-
-}
-
-function consulta_alerta_producto(productoId, control) {
-
-	$.ajax({
-
-		url : "/productos/buscar/" + productoId,
-		type : 'GET',
-		dataType : "json",
-		data : {
-			productoId : productoId,
-		},
-		success : function(data) {
-
-			if (data.alerta === 1) {
-
-				$(control).bootstrapToggle('on');
-
-			} else if (data.alerta === 0) {
-
-				$(control).bootstrapToggle('off');
-			}
-		}
+function mostrar_modal_actualizar_stock_producto(idProducto) {
+	ocultar_mensajes();
+	cargar_stock_producto(idProducto);
+	$('#modal_actualizar_stock_producto').modal({
+		keyboard : false
 	});
 }
 
@@ -54,11 +38,16 @@ function actualizar_alerta(idProducto) {
 
 	if ($('#checkAlertaStock_ext_' + idProducto).prop('checked')) {
 
+		$('#boton_stock_' + idProducto).show();
 		grabar_estado_alerta(idProducto, 1);
+
+		console.log('debe aparecer boton_stock_' + idProducto);
 
 	} else {
 
+		$('#boton_stock_' + idProducto).hide();
 		grabar_estado_alerta(idProducto, 0);
+		console.log('debe desaparecer  #boton_stock_' + idProducto);
 
 	}
 
@@ -206,6 +195,26 @@ function buscar_producto(productoId, opcion) {
 	});
 }
 
+function cargar_stock_producto(idProducto) {
+
+	$.ajax({
+
+		url : "/productos/buscar/" + idProducto,
+		type : 'GET',
+		dataType : "json",
+		data : {
+			idProducto : idProducto,
+		},
+		success : function(data) {
+
+			console.log(data.stockActual);
+			$('#stockActual_actualizar').val(data.stockActual);
+			$('#idProducto_').val(data.idProducto);
+
+		}
+	});
+}
+
 function filtrar_productos() {
 
 	var descripcion = $('#filtro_producto_descripcion').val();
@@ -293,6 +302,24 @@ function ocultar_mensajes() {
 	$('#panel_mensaje_info_producto').hide();
 }
 
+function inicializa_elementos_formulario(condicion) {
+
+	$('#precioCompra').val(0.00);
+	$('#stockMinimo').val(1);
+
+	if (condicion == 'mostrar') {
+
+		$('#col_precioCompra').show();
+		$('#col_stockMinimo').show();
+
+	} else if (condicion == 'ocultar') {
+
+		$('#col_precioCompra').hide();
+		$('#col_stockMinimo').hide();
+	}
+
+}
+
 $(document).ready(function() {
 
 	$('li').removeClass("active");
@@ -302,14 +329,14 @@ $(document).ready(function() {
 	$('#precioCompra').numeric('.');
 	$('#precioVenta').numeric('.');
 
-	//initializerToggleAll();
-
 	$('#checkAlertaStock').bootstrapToggle({
 		on : 'Si',
 		off : 'No',
 		onstyle : 'success',
 		offstyle : 'default'
 	});
+	
+	inicializa_elementos_formulario('ocultar')
 
 	valida_formulario();
 
@@ -326,12 +353,21 @@ $(document).ready(function() {
 
 	});
 
+	$("#btn_cancelar_stock_producto").click(function() {
+		// $('#idProducto').val('');
+		$('#modal_actualizar_stock_producto').modal('hide');
+
+	});
+
 	$('#checkAlertaStock').change(function() {
 		if ($(this).prop('checked')) {
 
+			inicializa_elementos_formulario('mostrar')
 			$('#alertaStock').val(1);
+			
 		} else {
 
+			inicializa_elementos_formulario('ocultar')
 			$('#alertaStock').val(0);
 		}
 	});
@@ -341,7 +377,6 @@ $(document).ready(function() {
 
 		$('#modal_vista_producto').modal('hide');
 	});
-	//
 	// // Ejecuta el filtrado al pulsar la tecla ENTER
 	$('#filtro_producto_descripcion').keypress(function(e) {
 

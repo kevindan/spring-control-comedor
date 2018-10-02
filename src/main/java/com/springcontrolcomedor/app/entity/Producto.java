@@ -45,10 +45,10 @@ public class Producto implements Serializable {
 	@Column(name = "precio_venta", columnDefinition = "Decimal(10,2) default '0.00'")
 	private Double precioVenta;
 
-	@Column(name = "stock_minimo")
+	@Column(name = "stock_minimo",  columnDefinition = "int default '1'")
 	private int stockMinimo;
 
-	@Column(name = "stock_actual")
+	@Column(name = "stock_actual",  columnDefinition = "int default '0'")
 	private int stockActual;
 
 	@Column(name = "alerta", columnDefinition = "bit default '0'")
@@ -67,6 +67,7 @@ public class Producto implements Serializable {
 		tipoProducto = new TipoProducto();
 		fechaRegistro = new Date();
 		eliminado = 0;
+				
 	}
 
 	public Long getIdProducto() {
