@@ -328,6 +328,14 @@ $(document).ready(function() {
 		offstyle : 'default'
 	});
 
+	$('#imagen').fileinput({
+		language : 'es',
+		showUpload : false,
+		showCancel : false,
+		//dropZoneEnabled: false,
+		allowedFileExtensions : [ 'jpg', 'png' ]
+	});
+
 	inicializa_elementos_formulario('ocultar')
 
 	valida_formulario();
@@ -335,12 +343,12 @@ $(document).ready(function() {
 	$('#checkAlertaStock').change(function() {
 		if ($(this).prop('checked')) {
 
-			inicializa_elementos_formulario('mostrar')
+			inicializa_elementos_formulario('mostrar');
 			$('#alertaStock').val(1);
 
 		} else {
 
-			inicializa_elementos_formulario('ocultar')
+			inicializa_elementos_formulario('ocultar');
 			$('#alertaStock').val(0);
 		}
 	});

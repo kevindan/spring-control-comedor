@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/layout :: head">  
+<!-- File Input  -->
+<link th:href="@{/bootstrap/controls/file-input/css/fileinput.css}" media="all" rel="stylesheet" type="text/css"/>   
+<link th:href="@{/bootstrap/controls/file-input/themes/explorer-fa/theme.css}" media="all" rel="stylesheet" type="text/css"/>  
+
+<head th:replace="layout/layout :: head">
 </head>
 <body class="hold-transition skin-blue fixed sidebar-mini sidebar-collapse">
 <div class="wrapper">
@@ -144,7 +148,7 @@
 <div class="modal fade" id="modal_registro_producto" data-backdrop="static">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
-			<form th:action="@{/productos/grabar}" id="form_producto" th:object="${producto}" method="post" accept-charset="utf-8">
+			<form th:action="@{/productos/grabar}" id="form_producto" th:object="${producto}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 				<div class="modal-header bg-primary">
 					<h4 class="modal-title">Datos del Producto</h4>
 				</div>
@@ -170,6 +174,14 @@
 						                  					<span class="input-group-addon"><i class="fa fa-th"></i></span>
 						                  					<input type="text" th:field="*{presentacion}" class="form-control" id="presentacion" name="presentacion" placeholder="Ingrese una presentacion" autocomplete="off"/>			                					
 						                				</div>						                				
+						                			</div>
+						                		</div>
+						                		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						                			<label for="imagen">Imagen</label>
+						                			<div class="form-group">
+						                				<div class="file-loading">						                					
+						                					<input type="file" class="file" id="imagen" name="imagen"/>
+						                				</div>
 						                			</div>
 						                		</div>
 								            	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -364,6 +376,12 @@
 <!--FIN MODAL ACTUALIZAR STOCK -->
 
 <script th:src="@{/js/producto.js}" ></script>
+<!-- File Input dependences-->
+ <script th:src="@{/bootstrap/controls/file-input/js/plugins/sortable.js}"></script>
+ <script th:src="@{/bootstrap/controls/file-input/js/fileinput.js}"></script>
+ <script th:src="@{/bootstrap/controls/file-input/js/locales/es.js}"></script>
+ <script th:src="@{/bootstrap/controls/file-input/themes/explorer-fa/theme.js}"></script>
+ <script th:src="@{/bootstrap/controls/file-input/themes/fa/theme.js}"></script>
 
 </body>
 </html>

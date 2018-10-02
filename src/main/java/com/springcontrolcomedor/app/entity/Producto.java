@@ -39,6 +39,9 @@ public class Producto implements Serializable {
 	@Column(name = "presentacion")
 	private String presentacion;
 
+	@Column(name="imagen")
+	private String imagen;
+
 	@Column(name = "precio_compra", columnDefinition = "Decimal(10,2) default '0.00'")
 	private Double precioCompra;
 
@@ -102,6 +105,14 @@ public class Producto implements Serializable {
 		this.presentacion = presentacion;
 	}
 
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
 	public Double getPrecioCompra() {
 		return precioCompra;
 	}
@@ -161,9 +172,9 @@ public class Producto implements Serializable {
 	@Override
 	public String toString() {
 		return "Producto [idProducto=" + idProducto + ", descripcion=" + descripcion + ", tipoProducto=" + tipoProducto
-				+ ", presentacion=" + presentacion + ", precioCompra=" + precioCompra + ", precioVenta=" + precioVenta
-				+ ", stockMinimo=" + stockMinimo + ", stockActual=" + stockActual + ", alerta=" + alerta
-				+ ", fechaRegistro=" + fechaRegistro + ", eliminado=" + eliminado + "]";
+				+ ", presentacion=" + presentacion + ", imagen=" + imagen + ", precioCompra=" + precioCompra
+				+ ", precioVenta=" + precioVenta + ", stockMinimo=" + stockMinimo + ", stockActual=" + stockActual
+				+ ", alerta=" + alerta + ", fechaRegistro=" + fechaRegistro + ", eliminado=" + eliminado + "]";
 	}
 
 	private static final long serialVersionUID = 1L;
