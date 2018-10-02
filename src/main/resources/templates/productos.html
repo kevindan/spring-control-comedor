@@ -102,7 +102,7 @@
 											</td>											
 										</tr>
 										<tr>
-											<td class="info text-center" colspan="8" th:if="${numeroElementos == 0}" th:text="${mensajeTabla}"></td>
+											<td class="info text-center" colspan="10" th:if="${numeroElementos == 0}" th:text="${mensajeTabla}"></td>
 										</tr>																			
 									</tbody>
 									<tfoot>
@@ -348,12 +348,11 @@
 				            	<label for="stockActual">Stock actual</label>
 				               	<div class="input-group">
 				               		<span class="input-group-addon"><i class="fa fa-th"></i></span>			               								
-				               		<input type="number" min="0" class="form-control input-lg text-center text-bold" id="stockActual_actualizar" name="stockActual_actualizar" placeholder="0" autocomplete="off"/>
-				               		<!-- <input type="hidden" id="idProducto_"/> -->
+				               		<input type="number" min="0" class="form-control input-lg text-center text-bold" id="stockActual_actualizar" name="stockActual_actualizar" placeholder="0" autocomplete="off"/>				               		
 				               	</div>			               	
 				            </div>
 				            <div class="form-group">
-				            	<button type="submit" class="btn btn-success btn-block" id="btn_actualizar_stock_producto" name="btn_actualizar_stock_producto" th:onclic="'actualizar_stock_producto()'">Actualizar</button>
+				            	<button type="button" class="btn btn-success btn-block" id="btn_actualizar_stock_producto" name="btn_actualizar_stock_producto" th:onclick="'actualizar_stock_producto()'">Actualizar</button>
 								<button type="button" class="btn btn-default btn-block" id="btn_cancelar_stock_producto" name="btn_cancelar_stock_producto">Cancelar</button>
 				            </div>				    	
 					</div>			

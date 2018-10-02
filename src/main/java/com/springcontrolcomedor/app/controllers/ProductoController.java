@@ -40,7 +40,7 @@ public class ProductoController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 
-		Producto producto = new Producto();		
+		Producto producto = new Producto();
 		List<TipoProducto> tipoProductos = tipoProductoService.findByActivos();
 
 		Pageable pageRequest = PageRequest.of(page, 5);
@@ -56,10 +56,7 @@ public class ProductoController {
 		}
 
 		PageRender<Producto> pageRender = new PageRender<>("", productos);
-		
-		System.out.println(producto.getFechaRegistro());
-		System.out.println(producto.getEliminado());
-		
+
 		model.addAttribute("producto", producto);
 		model.addAttribute("tipoProductos", tipoProductos);
 		model.addAttribute("numeroElementos", numElementos);
@@ -67,7 +64,7 @@ public class ProductoController {
 		model.addAttribute("titulo", "Listado de Productos");
 		model.addAttribute("productos", productos);
 		model.addAttribute("page", pageRender);
-				
+
 		return "productos";
 	}
 
@@ -114,9 +111,8 @@ public class ProductoController {
 	}
 
 	@RequestMapping(value = "/grabar", method = RequestMethod.POST)
-	public String grabar(@Valid Producto producto, BindingResult result, Model model, RedirectAttributes flash,SessionStatus status) {
-//		System.out.println(producto.toString());
-		System.out.println(result.getAllErrors());
+	public String grabar(@Valid Producto producto, BindingResult result, Model model, RedirectAttributes flash,
+			SessionStatus status) {
 
 		if (result.hasErrors()) {
 
@@ -147,7 +143,7 @@ public class ProductoController {
 
 		String mensajeFlash = (producto.getIdProducto() != null) ? "¡Producto editado con éxito!"
 				: "¡Producto grabado con éxito!";
-		producto.setEliminado(0);
+
 		productoService.save(producto);
 		flash.addFlashAttribute("success", mensajeFlash);
 		status.setComplete();
@@ -210,7 +206,7 @@ public class ProductoController {
 		return "redirect:/productos";
 	}
 
-	@RequestMapping(value = "/actualizarstock/{idProducto}/{stockActual}", method = RequestMethod.POST)
+	@RequestMapping(value = "/actualizarstock/{idProducto}/{stockActual}", method = RequestMethod.GET)
 	public String actualizarStock(@PathVariable Long idProducto, @PathVariable int stockActual,
 			RedirectAttributes flash) {
 

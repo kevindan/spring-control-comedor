@@ -33,7 +33,7 @@ public class Producto implements Serializable {
 	// relacionar
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_tipo_producto")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private TipoProducto tipoProducto;
 
 	@Column(name = "presentacion")
@@ -45,13 +45,13 @@ public class Producto implements Serializable {
 	@Column(name = "precio_venta", columnDefinition = "Decimal(10,2) default '0.00'")
 	private Double precioVenta;
 
-	@Column(name = "stock_minimo",  columnDefinition = "int default '1'")
+	@Column(name = "stock_minimo", columnDefinition = "int default '1'")
 	private int stockMinimo;
 
-	@Column(name = "stock_actual",  columnDefinition = "int default '0'")
+	@Column(name = "stock_actual", columnDefinition = "int default '0'")
 	private int stockActual;
 
-	@Column(name = "alerta", columnDefinition = "bit default '0'")
+	@Column(name = "alerta")
 	private int alerta;
 
 	@Temporal(TemporalType.DATE)
@@ -67,7 +67,7 @@ public class Producto implements Serializable {
 		tipoProducto = new TipoProducto();
 		fechaRegistro = new Date();
 		eliminado = 0;
-				
+
 	}
 
 	public Long getIdProducto() {
@@ -106,7 +106,7 @@ public class Producto implements Serializable {
 		return precioCompra;
 	}
 
-	public void setPrecioCompra(double precioCompra) {
+	public void setPrecioCompra(Double precioCompra) {
 		this.precioCompra = precioCompra;
 	}
 
@@ -114,7 +114,7 @@ public class Producto implements Serializable {
 		return precioVenta;
 	}
 
-	public void setPrecioVenta(double precioVenta) {
+	public void setPrecioVenta(Double precioVenta) {
 		this.precioVenta = precioVenta;
 	}
 
@@ -134,6 +134,14 @@ public class Producto implements Serializable {
 		this.stockActual = stockActual;
 	}
 
+	public int getAlerta() {
+		return alerta;
+	}
+
+	public void setAlerta(int alerta) {
+		this.alerta = alerta;
+	}
+
 	public Date getFechaRegistro() {
 		return fechaRegistro;
 	}
@@ -148,14 +156,6 @@ public class Producto implements Serializable {
 
 	public void setEliminado(int eliminado) {
 		this.eliminado = eliminado;
-	}
-
-	public int getAlerta() {
-		return alerta;
-	}
-
-	public void setAlerta(int alerta) {
-		this.alerta = alerta;
 	}
 
 	@Override
