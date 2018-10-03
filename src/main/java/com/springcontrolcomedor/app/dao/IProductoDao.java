@@ -35,4 +35,8 @@ public interface IProductoDao extends PagingAndSortingRepository<Producto, Long>
 	@Modifying
 	@Query("update Producto p set p.stockActual = ?1 where p.idProducto = ?2")
 	public void actualizaStock(int stockActual, Long idProducto);
+	
+	@Modifying
+	@Query("update Producto p set p.imagen = ?1 where p.idProducto = ?2")
+	public void guardarImagen(String imagen, Long idProducto);
 }

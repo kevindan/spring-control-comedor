@@ -71,6 +71,13 @@ public class IProductoServiceImpl implements IProductoService {
 	}
 
 	@Override
+	@Transactional
+	public void guardarImagen(String imagen, Long idProducto) {
+
+		productoDao.guardarImagen(imagen, idProducto);
+	}
+
+	@Override
 	@Transactional(readOnly = true)
 	public Page<Producto> findByDescripcion(String descripcion, Pageable pageable) {
 

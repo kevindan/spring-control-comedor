@@ -90,7 +90,10 @@
 	                                               </ul>
 	                                            </div>											
 											</td>
-											<td class="text-center"><button type="button" class="btn btn-default" th:onclick="'abrir_modal_imagen_producto('+${producto.idProducto}+')'"><i class="fa fa-file-picture-o"></i></button></td>																						
+											<td class="text-center">
+												<button type="button" th:if="${producto.imagen == null}" class="btn btn-default" th:onclick="'abrir_modal_imagen_producto('+${producto.idProducto}+')'"><i class="fa fa-file-picture-o"></i></button>
+												<img th:if="${producto.imagen != null}" style="max-width: 30px; max-height: 40px;" th:src="@{'/images/productos/'+${producto.imagen}}" th:alt="${producto.imagen}"/>
+											</td>																						
 											<td class="text-left"><i class="fa fa-ship"></i>&nbsp;&nbsp;<span th:text="${producto.descripcion}"></span></td>
 											<td class="text-left"><span th:text="${producto.tipoProducto.descripcion}"></span></td>
 											<td class="text-left"><span th:text="${producto.presentacion}"></span></td>
@@ -151,7 +154,7 @@
 <div class="modal fade" id="modal_registro_producto" data-backdrop="static">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
-			<form th:action="@{/productos/grabar}" id="form_producto" th:object="${producto}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+			<form th:action="@{/productos/grabar}" id="form_producto" th:object="${producto}" method="post" accept-charset="utf-8">
 				<div class="modal-header bg-primary">
 					<h4 class="modal-title">Datos del Producto</h4>
 				</div>
@@ -178,17 +181,7 @@
 						                  					<input type="text" th:field="*{presentacion}" class="form-control" id="presentacion" name="presentacion" placeholder="Ingrese una presentacion" autocomplete="off"/>			                					
 						                				</div>						                				
 						                			</div>
-						                		</div>
-						                		<!--
-						                		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						                			<label for="imagen">Imagen del producto</label>
-						                			<div class="form-group">
-						                				<div class="file-loading">						                					
-						                					<input type="file" class="file" th:field="*{imagen}" id="imagen" name="imagen"/>
-						                				</div>
-						                			</div>
-						                		</div>
-						                		 -->
+						                		</div>						                		
 								            	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 													<div class="form-group">                				                			
 					                					<label for="tipoProducto">Tipo producto</label>
@@ -389,17 +382,20 @@
 			</div>
 			<div class="modal-body">				
 				<div class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">					    
-						<div class="form-group">
-							<div class="file-loading">						                					
-								<input type="file" class="file" id="imagen" name="imagen"/>
-						    </div>
-						</div>
-						<div class="form-group">
-				        	<button type="button" class="btn btn-success btn-block" id="btn_grabar_imagen_producto" name="btn_grabar_imagen_producto">Actualizar</button>
-							<button type="button" class="btn btn-default btn-block" id="btn_cancelar_imagen_producto" name="btn_cancelar_imagen_producto">Cancelar</button>
-				        </div>		    	
-					</div>													
+					<form action="/productos/grabarimagen" id="form_imagen_producto" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">					    
+							<div class="form-group">
+								<div class="file-loading">						                					
+									<input type="file" class="file"  id="imagen" name="imagen"/>							    	
+							    </div>
+							</div>
+							<div class="form-group">
+								<input type="hidden" id="idProducto_" name="idproductoimagen"/>
+					        	<button type="submit" class="btn btn-success btn-block" id="btn_grabar_imagen_producto" name="btn_grabar_imagen_producto">Actualizar</button>
+								<button type="button" class="btn btn-default btn-block" id="btn_cancelar_imagen_producto" name="btn_cancelar_imagen_producto">Cancelar</button>
+					        </div>		    	
+						</div>													
+					</form>
 				</div>					
 			</div>									
 		</div>		

@@ -1,5 +1,9 @@
 package com.springcontrolcomedor.app.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springcontrolcomedor.app.entity.Producto;
@@ -217,4 +222,37 @@ public class ProductoController {
 
 		return "redirect:/productos";
 	}
+
+	@RequestMapping(value = "/grabarimagen", method = RequestMethod.POST)
+	public String grabarImagen(@RequestParam("idproductoimagen") long idproducto, @RequestParam("imagen") MultipartFile imagen,
+			RedirectAttributes flash) {
+
+		System.out.println(idproducto);
+
+		if (!imagen.isEmpty()) {
+
+			Path directorio = Paths.get("src//main//resources//static/images/productos");
+			String rootPath = directorio.toFile().getAbsolutePath();
+
+			try {
+
+				byte[] bytes = imagen.getBytes();
+				Path rutaCompleta = Paths.get(rootPath + "//" + imagen.getOriginalFilename());
+				Files.write(rutaCompleta, bytes);
+
+				productoService.guardarImagen(imagen.getOriginalFilename(),idproducto);
+				flash.addFlashAttribute("info",
+						"Has subido correctamente la imagen " + imagen.getOriginalFilename() + "");
+				System.out.println("Id : " + idproducto + ", Imagen : " + imagen.getOriginalFilename());
+
+				return "redirect:/productos";
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		flash.addFlashAttribute("warning","Debe seleccionar una imagen antes de presionar 'Actualizar'");
+		return "redirect:/productos";
+	}
+
 }

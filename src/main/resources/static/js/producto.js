@@ -6,13 +6,14 @@ function mostrar_modal_actualizar_stock_producto(idProducto) {
 	});
 }
 
-function abrir_modal_imagen_producto(idProducto){
-	
+function abrir_modal_imagen_producto(idProducto) {
+
+	$('#idProducto_').val(idProducto);
 	$('#modal_imagen_producto').modal({
 		keyboard : false
 	});
 	
-	console.log(idProducto);
+	console.log($('#idProducto_').val());
 }
 
 function actualizar_alerta(idProducto) {
@@ -101,6 +102,28 @@ function valida_formulario() {
 				validators : {
 					notEmpty : {
 						message : 'Campo Obligatorio'
+					}
+				}
+			}
+		}
+	});
+
+}
+
+function valida_formulario_imagen_producto() {
+
+	$('#form_imagen_producto').bootstrapValidator({
+		feedbackIcons : {
+
+			valid : 'glyphicon glyphicon-ok',
+			invalid : 'glyphicon glyphicon-remove',
+			validating : 'glyphicon glyphicon-refresh'
+		},
+		fields : {
+			imagen : {
+				validators : {
+					notEmpty : {
+						message : 'Debe seleccionar una imagen'
 					}
 				}
 			}
@@ -321,6 +344,17 @@ $("#btn_cancelar_vista_producto").click(function() {
 	$('#modal_vista_producto').modal('hide');
 });
 
+$('#btn_cancelar_imagen_producto').click(function() {
+
+	$('#form_imagen_producto').data('bootstrapValidator').resetForm();
+	$('#form_imagen_producto').trigger('reset');
+	$('#idProducto_').val('');
+	$('#imagen').val('');
+	$('#modal_imagen_producto').modal('hide');
+	console.log($('#idProducto_').val());
+
+});
+
 $(document).ready(function() {
 
 	$('li').removeClass("active");
@@ -340,14 +374,17 @@ $(document).ready(function() {
 	$('#imagen').fileinput({
 		language : 'es',
 		showUpload : false,
-		showCancel : false,
-		//dropZoneEnabled: false,
+		showCancel : false,		
+		maxFileCount : 1,
+		maxFileSize : 5000,
+		// dropZoneEnabled: false,
 		allowedFileExtensions : [ 'jpg', 'png' ]
 	});
 
 	inicializa_elementos_formulario('ocultar')
 
 	valida_formulario();
+	valida_formulario_imagen_producto();
 
 	$('#checkAlertaStock').change(function() {
 		if ($(this).prop('checked')) {

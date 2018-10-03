@@ -25,6 +25,8 @@ public interface IProductoService {
 
 	public void actualizaAlerta(int alerta, Long idProducto);
 	
+	public void guardarImagen(String imagen, Long idProducto);
+	
 	public void actualizaStock(int stockActual, Long idProducto);
 	
 	public Page<Producto> findByDescripcion(String descripcion, Pageable pageable);
