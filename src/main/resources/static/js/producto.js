@@ -6,6 +6,15 @@ function mostrar_modal_actualizar_stock_producto(idProducto) {
 	});
 }
 
+function abrir_modal_imagen_producto(idProducto){
+	
+	$('#modal_imagen_producto').modal({
+		keyboard : false
+	});
+	
+	console.log(idProducto);
+}
+
 function actualizar_alerta(idProducto) {
 
 	if ($('#checkAlertaStock_ext_' + idProducto).prop('checked')) {
