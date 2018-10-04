@@ -231,8 +231,7 @@ public class ProductoController {
 
 		if (!imagen.isEmpty()) {
 
-			Path directorio = Paths.get("src//main//resources//static/images/productos");
-			String rootPath = directorio.toFile().getAbsolutePath();
+			String rootPath = "C://sistemaweb//images//productos";
 
 			try {
 
@@ -251,6 +250,7 @@ public class ProductoController {
 				e.printStackTrace();
 			}
 		}
+		
 		flash.addFlashAttribute("warning","Debe seleccionar una imagen antes de presionar 'Actualizar'");
 		return "redirect:/productos";
 	}
