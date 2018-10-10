@@ -11,10 +11,9 @@ public class MvcConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		
 		WebMvcConfigurer.super.addResourceHandlers(registry);
-		registry.addResourceHandler("/sistemaweb/images/**")
+		registry.addResourceHandler("/images/**")
 		.addResourceLocations("file:/C:/sistemaweb/images/");
 	
 	}
-
 
 }
